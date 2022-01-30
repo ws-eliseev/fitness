@@ -55,6 +55,11 @@ public class WorkoutController {
     }
 
     @GetMapping(value = "/workout/{id}")
+    @Operation(summary = "Get Workout by ID", tags = "Поиск тренировки по ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешное получение данных"),
+            @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
+    )
     public void getWorkoutByID(@PathVariable Long id) {
         workoutService.getWorkoutByID(id);
     }
