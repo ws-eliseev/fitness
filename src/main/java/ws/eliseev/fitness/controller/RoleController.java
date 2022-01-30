@@ -9,7 +9,7 @@ import ws.eliseev.fitness.service.IRoleService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/role")
+@RequestMapping("/api/role")
 public class RoleController {
 
     private final IRoleService roleService;
@@ -39,17 +39,22 @@ public class RoleController {
     }
 
     @PutMapping("/updateRole")
-    public void updateRoleById(@RequestBody Role role) {
-        roleService.saveRole(role);
+    public ResponseEntity<Role> updateRoleById(@RequestBody Role updatedRole) {
+        roleService.saveRole(updatedRole);
+        return new ResponseEntity<>(updatedRole, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteById/{id}")
-    public void deleteRoleById(@PathVariable("id") int id) {
+    public ResponseEntity<Role> deleteRoleById(@PathVariable("id") int id) {
+        Role deletedRole = roleService.getRoleByID(id);
         roleService.deleteRoleById(id);
+        return new ResponseEntity<>(deletedRole, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteByName/{name}")
-    public void deleteRoleById(@PathVariable("name") String name) {
+    public ResponseEntity<Role> deleteRoleById(@PathVariable("name") String name) {
+        Role deletedRole = roleService.getRoleByName(name);
         roleService.deleteRoleByName(name);
+        return new ResponseEntity<>(deletedRole, HttpStatus.OK);
     }
 }
