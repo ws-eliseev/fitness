@@ -41,6 +41,6 @@ public class WorkoutServiceImpl implements WorkoutService{
     @Override
     @Transactional(readOnly = true)
     public Workout getWorkoutByID(Long id) {
-        return workoutRepository.getById(id);
+        return workoutRepository.findById(id).get();
     }
 }

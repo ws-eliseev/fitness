@@ -5,11 +5,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.model.Workout;
 import ws.eliseev.fitness.service.WorkoutServiceImpl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
@@ -23,7 +26,7 @@ public class WorkoutController {
         this.workoutService = workoutService;
     }
 
-    @GetMapping(value = "/allworkouts")
+    @GetMapping(value = "/")
     @Operation(summary = "Gets all Workouts", tags = "Получение списка всех тренировок")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка тренировок"),
@@ -33,18 +36,19 @@ public class WorkoutController {
         return workoutService.listWorkout();
     }
 
-    @PostMapping(value = "/allworkouts")
+    @PostMapping(value = "/")
     @Operation(summary = "Create or update Workout", tags = "Создание или изменение тренировки")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные о тренировки обновлены"),
             @ApiResponse(responseCode = "201", description = "Успешное создание тренировки"),
+            @ApiResponse(responseCode = "403", description = "Что то пошло не так..."),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
     public void createOrUpdateWorkout(@RequestBody Workout workout) {
         workoutService.saveOrUpdateWorkout(workout);
     }
 
-    @DeleteMapping(value = "/workout/{id}")
+    @DeleteMapping(value = "/{id}")
     @Operation(summary = "Delete Workout", tags = "Удаление тренировки")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные о тренировки удалены"),
@@ -54,14 +58,14 @@ public class WorkoutController {
         workoutService.deleteWorkout(id);
     }
 
-    @GetMapping(value = "/workout/{id}")
+    @GetMapping(value = "/{id}")
     @Operation(summary = "Get Workout by ID", tags = "Поиск тренировки по ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное получение данных"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public void getWorkoutByID(@PathVariable Long id) {
-        workoutService.getWorkoutByID(id);
+    public Workout getWorkoutByID(@PathVariable Long id) {
+        return workoutService.getWorkoutByID(id);
     }
 }
 
