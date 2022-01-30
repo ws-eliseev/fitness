@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+        <changeSet id="1" author="Liquibase">
+            <createTable tableName="workout">
+                <column name="id" type="bigint" autoIncrement="true">
+                    <constraints primaryKey="true"/>
+                </column>
+                <column name="name" type="varchar"/>
+                <column name="time" type="time"/>
+                <column name="repeat" type="int"/>
+                <column name="set" type="int"/>
+                <column name="area" type="varchar"/>
+                <column name="exercises" type="varchar"/>
+            </createTable>
+        </changeSet>
+
+</databaseChangeLog>
