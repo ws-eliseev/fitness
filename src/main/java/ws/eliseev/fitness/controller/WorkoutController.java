@@ -5,16 +5,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.model.Workout;
 import ws.eliseev.fitness.service.WorkoutServiceImpl;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
