@@ -5,35 +5,37 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
-@Entity @Table(name = "users")
-@Setter @Getter
+@Entity
+@Table(name = "users")
+@Setter
+@Getter
 @NoArgsConstructor
 public class User {
 
     @Id
 //    @GeneratedValue(strategy = GenerationType.AUTO) //Not sure what kind we should use
-    @Column(name = "id")
+    @Column(name = "ID")
     private Long id; //Not 'long' because it will be used in the generic for CrudRepository interface
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(name = "USERNAME", unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    @Column(name = "first_name")
+    @Column(name = "FIRST_NAME")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "LAST_NAME")
     private String lastName;
 
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "phone")
+    @Column(name = "PHONE")
     private String phone;
 
-    @Column(name = "age")
+    @Column(name = "AGE")
     private int age;
 
     @ManyToMany(fetch = FetchType.LAZY)

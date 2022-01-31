@@ -6,22 +6,21 @@ import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity @Table(name = "roles")
-@Getter @Setter
+@Entity
+@Table(name = "roles")
+@Getter
+@Setter
 @NoArgsConstructor
 public class Role {
     @Id
     // Need? @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
+    @Column (name = "ID")
     private Long id;
 
-    @Column (name = "name")
+    @Column (name = "NAME")
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @ManyToMany(mappedBy = "roleSet", fetch = FetchType.LAZY)
     private Set<User> userSet;
 
     @Override
