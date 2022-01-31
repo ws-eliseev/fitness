@@ -4,10 +4,12 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.model.Workout;
 import ws.eliseev.fitness.service.WorkoutServiceImpl;
 
@@ -16,15 +18,11 @@ import java.util.NoSuchElementException;
 
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/workout")
 public class WorkoutController {
 
     private final WorkoutServiceImpl workoutService;
-
-    @Autowired
-    public WorkoutController(WorkoutServiceImpl workoutService) {
-        this.workoutService = workoutService;
-    }
 
     @GetMapping(value = "/")
     @Operation(summary = "Gets all Workouts", tags = "Получение списка всех тренировок")
@@ -32,16 +30,15 @@ public class WorkoutController {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка тренировок"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public List<Workout> getAllWorkouts() {
-        return workoutService.listWorkout();
+    public ResponseEntity<List<Workout>> getAllWorkouts() {
+        return ResponseEntity.ok(workoutService.listWorkout());
     }
-
     @PostMapping(value = "/")
     @Operation(summary = "Create or update Workout", tags = "Создание или изменение тренировки")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные о тренировки обновлены"),
             @ApiResponse(responseCode = "201", description = "Успешное создание тренировки"),
-            @ApiResponse(responseCode = "403", description = "Что то пошло не так..."),
+            @ApiResponse(responseCode = "403", description = "Операция запрещена"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
     public void createOrUpdateWorkout(@RequestBody Workout workout) {
@@ -64,8 +61,8 @@ public class WorkoutController {
             @ApiResponse(responseCode = "200", description = "Успешное получение данных"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public Workout getWorkoutByID(@PathVariable Long id) {
-        return workoutService.getWorkoutByID(id);
+    public ResponseEntity<Workout> getWorkoutByID(@PathVariable Long id) {
+        return ResponseEntity.ok(workoutService.getWorkoutByID(id));
     }
 }
 
