@@ -39,4 +39,3 @@ public class RoleService implements IRoleService {
         roleRepository.deleteByName(name);
     }
 }
-
