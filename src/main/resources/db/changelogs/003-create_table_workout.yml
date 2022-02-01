@@ -1,0 +1,42 @@
+databaseChangeLog:
+        - logicalFilePath: db/changelogs/003-create_table_workout.yaml
+
+        - changeSet:
+        id: changelog-003
+        author: kensyn
+        changes:
+        - tagDatabase:
+        tag: create_table_workout
+        - createTable:
+        tableName: WORKOUT
+        columns:
+        - column:
+        name: id
+        type: bigint
+        autoIncrement: true
+        constraints:
+        primaryKey: true
+        nullable: false
+        - column:
+        name: NAME
+        type: varchar(255)
+        constraints:
+        unique: false
+        nullable: false
+        - column:
+        name: EXERCISE
+        type: varchar(255)
+        constraints:
+        nullable: true
+        - column:
+        name: first_name
+        type: varchar(255)
+        - column:
+        name: REPEAT
+        type: int
+        - column:
+        name: SET
+        type: int
+        - column:
+        name: AREA
+        type: varchar(10)

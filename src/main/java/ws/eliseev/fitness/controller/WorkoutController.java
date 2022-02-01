@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.model.Workout;
+import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.service.WorkoutServiceImpl;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class WorkoutController {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка тренировок"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public ResponseEntity<List<Workout>> getAllWorkouts() {
+    public ResponseEntity<List<WorkoutDto>> getAllWorkouts() {
         return ResponseEntity.ok(workoutService.listWorkout());
     }
     @PostMapping(value = "/")
@@ -37,7 +37,7 @@ public class WorkoutController {
             @ApiResponse(responseCode = "403", description = "Операция запрещена"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public void createOrUpdateWorkout(@RequestBody Workout workout) {
+    public void createOrUpdateWorkout(@RequestBody WorkoutDto workout) {
         workoutService.saveOrUpdateWorkout(workout);
     }
 
@@ -48,7 +48,7 @@ public class WorkoutController {
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
     public void deleteWorkout(@PathVariable Long id) {
-        workoutService.deleteWorkout(id);
+        workoutService.deleteWorkoutByID(id);
     }
 
     @GetMapping(value = "/{id}")
@@ -57,7 +57,7 @@ public class WorkoutController {
             @ApiResponse(responseCode = "200", description = "Успешное получение данных"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public ResponseEntity<Workout> getWorkoutByID(@PathVariable Long id) {
+    public ResponseEntity<WorkoutDto> getWorkoutByID(@PathVariable Long id) {
         return ResponseEntity.ok(workoutService.getWorkoutByID(id));
     }
 }
