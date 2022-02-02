@@ -1,20 +1,43 @@
 package ws.eliseev.fitness.service;
 
+import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.Recipe;
+import ws.eliseev.fitness.repository.IRecipeRepository;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface RecipeService {
-    //Вывести список всех рецептов
-    public List<Recipe> fetchRecipeList();
-    //Сохранить рецепт
-    public Recipe saveRecipe(Recipe recipe);
-    //Найти рецепт по Id
-    public Recipe fetchRecipeById(Long departmentId);
-    //Найти все подходящие рецепты по имени
-    public List<Recipe> fetchRecipeByName(String name);
-    //Удалить рецепт по Id
-    public void deleteRecipeById(Long recipeId);
-    //Обновить рецепт
-    public Recipe updateRecipe(Long departmentId, Recipe recipe);
+@Service
+public class RecipeService implements IRecipeService {
+
+    private final IRecipeRepository recipeRepository;
+
+    public RecipeService(IRecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
+
+    @Override
+    public List<Recipe> fetchRecipeList() {
+        return recipeRepository.findAll();
+    }
+
+    @Override
+    public Recipe saveOrUpdateRecipe(Recipe recipe) {
+        return recipeRepository.save(recipe);
+    }
+
+    @Override
+    public Optional<Recipe> fetchRecipeById(Long recipeId) {
+        return recipeRepository.findById(recipeId);
+    }
+
+    @Override
+    public List<Recipe> fetchRecipeByName(String name) {
+        return recipeRepository.findAllByName(name);
+    }
+
+    @Override
+    public void deleteRecipeById(Long recipeId) {
+        recipeRepository.deleteById(recipeId);
+    }
 }

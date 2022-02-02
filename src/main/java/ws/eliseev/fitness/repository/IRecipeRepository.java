@@ -5,7 +5,7 @@ import ws.eliseev.fitness.model.Recipe;
 
 import java.util.List;
 
-public interface RecipeRepository extends JpaRepository <Recipe, Long> {
+public interface IRecipeRepository extends JpaRepository <Recipe, Long> {
     //Найти все рецепты по имени
     List<Recipe> findAllByName(String name);
 }

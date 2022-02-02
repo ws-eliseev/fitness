@@ -1,85 +1,86 @@
 package ws.eliseev.fitness.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.model.Recipe;
-import ws.eliseev.fitness.service.RecipeService;
+import ws.eliseev.fitness.service.IRecipeService;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+
 @Tag(name = "Recipe", description = "Recipe API")
 @RestController
+@RequiredArgsConstructor
 public class RecipeController {
-    private final RecipeService recipeService;
 
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
+    private final IRecipeService recipeService;
 
+    /**
+     * Сохраняет или обновляет рецепт в базе данных
+     *
+     * @param recipe - Основной Entity рецепт
+     */
     @Operation(summary = "Saves recipe", tags = "recipe")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Saved recipe",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class)))
-                    })
+                    description = "Saved recipe"
+            )
     })
     @PostMapping("/recipes")
-    public Recipe saveRecipe(@Valid @RequestBody Recipe recipe) {
-        return recipeService.saveRecipe(recipe);
+    public ResponseEntity<Recipe> saveRecipe(@Valid @RequestBody Recipe recipe) {
+        return ResponseEntity.ok(recipeService.saveOrUpdateRecipe(recipe));
+
     }
 
+    /**
+     * Получает список всех рецептов
+     */
     @Operation(summary = "Gets all recipes", tags = "recipe")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Got all recipes",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class)))
-                    })
+                    description = "Got all recipes"
+            )
     })
     @GetMapping("/recipes")
-    public List<Recipe> fetchRecipeList() {
-        return recipeService.fetchRecipeList();
+    public ResponseEntity<List<Recipe>> fetchRecipeList() {
+        return ResponseEntity.ok(recipeService.fetchRecipeList());
     }
 
+    /**
+     * Получает рецепт по ID
+     *
+     * @param recipeId - Идентификационный номер рецепта в БД
+     */
     @Operation(summary = "Gets recipe by ID", tags = "recipe")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Found recipe by ID",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class)))
-                    })
+                    description = "Found recipe by ID"
+            )
     })
     @GetMapping("/recipes/{id}")
-    public Recipe fetchRecipeById(@PathVariable("id") Long recipeId) {
-        return recipeService.fetchRecipeById(recipeId);
+    public ResponseEntity<Optional<Recipe>> fetchRecipeById(@PathVariable("id") Long recipeId) {
+        return ResponseEntity.ok(recipeService.fetchRecipeById(recipeId));
     }
 
+    /**
+     * Удаляет рецепт из БД по ID
+     *
+     * @param recipeId - Идентификационный номер рецепта в БД
+     */
     @Operation(summary = "Deletes recipes by ID", tags = "recipe")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Deleted recipe",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class)))
-                    })
+                    description = "Deleted recipe")
     })
     @DeleteMapping("/recipes/{id}")
     public String deleteRecipeById(@PathVariable("id") Long recipeId) {
@@ -87,36 +88,20 @@ public class RecipeController {
         return "Recipe deleted. (OK)";
     }
 
-    @Operation(summary = "Updates recipe by ID", tags = "recipe")
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Updated recipe",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class)))
-                    })
-    })
-    @PutMapping("/recipes/{id}")
-    public Recipe updateRecipe(@PathVariable("id") Long recipeId, @RequestBody Recipe recipe) {
-        return recipeService.updateRecipe(recipeId, recipe);
-    }
-
+    /**
+     * Получает все рецепты по совпадению названия
+     *
+     * @param name - Название рецепта
+     */
     @Operation(summary = "Gets all recipes by name", tags = "recipe")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Got all recipes found by defined name",
-                    content = {
-                            @Content(
-                                    mediaType = "application/json",
-                                    array = @ArraySchema(schema = @Schema(implementation = Recipe.class)))
-                    })
+                    description = "Got all recipes found by defined name"
+            )
     })
     @GetMapping("/recipes/name/{name}")
-    public List<Recipe> fetchDepByName(@PathVariable("name") String name) {
-        return recipeService.fetchRecipeByName(name);
-
+    public ResponseEntity<List<Recipe>> fetchDepByName(@PathVariable("name") String name) {
+        return ResponseEntity.ok(recipeService.fetchRecipeByName(name));
     }
 }
