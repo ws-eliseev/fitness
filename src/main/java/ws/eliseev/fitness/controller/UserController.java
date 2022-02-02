@@ -1,24 +1,22 @@
 package ws.eliseev.fitness.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.model.User;
-import ws.eliseev.fitness.service.IUserServiceImpl;
+import ws.eliseev.fitness.service.IUserService;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class UserController {
 
-    private final IUserServiceImpl iUserService;
 
-    @Autowired
-    public UserController(IUserServiceImpl iUserService) {
-        this.iUserService = iUserService;
-    }
+    private final IUserService iUserService;
+
 
     /**
      * Возвращаем список всех User-ов из базы данных
