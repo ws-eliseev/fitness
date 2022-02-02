@@ -55,4 +55,5 @@ public class UserController {
     public void deleteUserById(@PathVariable Long id) {
         iUserService.deleteUserById(id);
     }
+
 }

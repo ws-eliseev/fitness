@@ -50,4 +50,5 @@ public class IUserServiceImpl implements IUserService {
     public void deleteUserById(Long id) {
         iUserRepository.deleteById(id);
     }
+
 }

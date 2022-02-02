@@ -5,6 +5,7 @@ import ws.eliseev.fitness.model.User;
 import java.util.List;
 
 public interface IUserService {
+
     /**
      * Возвращаем список всех User-ов из базы данных
      *
@@ -58,4 +59,5 @@ public interface IUserService {
      * @param id
      */
     void deleteUserById(Long id);
+
 }
