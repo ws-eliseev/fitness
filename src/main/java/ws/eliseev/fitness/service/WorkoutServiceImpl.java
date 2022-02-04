@@ -1,7 +1,6 @@
 package ws.eliseev.fitness.service;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ws.eliseev.fitness.dto.WorkoutDto;
@@ -11,40 +10,48 @@ import ws.eliseev.fitness.utils.mapper.IWorkoutMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log4j2
 @Service
-@AllArgsConstructor
-@NoArgsConstructor
 public class WorkoutServiceImpl implements IWorkoutService {
 
-    private IWorkoutRepository workoutRepository;
+    private final IWorkoutRepository workoutRepository;
 
-    private IWorkoutMapper workoutMapper;
+    private final IWorkoutMapper workoutMapper;
 
-    @Override
+    public WorkoutServiceImpl(IWorkoutRepository workoutRepository, IWorkoutMapper workoutMapper) {
+        this.workoutRepository = workoutRepository;
+        this.workoutMapper = workoutMapper;
+    }
+
     @Transactional(readOnly = true)
     public List<WorkoutDto> listWorkout() {
+
+//        log.debug("enter method listWorkout");
+
         return workoutRepository.findAll().stream()
-                .map(workoutMapper::mapWorkoutToWorkoutDto)
+                .map(workoutMapper::mapToDto)
                 .collect(Collectors.toList());
     }
+
+
 
     @Override
     @Transactional
     public void saveOrUpdateWorkout(WorkoutDto workout) {
-        workoutRepository.save(workoutMapper.mapWorkoutDtoToEntityWorkout(workout));
+        workoutRepository.save(workoutMapper.mapToModel(workout));
 
     }
 
     @Override
     @Transactional
     public void deleteWorkoutByID(Long id) {
-        workoutRepository.delete(workoutMapper.mapWorkoutDtoToEntityWorkout(getWorkoutByID(id)));
+        workoutRepository.delete(workoutMapper.mapToModel(getWorkoutByID(id)));
 
     }
 
     @Override
     @Transactional(readOnly = true)
     public WorkoutDto getWorkoutByID(Long id) {
-        return workoutMapper.mapWorkoutToWorkoutDto(workoutRepository.findById(id).get());
+        return workoutMapper.mapToDto(workoutRepository.findById(id).get());
     }
 }

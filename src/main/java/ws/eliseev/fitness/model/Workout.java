@@ -1,18 +1,15 @@
 package ws.eliseev.fitness.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Builder
-@Entity
+
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-@Getter
-@Setter
-@EqualsAndHashCode(exclude = "id")
 @Table(name = "WORKOUT")
+@Entity
 public class Workout {
 
         @Id
@@ -42,6 +39,53 @@ public class Workout {
                 GYM;
         }
 
+        public Long getId() {
+                return id;
+        }
+
+        public void setId(Long id) {
+                this.id = id;
+        }
+
+        public String getName() {
+                return name;
+        }
+
+        public void setName(String name) {
+                this.name = name;
+        }
+
+        public String getExercise() {
+                return exercise;
+        }
+
+        public void setExercise(String exercise) {
+                this.exercise = exercise;
+        }
+
+        public int getRepeat() {
+                return repeat;
+        }
+
+        public void setRepeat(int repeat) {
+                this.repeat = repeat;
+        }
+
+        public int getSet() {
+                return set;
+        }
+
+        public void setSet(int set) {
+                this.set = set;
+        }
+
+        public String getArea() {
+                return area;
+        }
+
+        public void setArea(String area) {
+                this.area = area;
+        }
 }
 
 

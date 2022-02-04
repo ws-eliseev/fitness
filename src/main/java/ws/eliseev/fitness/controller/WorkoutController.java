@@ -4,7 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.WorkoutDto;
@@ -12,13 +13,17 @@ import ws.eliseev.fitness.service.WorkoutServiceImpl;
 
 import java.util.List;
 
+@Log4j2
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/workout")
 public class WorkoutController {
 
     private final WorkoutServiceImpl workoutService;
+
+    public WorkoutController(WorkoutServiceImpl workoutService) {
+        this.workoutService = workoutService;
+    }
 
     @GetMapping(value = "/")
     @Operation(summary = "Gets all Workouts", tags = "Получение списка всех тренировок")
@@ -27,8 +32,20 @@ public class WorkoutController {
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
     public ResponseEntity<List<WorkoutDto>> getAllWorkouts() {
-        return ResponseEntity.ok(workoutService.listWorkout());
+        List<WorkoutDto> dtoList = workoutService.listWorkout();
+        if (!dtoList.isEmpty()) {
+
+//            log.info("success received list from database");
+
+            return ResponseEntity.ok(dtoList);
+        } else {
+
+//            log.error("entity or dto not found");
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
+
     @PostMapping(value = "/")
     @Operation(summary = "Create or update Workout", tags = "Создание или изменение тренировки")
     @ApiResponses(value = {
