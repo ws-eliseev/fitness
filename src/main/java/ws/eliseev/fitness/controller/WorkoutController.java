@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +13,12 @@ import ws.eliseev.fitness.service.WorkoutServiceImpl;
 
 import java.util.List;
 
-@Log4j2
+
+/**
+ * Контроллеры на CRUD  операции с сущностью Workout
+ * @autor Корнеев Аркадий
+ */
+@Log4j
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
 @RequestMapping("/workout")
@@ -25,6 +30,10 @@ public class WorkoutController {
         this.workoutService = workoutService;
     }
 
+    /**
+     * Контроллер на запрос списка всех Тренировок
+     * @return http ответ на исход запроса
+     */
     @GetMapping(value = "/")
     @Operation(summary = "Gets all Workouts", tags = "Получение списка всех тренировок")
     @ApiResponses(value = {
@@ -34,18 +43,18 @@ public class WorkoutController {
     public ResponseEntity<List<WorkoutDto>> getAllWorkouts() {
         List<WorkoutDto> dtoList = workoutService.listWorkout();
         if (!dtoList.isEmpty()) {
-
 //            log.info("success received list from database");
-
             return ResponseEntity.ok(dtoList);
         } else {
-
 //            log.error("entity or dto not found");
-
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
+    /**
+     * Контроллер на создание или обновление Тренировки
+     * @param workout - сущность БД
+     */
     @PostMapping(value = "/")
     @Operation(summary = "Create or update Workout", tags = "Создание или изменение тренировки")
     @ApiResponses(value = {
@@ -58,6 +67,10 @@ public class WorkoutController {
         workoutService.saveOrUpdateWorkout(workout);
     }
 
+    /**
+     * Контроллер на удаление сущности Workout по ID
+     * @param id - Первичный ключ сущности Workout
+     */
     @DeleteMapping(value = "/{id}")
     @Operation(summary = "Delete Workout", tags = "Удаление тренировки")
     @ApiResponses(value = {
@@ -68,6 +81,11 @@ public class WorkoutController {
         workoutService.deleteWorkoutByID(id);
     }
 
+    /**
+     * Контроллер на получение сущности Workout из БД по параметру ID
+     * @param id - Первичный ключ сущности Workout
+     * @return http ответ на исход запроса
+     */
     @GetMapping(value = "/{id}")
     @Operation(summary = "Get Workout by ID", tags = "Поиск тренировки по ID")
     @ApiResponses(value = {
@@ -75,7 +93,12 @@ public class WorkoutController {
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
     public ResponseEntity<WorkoutDto> getWorkoutByID(@PathVariable Long id) {
-        return ResponseEntity.ok(workoutService.getWorkoutByID(id));
+        WorkoutDto dto = workoutService.getWorkoutByID(id);
+        if (dto != null) {
+            return ResponseEntity.ok(dto);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
 

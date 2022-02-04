@@ -3,20 +3,31 @@ package ws.eliseev.fitness.dto;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+/**
+ * DTO объект от сущности Workout
+ * @see ws.eliseev.fitness.model.Workout
+ * @autor Корнеев Аркадий
+ */
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkoutDto {
 
+    /** Поле id */
     private Long id;
 
+    /** Поле название упражнения */
     private String name;
 
+    /** Поле указания группы мышц */
     private String exercise;
 
+    /** Поле количество подходов */
     private int set;
 
+    /** Поле количество повторений */
     private int repeat;
 
+    /** Поле месторасположение для занятий */
     private String area;
 
     public Long getId() {

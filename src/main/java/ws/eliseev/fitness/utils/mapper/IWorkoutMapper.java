@@ -4,47 +4,30 @@ import org.mapstruct.Mapper;
 import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.model.Workout;
 
+/**
+ * Преобразовние сущности Workout в DTO
+ * @see ws.eliseev.fitness.model.Workout
+ * @see ws.eliseev.fitness.dto.WorkoutDto
+ * @autor Корнеев Аркадий
+ */
 @Mapper(componentModel = "spring")
 public interface IWorkoutMapper {
 
-//    default Workout toModel(WorkoutDto workoutDto) {
-//        if (workoutDto == null) {
-//            return null;
-//        }
-//
-//        return Workout.builder()
-//                .id(workoutDto.getId())
-//                .name(workoutDto.getName())
-//                .exercise(workoutDto.getExercise())
-//                .set(workoutDto.getSet())
-//                .repeat(workoutDto.getRepeat())
-//                .area(workoutDto.getArea())
-//                .build();
-//    }
-//
-//    default WorkoutDto toDto(Workout workout) {
-//        WorkoutDto workoutDto = new WorkoutDto();
-//        if (workout == null) {
-//            return null;
-//        }
-//        workoutDto.setId(workout.getId());
-//        workoutDto.setName(workout.getName());
-//        workoutDto.setExercise(workoutDto.getExercise());
-//        workoutDto.setSet(workoutDto.getSet());
-//        workoutDto.setRepeat(workoutDto.getRepeat());
-//        workoutDto.setArea(workout.getArea());
-//
-//        return workoutDto;
-//    }
-
-//    IWorkoutMapper INSTANCE = Mappers.getMapper( IWorkoutMapper.class );
-
 //    WorkoutDto mapWorkoutToWorkoutDto (Workout entity);
+
 
 //    Workout mapWorkoutDtoToEntityWorkout (WorkoutDto dto);
 
+    /**
+     * метод преобразования объекта в DTO
+     * @param entity сущность Workout
+     * @return объект типа DTO
+     */
     default WorkoutDto mapToDto(Workout entity) {
         WorkoutDto dto = new WorkoutDto();
+        if (dto == null) {
+            return null;
+        }
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setExercise(entity.getExercise());
@@ -54,8 +37,16 @@ public interface IWorkoutMapper {
         return dto;
     }
 
+    /**
+     * метод преобразования объекта в сущность Workout
+     * @param dto объект WorkoutDto
+     * @return сущность Workout
+     */
     default Workout mapToModel(WorkoutDto dto) {
         Workout entity = new Workout();
+        if (entity == null) {
+            return null;
+        }
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setExercise(dto.getExercise());

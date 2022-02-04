@@ -10,10 +10,10 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="NAME" type="varchar"/>
+            <column name="EXERCISE" type="varchar"/>
             <column name="REPEAT" type="int"/>
             <column name="SET" type="int"/>
             <column name="AREA" type="varchar"/>
-            <column name="EXERCISE" type="varchar"/>
         </createTable>
     </changeSet>
 

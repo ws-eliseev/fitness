@@ -4,6 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ws.eliseev.fitness.model.Workout;
 
+/**
+ * SpringData CRUD репозиторий для сущности Workout
+ * @autor Корнеев Аркадий
+ */
 @Repository
 public interface IWorkoutRepository extends JpaRepository<Workout, Long> {
 }
