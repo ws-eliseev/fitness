@@ -41,12 +41,12 @@ public class Workout {
          * @deprecated поле указано как String (по задумке Enum)
          */
         @Column(name = "AREA")
-//        @Enumerated(EnumType.STRING)
-        private String area;
+        @Enumerated(EnumType.STRING)
+        private Area area;
 
         /** Вложенный Enum со значениями Дом и Зал*/
         @NoArgsConstructor
-        enum Area {
+        public enum Area {
                 HOME,
                 GYM;
         }
@@ -91,11 +91,11 @@ public class Workout {
                 this.set = set;
         }
 
-        public String getArea() {
+        public Area getArea() {
                 return area;
         }
 
-        public void setArea(String area) {
+        public void setArea(Area area) {
                 this.area = area;
         }
 
