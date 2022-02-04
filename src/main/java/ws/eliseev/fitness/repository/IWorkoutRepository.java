@@ -6,7 +6,7 @@ import ws.eliseev.fitness.model.Workout;
 
 /**
  * SpringData CRUD репозиторий для сущности Workout
- * @autor Корнеев Аркадий
+ * @author Корнеев Аркадий
  */
 @Repository
 public interface IWorkoutRepository extends JpaRepository<Workout, Long> {

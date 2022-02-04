@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * Контроллеры на CRUD  операции с сущностью Workout
- * @autor Корнеев Аркадий
+ * @author Корнеев Аркадий
  */
 @Log4j
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")

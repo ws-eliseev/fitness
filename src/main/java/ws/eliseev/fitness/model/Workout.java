@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 /**
  * Сущность Workout и сопоставление с БД
- * @autor Корнеев Аркадий
+ * @author Корнеев Аркадий
  */
 @NoArgsConstructor
 @AllArgsConstructor

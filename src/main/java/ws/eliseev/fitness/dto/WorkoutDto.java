@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 /**
  * DTO объект от сущности Workout
  * @see ws.eliseev.fitness.model.Workout
- * @autor Корнеев Аркадий
+ * @author Корнеев Аркадий
  */
 @NoArgsConstructor
 @AllArgsConstructor
