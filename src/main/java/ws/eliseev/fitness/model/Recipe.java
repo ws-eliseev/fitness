@@ -6,7 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
-
+/**
+ *
+ * Класс entity - рецепт
+ * private Long id - идентификационный номер рецепта в БД
+ * private String name - название рецепта
+ * String disckript - описание рецепта
+ * String custName - дополнительные свойства рецепта
+ *
+ */
 @Entity
 public class Recipe {
     @Id
@@ -65,7 +73,8 @@ public class Recipe {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return Objects.equals(name, recipe.name) && Objects.equals(disckript, recipe.disckript) && Objects.equals(custName, recipe.custName);
+        return Objects.equals(name, recipe.name) && Objects.equals(disckript, recipe.disckript)
+                && Objects.equals(custName, recipe.custName);
     }
 
     @Override

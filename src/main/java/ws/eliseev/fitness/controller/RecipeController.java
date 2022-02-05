@@ -17,6 +17,7 @@ import java.util.Optional;
 @Tag(name = "Recipe", description = "Recipe API")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/recipes")
 public class RecipeController {
 
     private final IRecipeService recipeService;
@@ -33,7 +34,7 @@ public class RecipeController {
                     description = "Saved recipe"
             )
     })
-    @PostMapping("/recipes")
+    @PostMapping()
     public ResponseEntity<Recipe> saveRecipe(@Valid @RequestBody Recipe recipe) {
         return ResponseEntity.ok(recipeService.saveOrUpdateRecipe(recipe));
 
@@ -49,7 +50,7 @@ public class RecipeController {
                     description = "Got all recipes"
             )
     })
-    @GetMapping("/recipes")
+    @GetMapping()
     public ResponseEntity<List<Recipe>> fetchRecipeList() {
         return ResponseEntity.ok(recipeService.fetchRecipeList());
     }
@@ -66,7 +67,7 @@ public class RecipeController {
                     description = "Found recipe by ID"
             )
     })
-    @GetMapping("/recipes/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Optional<Recipe>> fetchRecipeById(@PathVariable("id") Long recipeId) {
         return ResponseEntity.ok(recipeService.fetchRecipeById(recipeId));
     }
@@ -82,7 +83,7 @@ public class RecipeController {
                     responseCode = "200",
                     description = "Deleted recipe")
     })
-    @DeleteMapping("/recipes/{id}")
+    @DeleteMapping("/{id}")
     public String deleteRecipeById(@PathVariable("id") Long recipeId) {
         recipeService.deleteRecipeById(recipeId);
         return "Recipe deleted. (OK)";
@@ -100,7 +101,7 @@ public class RecipeController {
                     description = "Got all recipes found by defined name"
             )
     })
-    @GetMapping("/recipes/name/{name}")
+    @GetMapping("/name/{name}")
     public ResponseEntity<List<Recipe>> fetchDepByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(recipeService.fetchRecipeByName(name));
     }
