@@ -1,41 +1,45 @@
 package ws.eliseev.fitness.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.repository.IRoleRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class RoleService implements IRoleService {
 
     private final IRoleRepository roleRepository;
 
-    public RoleService(IRoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
-    }
-
-    public void saveRole(Role role) {
+    public Optional<Role> saveOrUpdateRole(Role role) {
         roleRepository.save(role);
+        return findRoleByName(role.getName());
     }
 
-    public Role getRoleByID(int id) {
-        return roleRepository.getById(id);
+    public Optional<Role> findRoleByID(Integer id) {
+        return roleRepository.findById(id);
     }
 
-    public Role getRoleByName(String name) {
-        return roleRepository.getByName(name);
+    public Optional<Role> findRoleByName(String name) {
+        return roleRepository.findByName(name);
     }
 
-    public List<Role> getAllRoles() {
+    public List<Role> findAllRoles() {
         return roleRepository.findAll();
     }
 
-    public void deleteRoleById(int id) {
+    public Optional<Role> deleteRoleById(Integer id) {
+        final Optional<Role> deletedOptionalRole = roleRepository.findById(id);
         roleRepository.deleteById(id);
+        return deletedOptionalRole;
     }
 
-    public void deleteRoleByName(String name) {
+    public Optional<Role> deleteRoleByName(String name) {
+        final Optional<Role> deletedOptionalRole = roleRepository.findByName(name);
         roleRepository.deleteByName(name);
+        return deletedOptionalRole;
     }
 }
