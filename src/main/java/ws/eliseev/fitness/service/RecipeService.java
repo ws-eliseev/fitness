@@ -1,7 +1,6 @@
 package ws.eliseev.fitness.service;
 
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.model.Recipe;
 import ws.eliseev.fitness.repository.IRecipeRepository;
 
 import java.util.List;
