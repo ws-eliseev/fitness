@@ -28,7 +28,7 @@ public class RoleService implements IRoleService {
     }
 
     public List<Role> findAllRoles() {
-        return roleRepository.findAll();
+        return roleRepository.findAllRoles();
     }
 
     public Optional<Role> deleteRoleById(Integer id) {

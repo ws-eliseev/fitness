@@ -10,7 +10,7 @@ public interface IRoleService {
     /**
      * Метод, позволяющий сохранить или обновить роль.
      *
-     * @param role Сохраняемая роль.
+     * @param role Сохраняемая.обновляемая роль.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
     Optional<Role> saveOrUpdateRole(Role role);
