@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 /**
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
  * @see ws.eliseev.fitness.model.Workout
  * @author Корнеев Аркадий
  */
+@EqualsAndHashCode(exclude = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 public class WorkoutDto {

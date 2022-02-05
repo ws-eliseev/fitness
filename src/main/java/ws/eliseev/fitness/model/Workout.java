@@ -1,7 +1,6 @@
 package ws.eliseev.fitness.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -9,6 +8,10 @@ import javax.persistence.*;
  * Сущность Workout и сопоставление с БД
  * @author Корнеев Аркадий
  */
+
+//@Getter
+//@Setter
+@EqualsAndHashCode(exclude = "id")
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "WORKOUT")
