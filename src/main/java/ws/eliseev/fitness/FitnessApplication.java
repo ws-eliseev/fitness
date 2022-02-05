@@ -6,12 +6,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-// Use http://localhost:8082/swagger-ui/index.html to open UI
-// or http://localhost:8082/v3/api-docs.yaml to generate YAML file
-// you can also use http://localhost:8082/v3/api-docs without .yaml to open docs in browser
+// Используйте ссылку http://localhost:8082/swagger-ui/index.html чтобы открыть UI
+// или http://localhost:8082/v3/api-docs.yaml чтобы сгенерировать YAML файл и сохранить на пк
+// также можно использовать http://localhost:8082/v3/api-docs без .yaml чтобы открыть доки в браузере
 @OpenAPIDefinition(info = @Info(title = "FITNESS API", version = "IN DEV", description = "Fitness App"))
 public class FitnessApplication {
     public static void main(String[] args) {
         SpringApplication.run(FitnessApplication.class, args);
+
     }
 }
