@@ -10,7 +10,6 @@ import java.util.*;
 @Setter
 @Getter
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
 
     @Id
@@ -31,7 +30,6 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    @EqualsAndHashCode.Include
     @Column(name = "EMAIL")
     private String email;
 
@@ -58,5 +56,5 @@ public class User {
     @JoinTable(name = "USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 }
