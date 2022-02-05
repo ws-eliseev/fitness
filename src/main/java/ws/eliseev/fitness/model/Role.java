@@ -7,21 +7,21 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "ROLE")
 @Getter
 @Setter
 @NoArgsConstructor
 public class Role {
     @Id
-    // Need? @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "ID")
     private Long id;
 
     @Column (name = "NAME")
     private String name;
 
-    @ManyToMany(mappedBy = "roleSet", fetch = FetchType.LAZY)
-    private Set<User> userSet;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private Set<User> users;
 
     @Override
     public boolean equals(Object o) {

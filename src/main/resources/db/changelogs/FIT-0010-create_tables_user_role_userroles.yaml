@@ -1,0 +1,106 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0010-create_tables_user_role_userroles.yaml
+
+  - changeSet:
+      id: FIT-10-1
+      author: dxhoan420
+      changes:
+        - createSequence:
+            cacheSize: 1
+            catalogName: cat
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            schemaName: public
+            sequenceName: user_seq
+            startValue: 1
+  - changeSet:
+      id: FIT-10-2
+      author: dxhoan420
+      changes:
+        - tagDatabase:
+            tag: create_table_users
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: phone
+                  type: varchar(255)
+              - column:
+                  name: age
+                  type: int
+              - column:
+                  name: sex
+                  type: varchar(255)
+
+  - changeSet:
+      id: FIT-10-3
+      author: dxhoan420
+      changes:
+        - tagDatabase:
+            tag: create_table_roles
+        - createTable:
+            tableName: role
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: FIT-10-4
+      author: dxhoan420
+      changes:
+        - tagDatabase:
+            tag: create_table_users_roles
+        - createTable:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user
+                    references: user(id)
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_role
+                    references: role(id)

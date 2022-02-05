@@ -6,14 +6,16 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USER")
 @Setter
 @Getter
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO) //Not sure what kind we should use
+    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
     @Column(name = "ID")
     private Long id; //Not 'long' because it will be used in the generic for CrudRepository interface
 
@@ -29,6 +31,7 @@ public class User {
     @Column(name = "LAST_NAME")
     private String lastName;
 
+    @EqualsAndHashCode.Include
     @Column(name = "EMAIL")
     private String email;
 
@@ -38,22 +41,22 @@ public class User {
     @Column(name = "AGE")
     private int age;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roleSet;
+    @Column(name = "SEX")
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return getEmail().equals(user.getEmail());
+    @RequiredArgsConstructor
+    @Getter
+    public enum Sex {
+        MALE ("male"),
+        FEMALE ("female");
+
+        private final String title;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getEmail());
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "USER_ROLES",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    private Set<Role> roles;
 }
