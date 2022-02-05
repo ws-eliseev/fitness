@@ -1,0 +1,5 @@
+databaseChangeLog:
+  - logicalFilePath: db/db.changelog-master.yaml
+
+  - include:
+      file: db/changelogs/FIT-0010-create_tables_user_role_userroles.yaml 
