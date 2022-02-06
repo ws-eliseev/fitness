@@ -21,7 +21,7 @@ public interface IRoleService {
      * @param id идентификатор искомой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> findRoleByID(Integer id);
+    Optional<Role> findRoleById(Long id);
 
     /**
      * Метод, позволяющий найти роль по имени.
@@ -44,7 +44,7 @@ public interface IRoleService {
      * @param id идентификатор удаляемой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> deleteRoleById(Integer id);
+    Optional<Role> deleteRoleById(Long id);
 
     /**
      * Метод, позволяет удалить роль по имени.

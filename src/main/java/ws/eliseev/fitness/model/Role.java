@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;

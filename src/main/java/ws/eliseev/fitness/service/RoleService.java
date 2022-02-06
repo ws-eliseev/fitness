@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.repository.IRoleRepository;
+//import ws.eliseev.fitness.util.mapper.IRoleMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,13 +14,14 @@ import java.util.Optional;
 public class RoleService implements IRoleService {
 
     private final IRoleRepository roleRepository;
+//    private final IRoleMapper roleMapper;
 
     public Optional<Role> saveOrUpdateRole(Role role) {
         roleRepository.save(role);
         return findRoleByName(role.getName());
     }
 
-    public Optional<Role> findRoleByID(Integer id) {
+    public Optional<Role> findRoleById(Long id) {
         return roleRepository.findById(id);
     }
 
@@ -28,10 +30,10 @@ public class RoleService implements IRoleService {
     }
 
     public List<Role> findAllRoles() {
-        return roleRepository.findAllRoles();
+        return roleRepository.findAll();
     }
 
-    public Optional<Role> deleteRoleById(Integer id) {
+    public Optional<Role> deleteRoleById(Long id) {
         final Optional<Role> deletedOptionalRole = roleRepository.findById(id);
         roleRepository.deleteById(id);
         return deletedOptionalRole;
