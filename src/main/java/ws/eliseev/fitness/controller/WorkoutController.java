@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ import java.util.List;
  * Контроллеры на CRUD  операции с сущностью Workout
  * @author Корнеев Аркадий
  */
-@Log4j
+//@Log4j
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
 @RequestMapping("/workout")
