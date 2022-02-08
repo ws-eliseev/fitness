@@ -5,6 +5,7 @@ spring:
   jpa:
     hibernate.ddl-auto: validate
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    open-in-view: false
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres_db

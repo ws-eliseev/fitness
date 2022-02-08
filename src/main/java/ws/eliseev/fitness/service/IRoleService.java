@@ -8,12 +8,12 @@ import java.util.Optional;
 public interface IRoleService {
 
     /**
-     * Метод, позволяющий сохранить или обновить роль.
+     * Метод, позволяющий сохранить роль.
      *
-     * @param role сохраняемая/обновляемая роль.
+     * @param role сохраняемая роль.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> saveOrUpdateRole(Role role);
+    Optional<Role> saveRole(Role role);
 
     /**
      * Метод, позволяющий найти роль по Id.
@@ -38,6 +38,13 @@ public interface IRoleService {
      */
     List<Role> findAllRoles();
 
+    /**
+     * Метод, позволяющий обновить роль.
+     *
+     * @param role обновляемая роль.
+     * @return Optional, в котором может храниться либо роль, либо null.
+     */
+    Optional<Role> updateRole(Role role);
     /**
      * Метод, позволяющий удалить роль по Id.
      *

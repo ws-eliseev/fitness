@@ -1,11 +1,12 @@
 package ws.eliseev.fitness.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.dto.RoleDTO;
+import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.service.IRoleService;
 import ws.eliseev.fitness.util.mapper.IRoleMapper;
 
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/role")
+@Log4j2
 @RequiredArgsConstructor
 public class RoleController {
 
@@ -28,7 +30,8 @@ public class RoleController {
      */
     @PostMapping("/createRole")
     public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO createdRoleDTO) {
-        final Optional<Role> gotRole = roleService.saveOrUpdateRole(roleMapper.mapToModel(createdRoleDTO));
+        final Optional<Role> gotRole = roleService.saveRole(roleMapper.mapToModel(createdRoleDTO));
+        log.info("Create role");
         return gotRole.map(
                 presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
@@ -43,6 +46,7 @@ public class RoleController {
     @GetMapping("/roleById/{id}")
     public ResponseEntity<RoleDTO> getRoleById(@PathVariable("id") Long id) {
         final Optional<Role> gotRole = roleService.findRoleById(id);
+        log.info("Get role by id");
         return gotRole.map(
                 presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
@@ -57,6 +61,7 @@ public class RoleController {
     @GetMapping("/roleByName/{name}")
     public ResponseEntity<RoleDTO> getRoleByName(@PathVariable("name") String name) {
         final Optional<Role> gotRole = roleService.findRoleByName(name);
+        log.info("Get role by name");
         return gotRole.map(
                 presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
@@ -69,7 +74,9 @@ public class RoleController {
      */
     @GetMapping("/allRoles")
     public ResponseEntity<List<RoleDTO>> getAllRoles() {
-        return new ResponseEntity<>(roleMapper.mapToListDTO(roleService.findAllRoles()), HttpStatus.OK);
+        List<Role> allRoles = roleService.findAllRoles();
+        log.info("Get all roles");
+        return new ResponseEntity<>(roleMapper.mapToListDTO(allRoles), HttpStatus.OK);
     }
 
     /**
@@ -79,8 +86,8 @@ public class RoleController {
      */
     @PutMapping("/updateRole")
     public ResponseEntity<RoleDTO> updateRoleById(@RequestBody RoleDTO updatedRoleDTO) {
-        roleService.saveOrUpdateRole(roleMapper.mapToModel(updatedRoleDTO));
-        final Optional<Role> gotRole = roleService.findRoleById(updatedRoleDTO.getId());
+        final Optional<Role> gotRole = roleService.updateRole(roleMapper.mapToModel(updatedRoleDTO));
+        log.info("Update role");
         return gotRole.map(
                 presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
@@ -95,6 +102,7 @@ public class RoleController {
     @DeleteMapping("/deleteById/{id}")
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("id") Long id) {
         final Optional<Role> gotRole = roleService.deleteRoleById(id);
+        log.info("Delete role by id");
         return gotRole.map(
                 presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
@@ -109,6 +117,7 @@ public class RoleController {
     @DeleteMapping("/deleteByName/{name}")
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("name") String name) {
         final Optional<Role> gotRole = roleService.deleteRoleByName(name);
+        log.info("Delete role by name");
         return gotRole.map(
                 presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));

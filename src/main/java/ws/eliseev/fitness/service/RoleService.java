@@ -14,7 +14,7 @@ public class RoleService implements IRoleService {
 
     private final IRoleRepository roleRepository;
 
-    public Optional<Role> saveOrUpdateRole(Role role) {
+    public Optional<Role> saveRole(Role role) {
         roleRepository.save(role);
         return findRoleByName(role.getName());
     }
@@ -31,6 +31,10 @@ public class RoleService implements IRoleService {
         return roleRepository.findAll();
     }
 
+    public Optional<Role> updateRole(Role role) {
+        roleRepository.save(role);
+        return roleRepository.findById(role.getId());
+    }
     public Optional<Role> deleteRoleById(Long id) {
         final Optional<Role> deletedOptionalRole = roleRepository.findById(id);
         roleRepository.deleteById(id);
