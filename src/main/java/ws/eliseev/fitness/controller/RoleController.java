@@ -38,8 +38,7 @@ public class RoleController {
     @PostMapping("/createRole")
     @Operation(summary = "Создание роли")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль успешно создана", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роль успешно создана"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
     public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO createdRoleDTO) {
         final Optional<Role> gotRole = roleService.saveRole(roleMapper.mapToModel(createdRoleDTO));
@@ -58,8 +57,7 @@ public class RoleController {
     @GetMapping("/roleById/{id}")
     @Operation(summary = "Получение роли по id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль успешно получена", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роль успешно получена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> getRoleById(@PathVariable("id") Long id) {
@@ -79,8 +77,7 @@ public class RoleController {
     @GetMapping("/roleByName/{name}")
     @Operation(summary = "Получение роли по имени")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль успешно получена", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роль успешно получена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> getRoleByName(@PathVariable("name") String name) {
@@ -99,8 +96,7 @@ public class RoleController {
     @GetMapping("/allRoles")
     @Operation(summary = "Получение всех ролей")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роли успешно получены", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роли успешно получены"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
     public ResponseEntity<List<RoleDTO>> getAllRoles() {
         List<Role> allRoles = roleService.findAllRoles();
@@ -117,8 +113,7 @@ public class RoleController {
     @PutMapping("/updateRole")
     @Operation(summary = "Обновление роли")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль успешно обновлена", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роль успешно обновлена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> updateRoleById(@RequestBody RoleDTO updatedRoleDTO) {
@@ -138,8 +133,7 @@ public class RoleController {
     @DeleteMapping("/deleteById/{id}")
     @Operation(summary = "Удаление роли по id")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль успешно удалена", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роль успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("id") Long id) {
@@ -159,8 +153,7 @@ public class RoleController {
     @DeleteMapping("/deleteByName/{name}")
     @Operation(summary = "Удаление роли по имени")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Роль успешно удалена", content = {
-                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "200", description = "Роль успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("name") String name) {
