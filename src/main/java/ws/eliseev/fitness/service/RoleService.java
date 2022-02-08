@@ -32,7 +32,9 @@ public class RoleService implements IRoleService {
     }
 
     public Optional<Role> updateRole(Role role) {
-        roleRepository.save(role);
+        if (roleRepository.findById(role.getId()).isPresent()) {
+            roleRepository.save(role);
+        }
         return roleRepository.findById(role.getId());
     }
     public Optional<Role> deleteRoleById(Long id) {

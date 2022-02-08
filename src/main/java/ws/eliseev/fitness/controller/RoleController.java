@@ -1,5 +1,11 @@
 package ws.eliseev.fitness.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -15,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/role")
+@Tag(name = "Role", description = "CRUD операции с ролями")
 @Log4j2
 @RequiredArgsConstructor
 public class RoleController {
@@ -29,11 +36,16 @@ public class RoleController {
      * @return ResponseEntity сохраняемой роли, параметризованная RoleDTO.
      */
     @PostMapping("/createRole")
+    @Operation(summary = "Создание роли")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роль успешно создана", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос")})
     public ResponseEntity<RoleDTO> createRole(@RequestBody RoleDTO createdRoleDTO) {
         final Optional<Role> gotRole = roleService.saveRole(roleMapper.mapToModel(createdRoleDTO));
         log.info("Create role");
         return gotRole.map(
-                presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
+                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
@@ -44,11 +56,17 @@ public class RoleController {
      * @return ResponseEntity получаемой роли, параметризованная RoleDTO.
      */
     @GetMapping("/roleById/{id}")
+    @Operation(summary = "Получение роли по id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роль успешно получена", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+            @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> getRoleById(@PathVariable("id") Long id) {
         final Optional<Role> gotRole = roleService.findRoleById(id);
         log.info("Get role by id");
         return gotRole.map(
-                presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
+                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
@@ -59,11 +77,17 @@ public class RoleController {
      * @return ResponseEntity получаемой роли, параметризованная RoleDTO.
      */
     @GetMapping("/roleByName/{name}")
+    @Operation(summary = "Получение роли по имени")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роль успешно получена", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+            @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> getRoleByName(@PathVariable("name") String name) {
         final Optional<Role> gotRole = roleService.findRoleByName(name);
         log.info("Get role by name");
         return gotRole.map(
-                presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
+                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
@@ -73,6 +97,11 @@ public class RoleController {
      * @return ResponseEntity получаемых ролей, параметризованная ListDTO.
      */
     @GetMapping("/allRoles")
+    @Operation(summary = "Получение всех ролей")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роли успешно получены", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос")})
     public ResponseEntity<List<RoleDTO>> getAllRoles() {
         List<Role> allRoles = roleService.findAllRoles();
         log.info("Get all roles");
@@ -81,15 +110,22 @@ public class RoleController {
 
     /**
      * Метод контроллера, позволяющий обновить роль в БД.
+     *
      * @param updatedRoleDTO DTO обновляемой роли.
      * @return ResponseEntity обновляемой роли, параметризованная RoleDTO.
      */
     @PutMapping("/updateRole")
+    @Operation(summary = "Обновление роли")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роль успешно обновлена", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+            @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> updateRoleById(@RequestBody RoleDTO updatedRoleDTO) {
         final Optional<Role> gotRole = roleService.updateRole(roleMapper.mapToModel(updatedRoleDTO));
         log.info("Update role");
         return gotRole.map(
-                presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
+                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
@@ -100,11 +136,17 @@ public class RoleController {
      * @return ResponseEntity удаляемой роли, параметризованная RoleDTO.
      */
     @DeleteMapping("/deleteById/{id}")
+    @Operation(summary = "Удаление роли по id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роль успешно удалена", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+            @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("id") Long id) {
         final Optional<Role> gotRole = roleService.deleteRoleById(id);
         log.info("Delete role by id");
         return gotRole.map(
-                presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
+                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
@@ -115,11 +157,17 @@ public class RoleController {
      * @return ResponseEntity удаляемой роли, параметризованная RoleDTO.
      */
     @DeleteMapping("/deleteByName/{name}")
+    @Operation(summary = "Удаление роли по имени")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Роль успешно удалена", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = RoleDTO.class))}),
+            @ApiResponse(responseCode = "400", description = "Неверный запрос"),
+            @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("name") String name) {
         final Optional<Role> gotRole = roleService.deleteRoleByName(name);
         log.info("Delete role by name");
         return gotRole.map(
-                presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
+                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 }
