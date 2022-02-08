@@ -1,13 +1,17 @@
 package ws.eliseev.fitness.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 import ws.eliseev.fitness.model.User;
 
+import java.util.Optional;
+
+@Repository
 public interface IUserRepository extends JpaRepository<User, Long> {
 
-    User getUserByUsername(String username);
+    Optional<User> findByUserName(String username);
 
-    User getUserByEmail(String email);
+    Optional<User>  findUsersByEmail(String email);
 
-    User getUserByPhone(String phone);
+    Optional<User>  findUsersByPhone(String phone);
 }
