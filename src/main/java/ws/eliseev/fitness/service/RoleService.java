@@ -37,6 +37,7 @@ public class RoleService implements IRoleService {
         }
         return roleRepository.findById(role.getId());
     }
+
     public Optional<Role> deleteRoleById(Long id) {
         final Optional<Role> deletedOptionalRole = roleRepository.findById(id);
         roleRepository.deleteById(id);

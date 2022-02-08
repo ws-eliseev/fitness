@@ -45,6 +45,7 @@ public interface IRoleService {
      * @return Optional, в котором может храниться либо роль, либо null.
      */
     Optional<Role> updateRole(Role role);
+
     /**
      * Метод, позволяющий удалить роль по Id.
      *
@@ -55,6 +56,7 @@ public interface IRoleService {
 
     /**
      * Метод, позволяет удалить роль по имени.
+     *
      * @param name имя удаляемой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */

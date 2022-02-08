@@ -19,6 +19,7 @@ public interface IRoleMapper {
 
     /**
      * Метод, позволяющий конвертировать DTO объект в Entity.
+     *
      * @param roleDTO объект с полями id и name.
      * @return сущность, полученная из БД или подлежащая сохранению.
      */
