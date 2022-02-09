@@ -22,6 +22,7 @@ import java.util.List;
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
 @RequestMapping("/workout")
+@Profile("dev")
 public class WorkoutController {
 
     private final WorkoutServiceImpl workoutService;
