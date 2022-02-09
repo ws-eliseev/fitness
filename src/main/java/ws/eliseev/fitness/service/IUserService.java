@@ -15,9 +15,8 @@ public interface IUserService {
     /**
      *
      * @param user Добавляем/изменяем в базе данных нового User-а
-     * @return  Возвращаем сохраненного User-a
      */
-    User saveUser(User user);
+    void saveUser(User user);
 
     /**
      *
@@ -25,28 +24,28 @@ public interface IUserService {
      * @param id Получаем User-а по id из базы данных
      * @return Возвращаем полученного User-a
      */
-    User getUserById(Long id);
+    Optional<User> getUserById(Long id);
 
     /**
      *
      * @param username Получаем User-а по его username из базы данных
      * @return Возвращаем полученного User-a
      */
-    Optional<User> getByUserName(String username);
+    User getByUserName(String username);
 
     /**
      *
      * @param email Получаем User-а по его email из базы данных
      * @return Возвращаем полученного User-a
      */
-    Optional<User> getUserByEmail(String email);
+    User getUserByEmail(String email);
 
     /**
      *
      * @param phone Получаем User-а по номеру его телефона из базы данных
      * @return Возвращаем User-а по номеру его телефона
      */
-    Optional<User> getUserByPhone(String phone);
+    User getUserByPhone(String phone);
 
     /**
      *
