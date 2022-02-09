@@ -1,6 +1,6 @@
 package ws.eliseev.fitness.service;
 
-import ws.eliseev.fitness.model.Role;
+import ws.eliseev.fitness.dto.RoleDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,10 +10,9 @@ public interface IRoleService {
     /**
      * Метод, позволяющий сохранить роль.
      *
-     * @param role сохраняемая роль.
-     * @return Optional, в котором может храниться либо роль, либо null.
+     * @param roleDTO сохраняемая роль.
      */
-    Optional<Role> saveRole(Role role);
+    void saveRole(RoleDTO roleDTO);
 
     /**
      * Метод, позволяющий найти роль по Id.
@@ -21,7 +20,7 @@ public interface IRoleService {
      * @param id идентификатор искомой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> findRoleById(Long id);
+    Optional<RoleDTO> findRoleById(Long id);
 
     /**
      * Метод, позволяющий найти роль по имени.
@@ -29,22 +28,22 @@ public interface IRoleService {
      * @param name имя искомой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> findRoleByName(String name);
+    Optional<RoleDTO> findRoleByName(String name);
 
     /**
      * Метод, позволяющий найти все роли.
      *
      * @return Коллекция (List) ролей.
      */
-    List<Role> findAllRoles();
+    List<RoleDTO> findAllRoles();
 
     /**
      * Метод, позволяющий обновить роль.
      *
-     * @param role обновляемая роль.
+     * @param roleDTO DTO обновляемой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> updateRole(Role role);
+    Optional<RoleDTO> updateRole(RoleDTO roleDTO);
 
     /**
      * Метод, позволяющий удалить роль по Id.
@@ -52,7 +51,7 @@ public interface IRoleService {
      * @param id идентификатор удаляемой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> deleteRoleById(Long id);
+    Optional<RoleDTO> deleteRoleById(Long id);
 
     /**
      * Метод, позволяет удалить роль по имени.
@@ -60,5 +59,5 @@ public interface IRoleService {
      * @param name имя удаляемой роли.
      * @return Optional, в котором может храниться либо роль, либо null.
      */
-    Optional<Role> deleteRoleByName(String name);
+    Optional<RoleDTO> deleteRoleByName(String name);
 }

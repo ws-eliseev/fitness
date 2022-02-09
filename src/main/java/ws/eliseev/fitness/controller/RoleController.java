@@ -11,9 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.RoleDTO;
-import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.service.IRoleService;
-import ws.eliseev.fitness.util.mapper.IRoleMapper;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,25 +24,19 @@ import java.util.Optional;
 public class RoleController {
 
     private final IRoleService roleService;
-    private final IRoleMapper roleMapper;
 
     /**
      * Метод контроллера, позволяющий сохранить роль в БД.
      *
      * @param createdRoleDTO DTO сохраняемой роли.
-     * @return ResponseEntity сохраняемой роли, параметризованная RoleDTO.
      */
     @PostMapping("/createRole")
     @Operation(summary = "Создание роли")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Роль успешно создана"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
-    public ResponseEntity<RoleDTO> createRole(@RequestBody @NonNull RoleDTO createdRoleDTO) {
-        final Optional<Role> gotRole = roleService.saveRole(roleMapper.mapToModel(createdRoleDTO));
-        log.info("Create role");
-        return gotRole.map(
-                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    public void createRole(@RequestBody RoleDTO createdRoleDTO) {
+        roleService.saveRole(createdRoleDTO);
     }
 
     /**
@@ -60,11 +52,15 @@ public class RoleController {
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> getRoleById(@PathVariable("id") Long id) {
-        final Optional<Role> gotRole = roleService.findRoleById(id);
-        log.info("Get role by id");
-        return gotRole.map(
-                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        Optional<RoleDTO> foundRoleDTO = roleService.findRoleById(id);
+        if (foundRoleDTO.isPresent()) {
+            RoleDTO presentedRole = foundRoleDTO.get();
+            log.info("Get role with id {} : [{}]", id, presentedRole);
+            return ResponseEntity.ok(presentedRole);
+        } else {
+            log.info("Get role with id {} : not found", id);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     /**
@@ -80,11 +76,15 @@ public class RoleController {
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> getRoleByName(@PathVariable("name") String name) {
-        final Optional<Role> gotRole = roleService.findRoleByName(name);
-        log.info("Get role by name");
-        return gotRole.map(
-                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        Optional<RoleDTO> foundRoleDTO = roleService.findRoleByName(name);
+        if (foundRoleDTO.isPresent()) {
+            RoleDTO presentedRole = foundRoleDTO.get();
+            log.info("Get role with name {} : [{}]", name, presentedRole);
+            return ResponseEntity.ok(presentedRole);
+        } else {
+            log.info("Get role with name {} : not found", name);
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -98,9 +98,9 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роли успешно получены"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
     public ResponseEntity<List<RoleDTO>> getAllRoles() {
-        List<Role> allRoles = roleService.findAllRoles();
-        log.info("Get all roles");
-        return new ResponseEntity<>(roleMapper.mapToListDTO(allRoles), HttpStatus.OK);
+        List<RoleDTO> roleDTOS = roleService.findAllRoles();
+        log.info("Get all roles, size: {}", roleDTOS.size());
+        return ResponseEntity.ok(roleDTOS);
     }
 
     /**
@@ -116,11 +116,15 @@ public class RoleController {
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> updateRoleById(@RequestBody @NonNull RoleDTO updatedRoleDTO) {
-        final Optional<Role> gotRole = roleService.updateRole(roleMapper.mapToModel(updatedRoleDTO));
-        log.info("Update role");
-        return gotRole.map(
-                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        Optional<RoleDTO> updatedRole = roleService.updateRole(updatedRoleDTO);
+        if (updatedRole.isPresent()) {
+            RoleDTO presentedRole = updatedRole.get();
+            log.info("Update role: [{}] - success", presentedRole);
+            return ResponseEntity.ok(presentedRole);
+        } else {
+            log.info("Update role: not found");
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -136,11 +140,15 @@ public class RoleController {
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
     public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("id") Long id) {
-        final Optional<Role> gotRole = roleService.deleteRoleById(id);
-        log.info("Delete role by id");
-        return gotRole.map(
-                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        Optional<RoleDTO> deletedRole = roleService.deleteRoleById(id);
+        if (deletedRole.isPresent()) {
+            RoleDTO presentedRole = deletedRole.get();
+            log.info("Delete role with id {} : [{}]", id, presentedRole);
+            return ResponseEntity.ok(presentedRole);
+        } else {
+            log.info("Delete role with id {} : not found", id);
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**
@@ -155,11 +163,15 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роль успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
-    public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("name") String name) {
-        final Optional<Role> gotRole = roleService.deleteRoleByName(name);
-        log.info("Delete role by name");
-        return gotRole.map(
-                        presentedRole -> new ResponseEntity<>(roleMapper.mapToDTO(presentedRole), HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+    public ResponseEntity<RoleDTO> deleteRoleByName(@PathVariable("name") String name) {
+        Optional<RoleDTO> deletedRole = roleService.deleteRoleByName(name);
+        if (deletedRole.isPresent()) {
+            RoleDTO presentedRole = deletedRole.get();
+            log.info("Delete role with name {} : [{}]", name, presentedRole);
+            return ResponseEntity.ok(presentedRole);
+        } else {
+            log.info("Delete role with name {} : not found", name);
+            return ResponseEntity.notFound().build();
+        }
     }
 }
