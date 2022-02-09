@@ -16,32 +16,32 @@ public class IUserServiceImpl implements IUserService {
 
     @Override
     public List<User> getAllUser() {
-        return repository.findAll();
+        return (List<User>) repository.findAll();
     }
 
     @Override
-    public User saveUser(User user) {
-        return repository.save(user);
+    public void saveUser(User user) {
+        repository.save(user);
     }
 
     @Override
-    public User getUserById(Long id) {
-        return repository.getById(id);
+    public Optional<User> getUserById(Long id) {
+        return repository.findById(id);
     }
 
     @Override
     public Optional<User> getByUserName(String username) {
-        return repository.findByUserName(username);
+        return Optional.ofNullable(repository.findByUsername(username));
     }
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return repository.findUsersByEmail(email);
+        return Optional.ofNullable(repository.findUsersByEmail(email));
     }
 
     @Override
     public Optional<User> getUserByPhone(String phone) {
-        return repository.findUsersByPhone(phone);
+        return Optional.ofNullable(repository.findUsersByPhone(phone));
     }
 
     @Override

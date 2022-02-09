@@ -15,9 +15,8 @@ public interface IUserService {
     /**
      *
      * @param user Добавляем/изменяем в базе данных нового User-а
-     * @return  Возвращаем сохраненного User-a
      */
-    User saveUser(User user);
+    void saveUser(User user);
 
     /**
      *
@@ -25,7 +24,7 @@ public interface IUserService {
      * @param id Получаем User-а по id из базы данных
      * @return Возвращаем полученного User-a
      */
-    User getUserById(Long id);
+    Optional<User> getUserById(Long id);
 
     /**
      *
