@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.service;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.Recipe;
 import ws.eliseev.fitness.repository.IRecipeRepository;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Profile("dev")
 public class RecipeService implements IRecipeService {
 
     private final IRecipeRepository recipeRepository;

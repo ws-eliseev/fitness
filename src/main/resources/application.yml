@@ -1,7 +1,10 @@
+#Свойства, используемые для всех профилей
 server:
   port: 8082
 
 spring:
+  profiles:
+    active: dev
   jpa:
     hibernate.ddl-auto: validate
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
