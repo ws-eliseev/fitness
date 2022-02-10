@@ -5,3 +5,7 @@ databaseChangeLog:
       file: db/changelogs/FIT-0010-create_tables_user_role_userroles.yaml
   - include:
       file: db/changelogs/FIT-0011-create_tables_recipe.yaml
+  - include:
+      file: db/changelogs/FIT-0012-create_table_workout.yaml
+  - include:
+      file: db/changelogs/FIT-0026-create_tables_userAud_userRolesAud_roleAud_reinfo.yaml

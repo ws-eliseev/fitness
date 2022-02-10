@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -19,7 +20,7 @@ public class Role {
 
     @Column (name = "NAME")
     private String name;
-
+    @Audited
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
 }

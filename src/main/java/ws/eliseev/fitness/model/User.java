@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.*;
@@ -9,6 +10,7 @@ import java.util.*;
 @Table(name = "USER")
 @Setter
 @Getter
+@Audited
 @NoArgsConstructor
 public class User {
 
