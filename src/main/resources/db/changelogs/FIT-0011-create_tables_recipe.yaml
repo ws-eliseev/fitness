@@ -8,7 +8,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_recipe_table
         - createTable:
-            tableName: recipe
+            tableName: fit_recipe
             columns:
               - column:
                   name: id

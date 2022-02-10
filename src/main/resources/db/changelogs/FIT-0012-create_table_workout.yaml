@@ -8,7 +8,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_workout
         - createTable:
-            tableName: WORKOUT
+            tableName: fit_workout
             columns:
               - column:
                   name: ID

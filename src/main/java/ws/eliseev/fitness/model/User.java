@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "FIT_USER")
 @Setter
 @Getter
 @Audited
@@ -15,7 +15,7 @@ import java.util.*;
 public class User {
 
     @Id
-    @SequenceGenerator(name = "user_gen", sequenceName = "user_seq", allocationSize = 1)
+    @SequenceGenerator(name = "user_gen", sequenceName = "fit_user_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
     @Column(name = "ID")
     private Long id; //Not 'long' because it will be used in the generic for CrudRepository interface
@@ -55,7 +55,7 @@ public class User {
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_ROLES",
+    @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();

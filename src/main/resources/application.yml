@@ -15,16 +15,3 @@ spring:
     drop-first: false
     change-log: db/db.changelog-master.yaml
     default-schema: public
-
-#server.port=8082
-#spring.jpa.hibernate.ddl-auto=validate
-#spring.datasource.driver-class-name=org.postgresql.Driver
-#spring.datasource.url=jdbc:postgresql://localhost:5432/postgres_db
-#spring.datasource.username=postgres_adm
-#spring.datasource.password=postgres_pass
-#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQL95Dialect
-#
-#spring.liquibase.enabled=true
-#spring.liquibase.drop-first=false
-#spring.liquibase.change-log=classpath:db/master.xml
-#spring.liquibase.default-schema=public
