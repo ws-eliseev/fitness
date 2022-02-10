@@ -1,12 +1,14 @@
 package ws.eliseev.fitness.util.mapper;
 
 import org.mapstruct.Mapper;
+import org.springframework.context.annotation.Profile;
 import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.dto.RoleDTO;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
+@Profile("dev")
 public interface IRoleMapper {
 
     /**
