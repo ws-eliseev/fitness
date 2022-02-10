@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.repository.IWorkoutRepository;
-import ws.eliseev.fitness.utils.mapper.IWorkoutMapper;
+import ws.eliseev.fitness.util.mapper.IWorkoutMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
