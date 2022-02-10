@@ -1,4 +1,4 @@
-package ws.eliseev.fitness.utils.mapper;
+package ws.eliseev.fitness.util.mapper;
 
 import org.mapstruct.Mapper;
 import org.springframework.context.annotation.Profile;
