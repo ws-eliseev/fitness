@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table(name = "WORKOUT")
+@Table(name = "FIT_WORKOUT")
 @Entity
 public class Workout {
 
