@@ -6,14 +6,14 @@ databaseChangeLog:
       author: dxhoan420
       changes:
         - createSequence:
+            sequenceName: fit_user_seq
             cacheSize: 1
-            catalogName: cat
             cycle: false
             dataType: bigint
             incrementBy: 1
             schemaName: public
-            sequenceName: user_seq
             startValue: 1
+
   - changeSet:
       id: FIT-10-2
       author: dxhoan420
@@ -21,7 +21,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_users
         - createTable:
-            tableName: user
+            tableName: fit_user
             columns:
               - column:
                   name: id
@@ -67,7 +67,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_roles
         - createTable:
-            tableName: role
+            tableName: fit_role
             columns:
               - column:
                   name: id
@@ -81,6 +81,7 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
+
   - changeSet:
       id: FIT-10-4
       author: dxhoan420
@@ -88,7 +89,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_users_roles
         - createTable:
-            tableName: user_roles
+            tableName: fit_user_roles
             columns:
               - column:
                   name: user_id
@@ -96,11 +97,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     foreignKeyName: fk_user
-                    references: user(id)
+                    references: fit_user(id)
               - column:
                   name: role_id
                   type: BIGINT
                   constraints:
                     nullable: false
                     foreignKeyName: fk_role
-                    references: role(id)
+                    references: fit_role(id)
