@@ -1,6 +1,7 @@
-package ws.eliseev.fitness.utils.mapper;
+package ws.eliseev.fitness.util.mapper;
 
 import org.mapstruct.Mapper;
+import org.springframework.context.annotation.Profile;
 import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.model.Workout;
 
@@ -11,6 +12,7 @@ import ws.eliseev.fitness.model.Workout;
  * @author Корнеев Аркадий
  */
 @Mapper(componentModel = "spring")
+@Profile("dev")
 public interface IWorkoutMapper {
 
     /**
