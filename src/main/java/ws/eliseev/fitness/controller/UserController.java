@@ -27,84 +27,57 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         log.debug("All Users");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
-        if (user != null) {
-            service.saveUser(user);
-            log.debug("The user is saved in the database");
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        log.debug("Unsuccessful");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        service.saveUser(user);
+        log.debug("The user is saved in the database");
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping()
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-        if (user != null) {
-            service.saveUser(user);
-            log.debug("User updated");
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+    public void updateUser(@RequestBody User user) {
         log.debug("Unsuccessful");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        service.saveUser(user);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long id) {
         Optional<User> user = service.getUserById(id);
         if (user.isEmpty()) {
             log.debug("User with id=" + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        service.getUserById(id);
         log.debug("User id{}", id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.of(user);
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUseName(@PathVariable(value = "username") String username) {
-        Optional<User> userName = service.getByUserName(username);
-        if (userName.isEmpty()) {
-            log.debug("Username not found{}", userName);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/username/{username}")
+    public ResponseEntity<Optional<User>> getUserByUseName(@PathVariable(value = "username") String username) {
+        Optional<Optional<User>> userName = Optional.of(service.getByUserName(username));
         log.debug("Username{}", userName);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.of(userName);
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable(value = "email") String email) {
-        Optional<User> userEmail = service.getUserByEmail(email);
-        if (userEmail.isEmpty()) {
-            log.debug("Email not found{}", userEmail);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Optional<User>> getUserByEmail(@PathVariable(value = "email") String email) {
+        Optional<Optional<User>> userEmail = Optional.of(service.getUserByEmail(email));
         log.debug("Email{}", email);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.of(userEmail);
     }
 
-    @GetMapping("/{phone}")
-    public ResponseEntity<User> getUserByPhone(@PathVariable(value = "phone") String phone) {
-        Optional<User> userPhone = service.getUserByPhone(phone);
-        if (userPhone.isEmpty()) {
-            log.debug("Phone number not found{}", userPhone);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    @GetMapping("/phone/{phone}")
+    public ResponseEntity<Optional<User>> getUserByPhone(@PathVariable(value = "phone") String phone) {
+        Optional<Optional<User>> userPhone = Optional.of(service.getUserByPhone(phone));
         log.debug("Phone number{}", phone);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.of(userPhone);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUserById(@PathVariable(value = "id") Long id) {
-        if (id == null) {
-            log.debug("User with id not found{}", id);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public void deleteUserById(@PathVariable(value = "id") Long id) {
         service.deleteUserById(id);
         log.debug("User deleted");
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
