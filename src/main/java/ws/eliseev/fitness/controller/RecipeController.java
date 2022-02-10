@@ -19,6 +19,7 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/recipes")
+@Profile("dev")
 public class RecipeController {
 
     private final IRecipeService recipeService;
