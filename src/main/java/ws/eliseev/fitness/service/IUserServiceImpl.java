@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.User;
 import ws.eliseev.fitness.repository.IUserRepository;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Profile("dev")
 public class IUserServiceImpl implements IUserService {
 
     private final IUserRepository repository;

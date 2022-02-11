@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.repository;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ws.eliseev.fitness.model.Role;
@@ -7,6 +8,7 @@ import ws.eliseev.fitness.model.Role;
 import java.util.Optional;
 
 @Repository
+@Profile("dev")
 public interface IRoleRepository extends JpaRepository<Role, Long> {
     /**
      * Метод, позволяющий получить роль из БД по имени.
