@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.model.User;
-import ws.eliseev.fitness.repository.IUserRepository;
+import ws.eliseev.fitness.service.IUserService;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,23 +17,23 @@ import java.util.Optional;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final IUserRepository repository;
+    private final IUserService service;
 
     @GetMapping()
     public ResponseEntity<List<User>> showAllUsers() {
-        List<User> userList = repository.findAll();
+        List<User> userList = service.getAllUser();
         if (userList.isEmpty()) {
             log.debug("No users found in the database");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        log.debug("");
+        log.debug("All Users");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping()
     public ResponseEntity<User> addNewUser(@RequestBody User user) {
         if (user != null) {
-            repository.save(user);
+            service.saveUser(user);
             log.debug("The user is saved in the database");
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
@@ -43,9 +43,8 @@ public class UserController {
 
     @PutMapping()
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-
         if (user != null) {
-            repository.save(user);
+            service.saveUser(user);
             log.debug("User updated");
             return new ResponseEntity<>(HttpStatus.OK);
         }
@@ -55,60 +54,57 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long id) {
-        Optional<User> user = repository.findById(id);
+        Optional<User> user = service.getUserById(id);
         if (user.isEmpty()) {
             log.debug("User with id=" + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        repository.getById(id);
-        log.debug("User id=" + id);
+        service.getUserById(id);
+        log.debug("User id{}", id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{username}")
     public ResponseEntity<User> getUserByUseName(@PathVariable(value = "username") String username) {
-        Optional<User> userName = repository.findByUserName(username);
+        Optional<User> userName = service.getByUserName(username);
         if (userName.isEmpty()) {
-            log.debug("");
+            log.debug("Username not found{}", userName);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        repository.findByUserName(username);
-        log.debug("");
+        log.debug("Username{}", userName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable(value = "email") String email) {
-        Optional<User> usersByEmail = repository.findUsersByEmail(email);
-        if (usersByEmail.isEmpty()) {
-            log.debug("");
+        Optional<User> userEmail = service.getUserByEmail(email);
+        if (userEmail.isEmpty()) {
+            log.debug("Email not found{}", userEmail);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        repository.findUsersByEmail(email);
-        log.debug("");
+        log.debug("Email{}", email);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/{phone}")
     public ResponseEntity<User> getUserByPhone(@PathVariable(value = "phone") String phone) {
-        Optional<User> userByPhone = repository.findUsersByPhone(phone);
-        if (userByPhone.isEmpty()) {
-            log.debug("");
+        Optional<User> userPhone = service.getUserByPhone(phone);
+        if (userPhone.isEmpty()) {
+            log.debug("Phone number not found{}", userPhone);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        repository.findUsersByPhone(phone);
-        log.debug("");
+        log.debug("Phone number{}", phone);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<User> deleteUserById(@PathVariable(value = "id") Long id) {
         if (id == null) {
-            log.debug("User with id=" + id + " not found");
+            log.debug("User with id not found{}", id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        repository.deleteById(id);
-        log.debug("");
+        service.deleteUserById(id);
+        log.debug("User deleted");
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

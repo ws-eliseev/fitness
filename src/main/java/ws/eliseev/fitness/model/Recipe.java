@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.*;
 
 @Entity
-@Table(name = "RECIPE")
+@Table(name = "FIT_RECIPE")
 @Setter
 @Getter
 @NoArgsConstructor
