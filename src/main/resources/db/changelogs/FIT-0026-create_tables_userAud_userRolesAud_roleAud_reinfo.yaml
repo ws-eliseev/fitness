@@ -36,8 +36,8 @@ databaseChangeLog:
                   name: username
                   type: varchar(255)
                   constraints:
-                    unique: true
-                    nullable: false
+                    unique: false
+                    nullable: true
 
   - changeSet:
       id: FIT-26-3
@@ -72,13 +72,13 @@ databaseChangeLog:
                   name: username
                   type: varchar(255)
                   constraints:
-                    unique: true
-                    nullable: false
+                    unique: false
+                    nullable: true
               - column:
                   name: password
                   type: varchar(255)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: first_name
                   type: varchar(255)
@@ -162,5 +162,5 @@ databaseChangeLog:
                   name: revtype
                   type: smallint
                   constraints:
-                    nullable: false
+                    nullable: true
 
