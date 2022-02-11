@@ -36,6 +36,7 @@ public class RoleController {
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
     public void createRole(@RequestBody RoleDTO createdRoleDTO) {
         roleService.saveRole(createdRoleDTO);
+        log.info("Create user: [{}]", createdRoleDTO);
     }
 
     /**
