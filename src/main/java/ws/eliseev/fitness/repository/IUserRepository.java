@@ -1,18 +1,19 @@
 package ws.eliseev.fitness.repository;
 
-import org.springframework.context.annotation.Profile;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ws.eliseev.fitness.model.User;
 
-
+/**Репозиторий для сущности User
+ * @see User
+ * @author Зыков Артем
+ */
 @Repository
-@Profile("dev")
-public interface IUserRepository extends CrudRepository<User, Long> {
+public interface IUserRepository extends JpaRepository<User, Long> {
 
     User findByUsername(String username);
 
-    User  findUsersByEmail(String email);
+    User findUsersByEmail(String email);
 
     User findUsersByPhone(String phone);
 }
