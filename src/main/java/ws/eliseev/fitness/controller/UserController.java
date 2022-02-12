@@ -1,114 +1,113 @@
 package ws.eliseev.fitness.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.model.User;
-import ws.eliseev.fitness.repository.IUserRepository;
+import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.service.IUserService;
 
 import java.util.List;
 import java.util.Optional;
 
-@Log4j2
+/**
+ * Контроллер реализует CRUD-операции над пользователем
+ * @see ws.eliseev.fitness.service.IUserServiceImpl
+ * @author Зыков Артем
+ */
+@Tag(name = "Users", description = "CRUD  операции над пользователями")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final IUserRepository repository;
+    private final IUserService service;
 
     @GetMapping()
-    public ResponseEntity<List<User>> showAllUsers() {
-        List<User> userList = repository.findAll();
+    @Operation(summary = "Get all Users", tags = "Получить списка всех пользователей")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Успешное получение списка"),
+            @ApiResponse(responseCode = "404", description = "Список пользователей не найден")})
+    public ResponseEntity<List<UserDto>> showAllUsers() {
+        List<UserDto> userList = service.getAllUser();
         if (userList.isEmpty()) {
-            log.debug("No users found in the database");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        log.debug("");
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
     @PostMapping()
-    public ResponseEntity<User> addNewUser(@RequestBody User user) {
-        if (user != null) {
-            repository.save(user);
-            log.debug("The user is saved in the database");
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        }
-        log.debug("Unsuccessful");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @Operation(summary = "Add new User", tags = "Создать пользователя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Успешное создание пользователя"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public ResponseEntity<UserDto> addNewUser(@RequestBody UserDto user) {
+        service.saveUserOrUpdate(user);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping()
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
-
-        if (user != null) {
-            repository.save(user);
-            log.debug("User updated");
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        log.debug("Unsuccessful");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @Operation(summary = "Update User", tags = "Обновить пользователя")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Данные пользователя обновлены"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public void updateUser(@RequestBody UserDto user) {
+        service.saveUserOrUpdate(user);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long id) {
-        Optional<User> user = repository.findById(id);
+    @GetMapping("/id/{id}")
+    @Operation(summary = "Get User by id", tags = "Получение пользователя по id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь найден"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public ResponseEntity<UserDto> getUserById(@PathVariable(value = "id") Long id) {
+        Optional<UserDto> user = service.getUserById(id);
         if (user.isEmpty()) {
-            log.debug("User with id=" + id + " not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        repository.getById(id);
-        log.debug("User id=" + id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.of(user);
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUserByUseName(@PathVariable(value = "username") String username) {
-        Optional<User> userName = repository.findByUserName(username);
-        if (userName.isEmpty()) {
-            log.debug("");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        repository.findByUserName(username);
-        log.debug("");
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/username/{username}")
+    @Operation(summary = "Get User by username", tags = "Получение пользователя по 'username'")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь найден"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public ResponseEntity<Optional<UserDto>> getUserByUseName(@PathVariable(value = "username") String username) {
+        Optional<Optional<UserDto>> userName = Optional.of(service.getByUserName(username));
+        return ResponseEntity.of(userName);
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable(value = "email") String email) {
-        Optional<User> usersByEmail = repository.findUsersByEmail(email);
-        if (usersByEmail.isEmpty()) {
-            log.debug("");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        repository.findUsersByEmail(email);
-        log.debug("");
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/email/{email}")
+    @Operation(summary = "Get User by email", tags = "Получение пользователя по 'email'")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь найден"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public ResponseEntity<Optional<UserDto>> getUserByEmail(@PathVariable(value = "email") String email) {
+        Optional<Optional<UserDto>> userEmail = Optional.of(service.getUserByEmail(email));
+        return ResponseEntity.of(userEmail);
     }
 
-    @GetMapping("/{phone}")
-    public ResponseEntity<User> getUserByPhone(@PathVariable(value = "phone") String phone) {
-        Optional<User> userByPhone = repository.findUsersByPhone(phone);
-        if (userByPhone.isEmpty()) {
-            log.debug("");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        repository.findUsersByPhone(phone);
-        log.debug("");
-        return new ResponseEntity<>(HttpStatus.OK);
+    @GetMapping("/phone/{phone}")
+    @Operation(summary = "Get User by phone", tags = "Получение пользователя по номеру телефона")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь найден"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public ResponseEntity<Optional<UserDto>> getUserByPhone(@PathVariable(value = "phone") String phone) {
+        Optional<Optional<UserDto>> userPhone = Optional.of(service.getUserByPhone(phone));
+        return ResponseEntity.of(userPhone);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUserById(@PathVariable(value = "id") Long id) {
-        if (id == null) {
-            log.debug("User with id=" + id + " not found");
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        repository.deleteById(id);
-        log.debug("");
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @Operation(summary = "Delete User by id", tags = "Удаление пользователя по 'id'")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Пользователь удален"),
+            @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
+    public void deleteUserById(@PathVariable(value = "id") Long id) {
+        service.deleteUserById(id);
     }
 }

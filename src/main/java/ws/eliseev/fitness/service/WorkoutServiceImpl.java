@@ -1,17 +1,19 @@
 package ws.eliseev.fitness.service;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.repository.IWorkoutRepository;
-import ws.eliseev.fitness.utils.mapper.IWorkoutMapper;
+import ws.eliseev.fitness.util.mapper.IWorkoutMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Log4j2
 @Service
+@Profile("dev")
 public class WorkoutServiceImpl implements IWorkoutService {
 
     private final IWorkoutRepository workoutRepository;

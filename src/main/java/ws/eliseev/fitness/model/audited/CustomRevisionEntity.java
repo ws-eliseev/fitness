@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "REVINFO")
+@Table(name = "FIT_REVINFO")
 @RevisionEntity(CustomRevisionEntityListener.class)
 @EqualsAndHashCode
 public class CustomRevisionEntity extends DefaultRevisionEntity {

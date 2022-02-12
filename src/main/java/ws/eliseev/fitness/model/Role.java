@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
@@ -8,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "ROLE")
+@Table(name = "FIT_ROLE")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,6 +21,8 @@ public class Role {
 
     @Column (name = "NAME")
     private String name;
+
+    @JsonIgnore
     @Audited
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();

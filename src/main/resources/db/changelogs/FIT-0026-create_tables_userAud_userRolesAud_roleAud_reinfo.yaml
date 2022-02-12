@@ -1,19 +1,17 @@
 databaseChangeLog:
   - logicalFilePath: db/changelogs/FIT-0026-create_tables_userAud_userRolesAud_roleAud_reinfo.yaml
 
-
   - changeSet:
       id: FIT-26-1
       author: Pavel_Khramov
       changes:
         - createSequence:
+            sequenceName: hibernate_sequence
             cacheSize: 1
-            catalogName: cat
             cycle: false
             dataType: bigint
             incrementBy: 1
             schemaName: public
-            sequenceName: hibernate_sequence
             startValue: 1
   - changeSet:
       id: FIT-26-2
@@ -22,7 +20,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_usersAud
         - createTable:
-            tableName: revinfo
+            tableName: fit_revinfo
             columns:
               - column:
                   name: id
@@ -38,8 +36,8 @@ databaseChangeLog:
                   name: username
                   type: varchar(255)
                   constraints:
-                    unique: true
-                    nullable: false
+                    unique: false
+                    nullable: true
 
   - changeSet:
       id: FIT-26-3
@@ -48,7 +46,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_usersAud
         - createTable:
-            tableName: user_aud
+            tableName: fit_user_aud
             columns:
               - column:
                   name: id
@@ -64,7 +62,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                     foreignKeyName: fk_user_aud
-                    references: revinfo(id)
+                    references: fit_revinfo(id)
               - column:
                   name: revtype
                   type: smallint
@@ -74,13 +72,13 @@ databaseChangeLog:
                   name: username
                   type: varchar(255)
                   constraints:
-                    unique: true
-                    nullable: false
+                    unique: false
+                    nullable: true
               - column:
                   name: password
                   type: varchar(255)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: first_name
                   type: varchar(255)
@@ -107,7 +105,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_rolesAud
         - createTable:
-            tableName: role_aud
+            tableName: fit_role_aud
             columns:
               - column:
                   name: id
@@ -123,7 +121,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                     foreignKeyName: fk_role_aud
-                    references: revinfo(id)
+                    references: fit_revinfo(id)
               - column:
                   name: revtype
                   type: smallint
@@ -136,7 +134,7 @@ databaseChangeLog:
         - tagDatabase:
             tag: create_table_users_rolesAud
         - createTable:
-            tableName: user_roles_aud
+            tableName: fit_user_roles_aud
             columns:
               - column:
                   name: rev
@@ -145,24 +143,24 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                     foreignKeyName: fk_user_role_aud
-                    references: revinfo(id)
+                    references: fit_revinfo(id)
               - column:
                   name: user_id
                   type: BIGINT
                   constraints:
                     nullable: false
                     foreignKeyName: fk_user
-                    references: user(id)
+                    references: fit_user(id)
               - column:
                   name: role_id
                   type: BIGINT
                   constraints:
                     nullable: false
                     foreignKeyName: fk_role
-                    references: role(id)
+                    references: fit_role(id)
               - column:
                   name: revtype
                   type: smallint
                   constraints:
-                    nullable: false
+                    nullable: true
 
