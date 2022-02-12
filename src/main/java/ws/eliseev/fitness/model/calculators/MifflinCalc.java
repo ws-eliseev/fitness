@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.model.calculators;
 
 import org.springframework.stereotype.Service;
+import ws.eliseev.fitness.model.calculators.calculatorfactory.UserParametersDto;
 
 @Service
 public class MifflinCalc implements ICalculator {

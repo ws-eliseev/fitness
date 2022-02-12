@@ -1,5 +1,7 @@
-package ws.eliseev.fitness.model.calculators;
+package ws.eliseev.fitness.model.calculators.calculatorfactory;
 
+
+import ws.eliseev.fitness.model.calculators.calculatorfactory.CalculatorType;
 
 public class UserParametersDto {
     private int age;
@@ -7,14 +9,23 @@ public class UserParametersDto {
     private int weight;
     private int height;
     private Activity activity;
-    private String key;
+    private CalculatorType key;
 
-    public UserParametersDto(int age, Sex sex, int weight, int height, Activity activity) {
+    public UserParametersDto(int age, Sex sex, int weight, int height, Activity activity, CalculatorType key) {
         this.age = age;
         this.sex = sex;
         this.weight = weight;
         this.height = height;
         this.activity = activity;
+        this.key = key;
+    }
+
+    public CalculatorType getKey() {
+        return key;
+    }
+
+    public void setKey(CalculatorType key) {
+        this.key = key;
     }
 
     public Activity getActivity() {
@@ -57,7 +68,6 @@ public class UserParametersDto {
         this.height = height;
     }
 
-
     public enum Activity {
         SEDENTARY(1.2),
         LIGHTLY(1.375),
@@ -67,9 +77,10 @@ public class UserParametersDto {
 
         private final Double value;
 
-        private Activity(Double value) {
+        Activity(Double value) {
             this.value = value;
         }
+
         public Double getValue() {
             return value;
         }
@@ -82,7 +93,7 @@ public class UserParametersDto {
 
         private final int value;
 
-        private Sex(int value) {
+        Sex(int value) {
             this.value = value;
         }
 

@@ -1,28 +1,29 @@
 package ws.eliseev.fitness.model.calculators.calculatorfactory;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import ws.eliseev.fitness.model.calculators.HarrisCalculator;
 import ws.eliseev.fitness.model.calculators.ICalculator;
 import ws.eliseev.fitness.model.calculators.MifflinCalc;
-import ws.eliseev.fitness.model.calculators.UserParametersDto;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class CalculatorFactory {
-    @Qualifier("harrisCalculator")
-    HarrisCalculator harrisCalculator;
-    @Qualifier("mifflinCalc")
-    MifflinCalc mifflinCalc;
 
 
-    public int getCalc(UserParametersDto userParametersDto) {
-        AtomicReference<ICalculator> result = null;
-        Map<String, Consumer<String>> calculatorMap = Map.of(
-                "key", x -> result.set(harrisCalculator),
-                "key2", x -> result.set(mifflinCalc));
-        // прописать Optional of nullable userparamdto.getKey
-        return calculatorMap.get(userParametersDto.getKey()).accept(userParametersDto.getKey());
+    static final Map<CalculatorType, Supplier<ICalculator>> mapCalculator = new HashMap<>();
+
+    static {
+        mapCalculator.put(CalculatorType.HARRISON, HarrisCalculator::new);
+        mapCalculator.put(CalculatorType.MIFFLIN, MifflinCalc::new);
+    }
+
+    public Number getCalculatorResult(UserParametersDto userParametersDto) {
+        Supplier<ICalculator> iCalculator = mapCalculator.get(userParametersDto.getKey());
+        if (iCalculator != null) {
+            return iCalculator.get().calculate(userParametersDto);
+        }
+        throw new IllegalArgumentException("No such calculator " + userParametersDto.getKey().name());
     }
 }
+
