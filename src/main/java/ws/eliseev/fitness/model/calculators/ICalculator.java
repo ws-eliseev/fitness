@@ -1,5 +1,5 @@
 package ws.eliseev.fitness.model.calculators;
 
-public interface Calculator {
+public interface ICalculator {
      int calculate(UserParametersDto userParametersDto);
 }

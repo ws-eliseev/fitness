@@ -1,6 +1,9 @@
 package ws.eliseev.fitness.model.calculators;
 
-public class HarrisCalculator implements Calculator {
+import org.springframework.stereotype.Service;
+
+@Service
+public class HarrisCalculator implements ICalculator {
     @Override
     public int calculate(UserParametersDto calorieDto) {
         if (calorieDto.getSex() == UserParametersDto.Sex.MALE) {

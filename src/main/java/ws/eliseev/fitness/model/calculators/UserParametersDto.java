@@ -7,6 +7,7 @@ public class UserParametersDto {
     private int weight;
     private int height;
     private Activity activity;
+    private String key;
 
     public UserParametersDto(int age, Sex sex, int weight, int height, Activity activity) {
         this.age = age;
@@ -55,6 +56,7 @@ public class UserParametersDto {
     public void setHeight(int height) {
         this.height = height;
     }
+
 
     public enum Activity {
         SEDENTARY(1.2),

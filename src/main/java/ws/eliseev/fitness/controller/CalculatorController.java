@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ws.eliseev.fitness.model.calculators.Calculator;
+import ws.eliseev.fitness.model.calculators.ICalculator;
 import ws.eliseev.fitness.model.calculators.UserParametersDto;
 import ws.eliseev.fitness.model.calculators.calculatorfactory.CalculatorFactory;
 
@@ -16,12 +16,12 @@ public class CalculatorController {
 
     @GetMapping("/calories/harris")
     public ResponseEntity<Integer> calculateCaloriesHarris(@RequestBody UserParametersDto calorieDto){
-        Calculator harrisCalculator = calculatorFactory.getHarrisCalculator();
+        ICalculator harrisCalculator = calculatorFactory.getHarrisCalculator();
         return ResponseEntity.ok(harrisCalculator.calculate(calorieDto));
     }
     @GetMapping("/calories/mifflin")
     public ResponseEntity<Integer> calculateCaloriesMifflin(@RequestBody UserParametersDto calorieDto){
-        Calculator mifflinCalculator =  calculatorFactory.getMifflinCalculator();
+        ICalculator mifflinCalculator =  calculatorFactory.getMifflinCalculator();
         return ResponseEntity.ok(mifflinCalculator.calculate(calorieDto));
     }
 }
