@@ -1,8 +1,6 @@
 package ws.eliseev.fitness.model.calculators.calculatorfactory;
 
 
-import ws.eliseev.fitness.model.calculators.calculatorfactory.CalculatorType;
-
 public class UserParametersDto {
     private int age;
     private Sex sex;

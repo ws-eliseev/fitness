@@ -18,6 +18,11 @@ public class CalculatorFactory {
         mapCalculator.put(CalculatorType.MIFFLIN, MifflinCalc::new);
     }
 
+    /**
+     *
+     * @param userParametersDto - DTO параметров пользователя для вычислений
+     * @return - возращает числовой результат вычислений
+     */
     public Number getCalculatorResult(UserParametersDto userParametersDto) {
         Supplier<ICalculator> iCalculator = mapCalculator.get(userParametersDto.getKey());
         if (iCalculator != null) {
