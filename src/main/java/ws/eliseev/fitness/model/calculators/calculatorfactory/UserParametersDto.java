@@ -1,6 +1,12 @@
 package ws.eliseev.fitness.model.calculators.calculatorfactory;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class UserParametersDto {
     private int age;
     private Sex sex;
@@ -8,70 +14,34 @@ public class UserParametersDto {
     private int height;
     private Activity activity;
     private CalculatorType key;
+    private WeightLossOrGain weightLossOrGainPercent;
 
-    public UserParametersDto(int age, Sex sex, int weight, int height, Activity activity, CalculatorType key) {
-        this.age = age;
-        this.sex = sex;
-        this.weight = weight;
-        this.height = height;
-        this.activity = activity;
-        this.key = key;
-    }
+    public enum WeightLossOrGain {
+        SMALL_LOSS(0.85),
+        MEDIUM_LOSS(0.80),
+        LARGE_LOSS(0.75),
+        SMALL_GAIN(1.10),
+        MEDIUM_GAIN(1.15),
+        LARGE_GAIN(1.20);
 
-    public CalculatorType getKey() {
-        return key;
-    }
+        private final Double value;
 
-    public void setKey(CalculatorType key) {
-        this.key = key;
-    }
+        WeightLossOrGain(Double value) {
+            this.value = value;
+        }
 
-    public Activity getActivity() {
-        return activity;
-    }
+        public Double getValue() {
+            return value;
+        }
 
-    public void setActivity(Activity activity) {
-        this.activity = activity;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
     }
 
     public enum Activity {
         SEDENTARY(1.2),
         LIGHTLY(1.375),
-        MODERATELYACTIVE(1.55),
-        VERYACTIVE(1.725),
-        EXTRAACTIVE(1.9);
+        MODERATELY_ACTIVE(1.55),
+        VERY_ACTIVE(1.725),
+        EXTRA_ACTIVE(1.9);
 
         private final Double value;
 
@@ -88,7 +58,6 @@ public class UserParametersDto {
     public enum Sex {
         MALE(5),
         FEMALE(-161);
-
         private final int value;
 
         Sex(int value) {

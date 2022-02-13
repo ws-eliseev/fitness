@@ -6,8 +6,9 @@ import ws.eliseev.fitness.model.calculators.calculatorfactory.UserParametersDto;
 @Service
 public class MifflinCalc implements ICalculator {
     @Override
-    public int calculate(UserParametersDto calorieDto) {
-        return (int) (((10 * calorieDto.getWeight()) + (6.25 * calorieDto.getHeight()) - (5 * calorieDto.getAge())
-                + calorieDto.getSex().getValue()) * calorieDto.getActivity().getValue());
+    public int calculate(UserParametersDto userParametersDto) {
+        return (int) (((10 * userParametersDto.getWeight()) + (6.25 * userParametersDto.getHeight())
+                - (5 * userParametersDto.getAge())
+                + userParametersDto.getSex().getValue()) * userParametersDto.getActivity().getValue());
     }
 }
