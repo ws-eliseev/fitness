@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.WorkoutDto;
-import ws.eliseev.fitness.service.WorkoutServiceImpl;
+import ws.eliseev.fitness.service.WorkoutService;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ import java.util.List;
 @RequestMapping("/workout")
 public class WorkoutController {
 
-    private final WorkoutServiceImpl workoutService;
+    private final WorkoutService workoutService;
 
-    public WorkoutController(WorkoutServiceImpl workoutService) {
+    public WorkoutController(WorkoutService workoutService) {
         this.workoutService = workoutService;
     }
 

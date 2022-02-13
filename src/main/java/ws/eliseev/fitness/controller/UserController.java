@@ -10,13 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.UserDto;
 import ws.eliseev.fitness.service.IUserService;
+import ws.eliseev.fitness.service.UserService;
 
 import java.util.List;
 import java.util.Optional;
 
 /**
  * Контроллер реализует CRUD-операции над пользователем
- * @see ws.eliseev.fitness.service.IUserServiceImpl
+ * @see UserService
  * @author Зыков Артем
  */
 @Tag(name = "Users", description = "CRUD  операции над пользователями")

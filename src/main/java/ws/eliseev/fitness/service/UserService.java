@@ -1,7 +1,6 @@
 package ws.eliseev.fitness.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.dto.UserDto;
 import ws.eliseev.fitness.repository.IUserRepository;
@@ -13,13 +12,13 @@ import java.util.stream.Collectors;
 
 /**
  * Класс реализует интерфейс доступа к репозиторию
- * @see IUserService
+ *
  * @author Зыков Артем
+ * @see IUserService
  */
 @RequiredArgsConstructor
 @Service
-@Profile("dev")
-public class IUserServiceImpl implements IUserService {
+public class UserService implements IUserService {
 
     private final IUserRepository repository;
 
