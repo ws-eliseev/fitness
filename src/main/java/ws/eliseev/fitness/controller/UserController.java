@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.dto.UserDTO;
 import ws.eliseev.fitness.service.IUserService;
 import ws.eliseev.fitness.service.UserService;
 
@@ -33,8 +33,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка"),
             @ApiResponse(responseCode = "404", description = "Список пользователей не найден")})
-    public ResponseEntity<List<UserDto>> showAllUsers() {
-        List<UserDto> userList = service.getAllUser();
+    public ResponseEntity<List<UserDTO>> showAllUsers() {
+        List<UserDTO> userList = service.getAllUser();
         if (userList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -46,7 +46,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Успешное создание пользователя"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public ResponseEntity<UserDto> addNewUser(@RequestBody UserDto user) {
+    public ResponseEntity<UserDTO> addNewUser(@RequestBody UserDTO user) {
         service.saveUserOrUpdate(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -56,7 +56,7 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные пользователя обновлены"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public void updateUser(@RequestBody UserDto user) {
+    public void updateUser(@RequestBody UserDTO user) {
         service.saveUserOrUpdate(user);
     }
 
@@ -65,8 +65,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Пользователь найден"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public ResponseEntity<UserDto> getUserById(@PathVariable(value = "id") Long id) {
-        Optional<UserDto> user = service.getUserById(id);
+    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Long id) {
+        Optional<UserDTO> user = service.getUserById(id);
         if (user.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
@@ -78,8 +78,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Пользователь найден"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public ResponseEntity<Optional<UserDto>> getUserByUseName(@PathVariable(value = "username") String username) {
-        Optional<Optional<UserDto>> userName = Optional.of(service.getByUserName(username));
+    public ResponseEntity<Optional<UserDTO>> getUserByUseName(@PathVariable(value = "username") String username) {
+        Optional<Optional<UserDTO>> userName = Optional.of(service.getByUserName(username));
         return ResponseEntity.of(userName);
     }
 
@@ -88,8 +88,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Пользователь найден"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public ResponseEntity<Optional<UserDto>> getUserByEmail(@PathVariable(value = "email") String email) {
-        Optional<Optional<UserDto>> userEmail = Optional.of(service.getUserByEmail(email));
+    public ResponseEntity<Optional<UserDTO>> getUserByEmail(@PathVariable(value = "email") String email) {
+        Optional<Optional<UserDTO>> userEmail = Optional.of(service.getUserByEmail(email));
         return ResponseEntity.of(userEmail);
     }
 
@@ -98,8 +98,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Пользователь найден"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public ResponseEntity<Optional<UserDto>> getUserByPhone(@PathVariable(value = "phone") String phone) {
-        Optional<Optional<UserDto>> userPhone = Optional.of(service.getUserByPhone(phone));
+    public ResponseEntity<Optional<UserDTO>> getUserByPhone(@PathVariable(value = "phone") String phone) {
+        Optional<Optional<UserDTO>> userPhone = Optional.of(service.getUserByPhone(phone));
         return ResponseEntity.of(userPhone);
     }
 

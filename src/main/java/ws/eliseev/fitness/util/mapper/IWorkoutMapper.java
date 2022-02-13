@@ -1,7 +1,7 @@
 package ws.eliseev.fitness.util.mapper;
 
 import org.mapstruct.Mapper;
-import ws.eliseev.fitness.dto.WorkoutDto;
+import ws.eliseev.fitness.dto.WorkoutDTO;
 import ws.eliseev.fitness.model.Workout;
 
 /**
@@ -9,7 +9,7 @@ import ws.eliseev.fitness.model.Workout;
  *
  * @author Корнеев Аркадий
  * @see ws.eliseev.fitness.model.Workout
- * @see ws.eliseev.fitness.dto.WorkoutDto
+ * @see WorkoutDTO
  */
 @Mapper(componentModel = "spring")
 public interface IWorkoutMapper {
@@ -20,13 +20,13 @@ public interface IWorkoutMapper {
      * @param entity сущность Workout
      * @return объект типа DTO
      */
-    WorkoutDto mapToDto(Workout entity);
+    WorkoutDTO mapToDto(Workout entity);
 
     /**
      * метод преобразования объекта в entity
      *
-     * @param dto объект WorkoutDto
+     * @param dto объект WorkoutDTO
      * @return сущность Workout
      */
-    Workout mapToModel(WorkoutDto dto);
+    Workout mapToModel(WorkoutDTO dto);
 }
