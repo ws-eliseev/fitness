@@ -1,10 +1,14 @@
+# Файл содержит свойства, используемые для тестирования
 spring:
+  profiles:
+    active: dev
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/test
-    username: sa
-    password:
+    url: jdbc:h2:mem:myDb;MODE=LEGACY;DB_CLOSE_DELAY=-1
   jpa:
-    properties.hibernate.dialect: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        ddl-auto: create
+        dialect: org.hibernate.dialect.H2Dialect
   liquibase:
     change-log: classpath:db/db.changelog-master.yaml

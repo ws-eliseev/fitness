@@ -18,6 +18,7 @@ public class RoleService implements IRoleService {
     private final IRoleRepository roleRepository;
     private final IRoleMapper roleMapper;
 
+    @Transactional
     public void saveRole(RoleDTO roleDTO) {
         roleRepository.save(roleMapper.mapToModel(roleDTO));
     }
