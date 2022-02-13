@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class WorkoutDto {
+public class WorkoutDTO {
 
     /** Поле id */
     private Long id;
