@@ -31,7 +31,8 @@ public class Role {
     private String name;
 
     /* Конструктор для удобного заполнения тестовыми данными */
-    public Role(Long id, String name) {
+    @Builder
+    private Role(Long id, String name) {
         this.id = id;
         this.name = name;
     }
