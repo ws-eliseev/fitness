@@ -1,4 +1,4 @@
-package ws.eliseev.fitness;
+package ws.eliseev.fitness.util;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
@@ -17,12 +17,12 @@ import java.util.Set;
 
 @Component
 @Profile("dev")
-public class BeanPostProcessor {
+public class InitRoleUser {
 
     final IUserRepository userRepository;
     final IRoleRepository roleRepository;
 
-    BeanPostProcessor(IUserRepository iUserRepository, IRoleRepository iRoleRepository) {
+    InitRoleUser(IUserRepository iUserRepository, IRoleRepository iRoleRepository) {
         this.userRepository = iUserRepository;
         this.roleRepository = iRoleRepository;
 
