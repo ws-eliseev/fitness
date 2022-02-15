@@ -5,7 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import ws.eliseev.fitness.dto.RoleDTO;
+import ws.eliseev.fitness.dto.RoleDto;
 
 import java.util.Optional;
 
@@ -20,23 +20,23 @@ class RoleServiceTest {
 
     @Test
     void saveRole() {
-        RoleDTO createdRoleDTO = new RoleDTO();
+        RoleDto createdRoleDTO = new RoleDto();
         createdRoleDTO.setName("ROLE_TEST");
 
         roleService.saveRole(createdRoleDTO);
 
-        RoleDTO foundedRoleDTO = roleService.findRoleByName("ROLE_TEST").get();
+        RoleDto foundedRoleDTO = roleService.findRoleByName("ROLE_TEST").get();
         assertEquals("ROLE_TEST", foundedRoleDTO.getName());
     }
 
     @Test
     void updateRole() {
-        RoleDTO updatedRoleDTO = roleService.findRoleByName("ROLE_TEST").get();
+        RoleDto updatedRoleDTO = roleService.findRoleByName("ROLE_TEST").get();
         updatedRoleDTO.setName("ROLE_TEST-UPDATED");
 
         roleService.updateRole(updatedRoleDTO);
 
-        RoleDTO foundedRoleDTO = roleService.findRoleByName("ROLE_TEST-UPDATED").get();
+        RoleDto foundedRoleDTO = roleService.findRoleByName("ROLE_TEST-UPDATED").get();
         assertEquals("ROLE_TEST-UPDATED", foundedRoleDTO.getName());
     }
 

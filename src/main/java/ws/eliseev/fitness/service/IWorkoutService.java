@@ -1,7 +1,7 @@
 package ws.eliseev.fitness.service;
 
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.dto.WorkoutDTO;
+import ws.eliseev.fitness.dto.WorkoutDto;
 
 import java.util.List;
 
@@ -11,16 +11,16 @@ public interface IWorkoutService {
     /**
      * метод получения списка всех Тренировок
      *
-     * @return коллекции WorkoutDTO в List
+     * @return коллекции WorkoutDto в List
      */
-    List<WorkoutDTO> listWorkout();
+    List<WorkoutDto> listWorkout();
 
     /**
      * метод создания или обновления сущности Workout
      *
-     * @param workout WorkoutDTO
+     * @param workout WorkoutDto
      */
-    void saveOrUpdateWorkout(WorkoutDTO workout);
+    void saveOrUpdateWorkout(WorkoutDto workout);
 
     /**
      * метод удаления сущности Workout из БД по ID
@@ -33,7 +33,7 @@ public interface IWorkoutService {
      * метод получения сущности Workout по ID
      *
      * @param id Первичный ключ сущности Workout
-     * @return объект WorkoutDTO
+     * @return объект WorkoutDto
      */
-    WorkoutDTO getWorkoutByID(Long id);
+    WorkoutDto getWorkoutByID(Long id);
 }

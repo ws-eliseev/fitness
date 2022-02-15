@@ -1,7 +1,7 @@
 package ws.eliseev.fitness.util.mapper;
 
 import org.mapstruct.Mapper;
-import ws.eliseev.fitness.dto.RoleDTO;
+import ws.eliseev.fitness.dto.RoleDto;
 import ws.eliseev.fitness.model.Role;
 
 import java.util.List;
@@ -13,9 +13,9 @@ public interface IRoleMapper {
      * Метод, позволяющий конвертировать Entity в DTO объект.
      *
      * @param role Сущность, полученная из БД или подлежащая сохранению.
-     * @return объект RoleDTO с полями id и name.
+     * @return объект RoleDto с полями id и name.
      */
-    RoleDTO mapToDTO(Role role);
+    RoleDto mapToDTO(Role role);
 
     /**
      * Метод, позволяющий конвертировать DTO объект в Entity.
@@ -23,7 +23,7 @@ public interface IRoleMapper {
      * @param roleDTO объект с полями id и name.
      * @return сущность, полученная из БД или подлежащая сохранению.
      */
-    Role mapToModel(RoleDTO roleDTO);
+    Role mapToModel(RoleDto roleDTO);
 
     /**
      * Метод, позволяющий конвертировать коллекцию Entities в коллекцию объектов DTO.
@@ -31,5 +31,5 @@ public interface IRoleMapper {
      * @param roles коллекция сущностей, полученных из БД.
      * @return коллекция объектов DTO с полями id и name.
      */
-    List<RoleDTO> mapToListDTO(List<Role> roles);
+    List<RoleDto> mapToListDTO(List<Role> roles);
 }

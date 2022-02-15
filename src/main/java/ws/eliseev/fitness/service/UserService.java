@@ -2,7 +2,7 @@ package ws.eliseev.fitness.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.dto.UserDTO;
+import ws.eliseev.fitness.dto.UserDto;
 import ws.eliseev.fitness.repository.IUserRepository;
 import ws.eliseev.fitness.util.mapper.IUserMapper;
 
@@ -25,34 +25,34 @@ public class UserService implements IUserService {
     private final IUserMapper iUserMapper;
 
     @Override
-    public List<UserDTO> getAllUser() {
+    public List<UserDto> getAllUser() {
         return repository.findAll().stream()
                 .map(iUserMapper::maoToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public void saveUserOrUpdate(UserDTO user) {
+    public void saveUserOrUpdate(UserDto user) {
         repository.save(iUserMapper.mapToModel(user));
     }
 
     @Override
-    public Optional<UserDTO> getUserById(Long id) {
+    public Optional<UserDto> getUserById(Long id) {
         return Optional.ofNullable(iUserMapper.maoToDto(repository.getById(id)));
     }
 
     @Override
-    public Optional<UserDTO> getByUserName(String username) {
+    public Optional<UserDto> getByUserName(String username) {
         return Optional.ofNullable(iUserMapper.maoToDto(repository.findByUsername(username)));
     }
 
     @Override
-    public Optional<UserDTO> getUserByEmail(String email) {
+    public Optional<UserDto> getUserByEmail(String email) {
         return Optional.ofNullable(iUserMapper.maoToDto(repository.findUsersByEmail(email)));
     }
 
     @Override
-    public Optional<UserDTO> getUserByPhone(String phone) {
+    public Optional<UserDto> getUserByPhone(String phone) {
         return Optional.ofNullable(iUserMapper.maoToDto(repository.findUsersByPhone(phone)));
     }
 

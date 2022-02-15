@@ -2,7 +2,7 @@ package ws.eliseev.fitness.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ws.eliseev.fitness.dto.WorkoutDTO;
+import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.repository.IWorkoutRepository;
 import ws.eliseev.fitness.util.mapper.IWorkoutMapper;
 
@@ -22,7 +22,7 @@ public class WorkoutService implements IWorkoutService {
     }
 
     @Transactional(readOnly = true)
-    public List<WorkoutDTO> listWorkout() {
+    public List<WorkoutDto> listWorkout() {
         return workoutRepository.findAll().stream()
                 .map(workoutMapper::mapToDto)
                 .collect(Collectors.toList());
@@ -31,7 +31,7 @@ public class WorkoutService implements IWorkoutService {
 
     @Override
     @Transactional
-    public void saveOrUpdateWorkout(WorkoutDTO workout) {
+    public void saveOrUpdateWorkout(WorkoutDto workout) {
         workoutRepository.save(workoutMapper.mapToModel(workout));
 
     }
@@ -45,7 +45,7 @@ public class WorkoutService implements IWorkoutService {
 
     @Override
     @Transactional(readOnly = true)
-    public WorkoutDTO getWorkoutByID(Long id) {
+    public WorkoutDto getWorkoutByID(Long id) {
         return workoutMapper.mapToDto(workoutRepository.findById(id).get());
     }
 }

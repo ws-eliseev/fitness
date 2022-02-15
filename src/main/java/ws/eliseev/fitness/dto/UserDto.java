@@ -12,7 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserDTO {
+public class UserDto {
 
     private Long id;
 

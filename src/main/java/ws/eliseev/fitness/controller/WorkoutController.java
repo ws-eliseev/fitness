@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.dto.WorkoutDTO;
+import ws.eliseev.fitness.dto.WorkoutDto;
 import ws.eliseev.fitness.service.WorkoutService;
 
 import java.util.List;
@@ -39,8 +39,8 @@ public class WorkoutController {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка тренировок"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public ResponseEntity<List<WorkoutDTO>> getAllWorkouts() {
-        List<WorkoutDTO> dtoList = workoutService.listWorkout();
+    public ResponseEntity<List<WorkoutDto>> getAllWorkouts() {
+        List<WorkoutDto> dtoList = workoutService.listWorkout();
         if (!dtoList.isEmpty()) {
 //            log.info("success received list from database");
             return ResponseEntity.ok(dtoList);
@@ -62,7 +62,7 @@ public class WorkoutController {
             @ApiResponse(responseCode = "403", description = "Операция запрещена"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public void createOrUpdateWorkout(@RequestBody WorkoutDTO workout) {
+    public void createOrUpdateWorkout(@RequestBody WorkoutDto workout) {
         workoutService.saveOrUpdateWorkout(workout);
     }
 
@@ -91,8 +91,8 @@ public class WorkoutController {
             @ApiResponse(responseCode = "200", description = "Успешное получение данных"),
             @ApiResponse(responseCode = "404", description = "Данный контроллер не найден")}
     )
-    public ResponseEntity<WorkoutDTO> getWorkoutByID(@PathVariable Long id) {
-        WorkoutDTO dto = workoutService.getWorkoutByID(id);
+    public ResponseEntity<WorkoutDto> getWorkoutByID(@PathVariable Long id) {
+        WorkoutDto dto = workoutService.getWorkoutByID(id);
         if (dto != null) {
             return ResponseEntity.ok(dto);
         } else {
