@@ -151,7 +151,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                     foreignKeyName: fk_user
-                    references: fit_user(id)
+
               - column:
                   name: role_id
                   type: BIGINT
@@ -159,7 +159,7 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
                     foreignKeyName: fk_role
-                    references: fit_role(id)
+
               - column:
                   name: revtype
                   type: smallint
