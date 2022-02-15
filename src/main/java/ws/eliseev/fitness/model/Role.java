@@ -3,6 +3,7 @@ package ws.eliseev.fitness.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,7 +19,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Role {
+public class Role implements GrantedAuthority {
 
     /* Первичный ключ с генерацией значения по возрастанию, 8 байт */
     @Id
@@ -42,4 +43,9 @@ public class Role {
     @Audited
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
+
+    @Override
+    public String getAuthority() {
+        return getName();
+    }
 }

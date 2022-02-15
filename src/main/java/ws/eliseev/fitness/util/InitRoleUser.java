@@ -32,7 +32,7 @@ public class InitRoleUser {
 
         List<User> userList = List.of(
                 new User(0L, "new_username", "password", "firstname", "lastname", "email", "phone", -10, User.Sex.MALE, Set.of(admin)),
-                new User(0L, "dxhoan420", "roma", "Roman", "Konchalov", "roma@ya.ru", "8(800)555-35-35", 28, User.Sex.MALE, Set.of(user)),
+                new User(0L, "dxhoan420", "$2a$12$nzX5eci2/4J/KO0RvZQQxuLi.oSfxbD6IzoeWh03AWSafJ1f7sgbW", "Roman", "Konchalov", "roma@ya.ru", "8(800)555-35-35", 28, User.Sex.MALE, Set.of(user)),
                 new User(0L, "ValentPr", "password", "Валентин", "lastname", "email", "+79273777777", 18, User.Sex.MALE, Set.of(admin, test, user)),
                 new User(0L, "dmitryprikhunov", "passWord", "Дмитрий", "lastname", "email", "8(495)123-312-312", 18, User.Sex.MALE, Set.of(test)),
                 new User(0L, "QRillich", "password111", "Кирилл", "lastname", "email", "0", -1000, User.Sex.MALE, Set.of(admin, test)),
