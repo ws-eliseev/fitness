@@ -20,18 +20,16 @@ class RoleServiceTest {
 
     @Test
     void saveRole() {
-        RoleDto createdRoleDTO = new RoleDto();
-        createdRoleDTO.setName("ROLE_TEST");
+        RoleDto createdRoleDto = new RoleDto();
+        createdRoleDto.setName("ROLE_TEST123");
 
-        roleService.saveRole(createdRoleDTO);
-
-        RoleDto foundedRoleDTO = roleService.findRoleByName("ROLE_TEST").get();
-        assertEquals("ROLE_TEST", foundedRoleDTO.getName());
+        Optional<RoleDto> createdRole = roleService.saveRole(createdRoleDto);
+        createdRole.ifPresent(roleDto -> assertEquals("ROLE_TEST123", roleDto.getName()));
     }
 
     @Test
     void updateRole() {
-        RoleDto updatedRoleDTO = roleService.findRoleByName("ROLE_TEST").get();
+        RoleDto updatedRoleDTO = roleService.findRoleByName("ROLE_TEST123").get();
         updatedRoleDTO.setName("ROLE_TEST-UPDATED");
 
         roleService.updateRole(updatedRoleDTO);

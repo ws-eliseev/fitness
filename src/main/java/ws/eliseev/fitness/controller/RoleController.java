@@ -38,7 +38,7 @@ public class RoleController {
         Optional<RoleDto> createdRole = roleService.saveRole(createdRoleDto);
         if (createdRole.isPresent()) {
             RoleDto presentedRole = createdRole.get();
-            log.info("Create user: [{}]", presentedRole);
+            log.info("Create role: [{}]", presentedRole);
         } else {
             log.info("Role with name {} already exists", createdRoleDto.getName());
         }

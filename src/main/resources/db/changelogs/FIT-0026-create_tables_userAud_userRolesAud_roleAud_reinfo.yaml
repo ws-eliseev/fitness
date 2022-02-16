@@ -150,16 +150,16 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_user
-                    references: fit_user(id)
+#                    foreignKeyName: fk_user
+#                    references: fit_user(id)
               - column:
                   name: role_id
                   type: BIGINT
                   constraints:
                     primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_role
-                    references: fit_role(id)
+#                    foreignKeyName: fk_role
+#                    references: fit_role(id)
               - column:
                   name: revtype
                   type: smallint

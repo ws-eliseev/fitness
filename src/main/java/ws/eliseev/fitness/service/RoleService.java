@@ -19,12 +19,12 @@ public class RoleService implements IRoleService {
     private final IRoleMapper roleMapper;
 
     @Transactional
-    public Optional<RoleDto> saveRole(RoleDto roleDTO) {
-        if (roleRepository.findByName(roleDTO.getName()).isPresent()) {
+    public Optional<RoleDto> saveRole(RoleDto roleDto) {
+        if (roleRepository.findByName(roleDto.getName()).isPresent()) {
             return Optional.empty();
         } else {
-            roleRepository.save(roleMapper.mapToModel(roleDTO));
-            return roleRepository.findById(roleDTO.getId()).map(roleMapper::mapToDTO);
+            roleRepository.save(roleMapper.mapToModel(roleDto));
+            return roleRepository.findByName(roleDto.getName()).map(roleMapper::mapToDTO);
         }
     }
 
