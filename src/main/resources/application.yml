@@ -10,9 +10,9 @@ spring:
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/postgres_db
-    username: postgres_adm
-    password: postgres_pass
+    url: jdbc:postgresql://localhost:5432/workout
+    username: postgres
+    password: 4071505
   liquibase:
     enabled: true
     drop-first: false

@@ -37,8 +37,8 @@ public class Workout {
         private int repeat;
 
         /** Поле количество подходов */
-        @Column(name="SET")
-        private int set;
+        @Column(name="MOVE")
+        private int move;
 
         /** Поле месторасположение для занятий
          * @deprecated поле указано как String (по задумке Enum)
