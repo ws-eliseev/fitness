@@ -27,16 +27,21 @@ public class RoleController {
     /**
      * Метод контроллера, позволяющий сохранить роль в БД.
      *
-     * @param createdRoleDTO DTO сохраняемой роли.
+     * @param createdRoleDto DTO сохраняемой роли.
      */
     @PostMapping("/createRole")
     @Operation(summary = "Создание роли")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Роль успешно создана"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
-    public void createRole(@RequestBody RoleDto createdRoleDTO) {
-        roleService.saveRole(createdRoleDTO);
-        log.info("Create user: [{}]", createdRoleDTO);
+    public void createRole(@RequestBody RoleDto createdRoleDto) {
+        Optional<RoleDto> createdRole = roleService.saveRole(createdRoleDto);
+        if (createdRole.isPresent()) {
+            RoleDto presentedRole = createdRole.get();
+            log.info("Create user: [{}]", presentedRole);
+        } else {
+            log.info("Role with name {} already exists", createdRoleDto.getName());
+        }
     }
 
     /**

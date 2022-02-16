@@ -11,8 +11,9 @@ public interface IRoleService {
      * Метод, позволяющий сохранить роль.
      *
      * @param roleDTO сохраняемая роль.
+     * @return Optional.empty - роль уже есть в БД.
      */
-    void saveRole(RoleDto roleDTO);
+    Optional<RoleDto> saveRole(RoleDto roleDTO);
 
     /**
      * Метод, позволяющий найти роль по Id.
