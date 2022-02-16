@@ -1,0 +1,168 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0026-create_tables_userAud_userRolesAud_roleAud_reinfo.yaml
+
+  - changeSet:
+      id: FIT-26-1
+      author: Pavel_Khramov
+      changes:
+        - createSequence:
+            sequenceName: hibernate_sequence
+            cacheSize: 1
+            cycle: false
+            dataType: bigint
+            incrementBy: 1
+            schemaName: public
+            startValue: 1
+  - changeSet:
+      id: FIT-26-2
+      author: Pavel_khramov
+      changes:
+        - tagDatabase:
+            tag: create_table_usersAud
+        - createTable:
+            tableName: fit_revinfo
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: timestamp
+                  type: bigint
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    unique: false
+                    nullable: true
+
+  - changeSet:
+      id: FIT-26-3
+      author: Pavel_Khramov
+      changes:
+        - tagDatabase:
+            tag: create_table_usersAud
+        - createTable:
+            tableName: fit_user_aud
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: false
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: rev
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user_aud
+                    references: fit_revinfo(id)
+              - column:
+                  name: revtype
+                  type: smallint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(255)
+                  constraints:
+                    unique: false
+                    nullable: true
+              - column:
+                  name: password
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: first_name
+                  type: varchar(255)
+              - column:
+                  name: last_name
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(255)
+              - column:
+                  name: phone
+                  type: varchar(255)
+              - column:
+                  name: age
+                  type: int
+              - column:
+                  name: sex
+                  type: varchar(255)
+
+  - changeSet:
+      id: FIT-26-4
+      author: Pavel_Khramov
+      changes:
+        - tagDatabase:
+            tag: create_table_rolesAud
+        - createTable:
+            tableName: fit_role_aud
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: rev
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_role_aud
+                    references: fit_revinfo(id)
+              - column:
+                  name: revtype
+                  type: smallint
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: FIT-26-5
+      author: Pavel_Khramov
+      changes:
+        - tagDatabase:
+            tag: create_table_users_rolesAud
+        - createTable:
+            tableName: fit_user_roles_aud
+            columns:
+              - column:
+                  name: rev
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user_role_aud
+                    references: fit_revinfo(id)
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_user
+                    references: fit_user(id)
+              - column:
+                  name: role_id
+                  type: BIGINT
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_role
+                    references: fit_role(id)
+              - column:
+                  name: revtype
+                  type: smallint
+                  constraints:
+                    nullable: true
+

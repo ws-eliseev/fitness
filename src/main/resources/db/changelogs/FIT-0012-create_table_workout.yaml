@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0012-create_table_workout.yaml
+
+  - changeSet:
+      id: FIT-0012-create_table_workout
+      author: KensynHimura
+      changes:
+        - tagDatabase:
+            tag: create_table_workout
+        - createTable:
+            tableName: fit_workout
+            columns:
+              - column:
+                  name: ID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: varchar(255)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: EXERCISE
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: REPEAT
+                  type: int
+              - column:
+                  name: SET
+                  type: int
+              - column:
+                  name: AREA
+                  type: varchar(255)

@@ -1,0 +1,40 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0011-create_tables_recipe.yaml
+
+  - changeSet:
+      id: changelog-005
+      author: 1
+      changes:
+        - tagDatabase:
+            tag: create_recipe_table
+        - createTable:
+            tableName: fit_recipe
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: unique_recipe_field
+                  type: varchar(255)
+                  constraints:
+              - column:
+                  name: calories
+                  type: int
+              - column:
+                  name: proteins
+                  type: int
+              - column:
+                  name: fat
+                  type: int
+              - column:
+                  name: carbohydrates
+                  type: int

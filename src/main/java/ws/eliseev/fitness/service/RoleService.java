@@ -1,42 +1,72 @@
 package ws.eliseev.fitness.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ws.eliseev.fitness.dto.RoleDto;
 import ws.eliseev.fitness.model.Role;
 import ws.eliseev.fitness.repository.IRoleRepository;
+import ws.eliseev.fitness.util.mapper.IRoleMapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class RoleService implements IRoleService {
 
     private final IRoleRepository roleRepository;
+    private final IRoleMapper roleMapper;
 
-    public RoleService(IRoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    @Transactional
+    public void saveRole(RoleDto roleDTO) {
+        roleRepository.save(roleMapper.mapToModel(roleDTO));
     }
 
-    public void saveRole(Role role) {
-        roleRepository.save(role);
+    public Optional<RoleDto> findRoleById(Long id) {
+        Optional<Role> gotRole = roleRepository.findById(id);
+        return gotRole.map(roleMapper::mapToDTO);
     }
 
-    public Role getRoleByID(int id) {
-        return roleRepository.getById(id);
+    public Optional<RoleDto> findRoleByName(String name) {
+        Optional<Role> gotRole = roleRepository.findByName(name);
+        return gotRole.map(roleMapper::mapToDTO);
     }
 
-    public Role getRoleByName(String name) {
-        return roleRepository.getByName(name);
+    public List<RoleDto> findAllRoles() {
+        List<Role> roles = roleRepository.findAll();
+        return roleMapper.mapToListDTO(roles);
     }
 
-    public List<Role> getAllRoles() {
-        return roleRepository.findAll();
+    @Transactional
+    public Optional<RoleDto> updateRole(RoleDto roleDTO) {
+        if (roleRepository.findById(roleDTO.getId()).isPresent()) {
+            roleRepository.save(roleMapper.mapToModel(roleDTO));
+            return roleRepository.findById(roleDTO.getId()).map(roleMapper::mapToDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
-    public void deleteRoleById(int id) {
-        roleRepository.deleteById(id);
+    @Transactional
+    public Optional<RoleDto> deleteRoleById(Long id) {
+        Optional<Role> gotRole = roleRepository.findById(id);
+        if (gotRole.isPresent()) {
+            roleRepository.deleteById(id);
+            return gotRole.map(roleMapper::mapToDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 
-    public void deleteRoleByName(String name) {
-        roleRepository.deleteByName(name);
+    @Transactional
+    public Optional<RoleDto> deleteRoleByName(String name) {
+        Optional<Role> gotRole = roleRepository.findByName(name);
+        if (gotRole.isPresent()) {
+            roleRepository.deleteByName(name);
+            return gotRole.map(roleMapper::mapToDTO);
+        } else {
+            return Optional.empty();
+        }
     }
 }
-
