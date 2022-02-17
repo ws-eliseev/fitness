@@ -29,13 +29,14 @@ class RoleServiceTest {
 
     @Test
     void updateRole() {
-        RoleDto updatedRoleDTO = roleService.findRoleByName("ROLE_TEST123").get();
-        updatedRoleDTO.setName("ROLE_TEST-UPDATED");
+        Optional<RoleDto> updatedRole = roleService.findRoleByName("ROLE_TEST123");
+        updatedRole.ifPresent(roleDto -> {
+            roleDto.setName("ROLE_TEST123-UPDATED");
+            roleService.updateRole(roleDto);
+        });
 
-        roleService.updateRole(updatedRoleDTO);
-
-        RoleDto foundedRoleDTO = roleService.findRoleByName("ROLE_TEST-UPDATED").get();
-        assertEquals("ROLE_TEST-UPDATED", foundedRoleDTO.getName());
+        Optional<RoleDto> foundedRole = roleService.findRoleByName("ROLE_TEST123-UPDATED");
+        foundedRole.ifPresent(roleDto -> assertEquals("ROLE_TEST123-UPDATED", roleDto.getName()));
     }
 
     @Test
