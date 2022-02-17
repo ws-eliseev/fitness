@@ -8,32 +8,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.User;
-import ws.eliseev.fitness.service.IUserService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service("UserCSVExport")
 public class UserCsvExporter implements IUserExporter {
-    private final IUserService service;
     private final Logger logger = LoggerFactory.getLogger("Export logger");
 
     @Override
-    public void exportAllUsers(HttpServletResponse response) {
-        List<User> listUsers = service.getAllUser();
+    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
         try (CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), CSVFormat.DEFAULT)) {
-            response.setContentType("text/csv");
-            DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-            String currentDateTime = dateFormatter.format(new Date());
-            String headerKey = "Content-Disposition";
-            String headerValue = "attachment; filename=users_" + currentDateTime + ".csv";
-            response.setHeader(headerKey, headerValue);
-            csvPrinter.printRecord("ID","Username","First Name","Last Name","E-mail","Phone","Age","Sex");
+            csvPrinter.printRecord("ID","Username","First Name","Last Name","E-mail","Phone","Age","Sex","Roles");
             for (User user : listUsers) {
                 csvPrinter.printRecord(
                         String.valueOf(user.getId()),
@@ -43,7 +31,8 @@ public class UserCsvExporter implements IUserExporter {
                         user.getEmail(),
                         user.getPhone(),
                         String.valueOf(user.getAge()),
-                        String.valueOf(user.getSex()));
+                        String.valueOf(user.getSex()),
+                        user.getRoles());
             }
             logger.info("Saved to csv...");
         } catch (IOException | DocumentException documentException) {

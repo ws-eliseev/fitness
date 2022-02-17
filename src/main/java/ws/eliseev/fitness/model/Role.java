@@ -26,4 +26,9 @@ public class Role {
     @Audited
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

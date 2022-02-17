@@ -9,18 +9,26 @@ public class UserExportFactory {
 
 //    @Qualifier("UserPDFExport")
     private final IUserExporter pdf;
-//    @Qualifier("UserCSVExport")
     private final IUserExporter csv;
+    private final IUserExporter xlsx;
+    private final IUserExporter docx;
 
-    public UserExportFactory(@Qualifier("UserPDFExport") IUserExporter pdf, @Qualifier("UserCSVExport")IUserExporter csv) {
+    public UserExportFactory(@Qualifier("UserPDFExport") IUserExporter pdf,
+                             @Qualifier("UserCSVExport") IUserExporter csv,
+                             @Qualifier("UserXLSXExport") IUserExporter xlsx,
+                             @Qualifier("UserDOCXExport") IUserExporter docx) {
         this.pdf = pdf;
         this.csv = csv;
+        this.xlsx = xlsx;
+        this.docx = docx;
     }
 
     public IUserExporter getExportFactory(String type) {
         switch (type) {
             case "pdf": return pdf;
             case "csv": return csv;
+            case "xlsx": return xlsx;
+            case "docx": return docx;
             default:    return null;
         }
     }
