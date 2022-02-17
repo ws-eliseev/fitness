@@ -24,7 +24,7 @@ public class WorkoutDto {
     private String exercise;
 
     /** Поле количество подходов */
-    private int set;
+    private int move;
 
     /** Поле количество повторений */
     private int repeat;

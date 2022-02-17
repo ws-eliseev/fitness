@@ -1,7 +1,5 @@
 package ws.eliseev.fitness.service;
 
-import lombok.extern.log4j.Log4j2;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ws.eliseev.fitness.dto.WorkoutDto;
@@ -11,30 +9,24 @@ import ws.eliseev.fitness.util.mapper.IWorkoutMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Log4j2
 @Service
-@Profile("dev")
-public class WorkoutServiceImpl implements IWorkoutService {
+public class WorkoutService implements IWorkoutService {
 
     private final IWorkoutRepository workoutRepository;
 
     private final IWorkoutMapper workoutMapper;
 
-    public WorkoutServiceImpl(IWorkoutRepository workoutRepository, IWorkoutMapper workoutMapper) {
+    public WorkoutService(IWorkoutRepository workoutRepository, IWorkoutMapper workoutMapper) {
         this.workoutRepository = workoutRepository;
         this.workoutMapper = workoutMapper;
     }
 
     @Transactional(readOnly = true)
     public List<WorkoutDto> listWorkout() {
-
-//        log.debug("enter method listWorkout");
-
         return workoutRepository.findAll().stream()
                 .map(workoutMapper::mapToDto)
                 .collect(Collectors.toList());
     }
-
 
 
     @Override

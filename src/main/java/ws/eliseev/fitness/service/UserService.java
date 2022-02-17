@@ -12,12 +12,13 @@ import java.util.stream.Collectors;
 
 /**
  * Класс реализует интерфейс доступа к репозиторию
- * @see IUserService
+ *
  * @author Зыков Артем
+ * @see IUserService
  */
 @RequiredArgsConstructor
 @Service
-public class IUserServiceImpl implements IUserService {
+public class UserService implements IUserService {
 
     private final IUserRepository repository;
 

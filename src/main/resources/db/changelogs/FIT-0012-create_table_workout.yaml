@@ -32,7 +32,7 @@ databaseChangeLog:
                   name: REPEAT
                   type: int
               - column:
-                  name: SET
+                  name: MOVE
                   type: int
               - column:
                   name: AREA
