@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ws.eliseev.fitness.dto.RoleDTO;
+import ws.eliseev.fitness.dto.RoleDto;
 import ws.eliseev.fitness.service.IRoleService;
 
 import java.util.List;
@@ -27,22 +27,28 @@ public class RoleController {
     /**
      * Метод контроллера, позволяющий сохранить роль в БД.
      *
-     * @param createdRoleDTO DTO сохраняемой роли.
+     * @param createdRoleDto DTO сохраняемой роли.
      */
     @PostMapping("/createRole")
     @Operation(summary = "Создание роли")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Роль успешно создана"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
-    public void createRole(@RequestBody RoleDTO createdRoleDTO) {
-        roleService.saveRole(createdRoleDTO);
+    public void createRole(@RequestBody RoleDto createdRoleDto) {
+        Optional<RoleDto> createdRole = roleService.saveRole(createdRoleDto);
+        if (createdRole.isPresent()) {
+            RoleDto presentedRole = createdRole.get();
+            log.info("Create role: [{}]", presentedRole);
+        } else {
+            log.info("Role with name {} already exists", createdRoleDto.getName());
+        }
     }
 
     /**
      * Метод контроллера, позволяющий получить роль по id.
      *
      * @param id идентификатор получаемой роли.
-     * @return ResponseEntity получаемой роли, параметризованная RoleDTO.
+     * @return ResponseEntity получаемой роли, параметризованная RoleDto.
      */
     @GetMapping("/roleById/{id}")
     @Operation(summary = "Получение роли по id")
@@ -50,10 +56,10 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роль успешно получена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
-    public ResponseEntity<RoleDTO> getRoleById(@PathVariable("id") Long id) {
-        Optional<RoleDTO> foundRoleDTO = roleService.findRoleById(id);
+    public ResponseEntity<RoleDto> getRoleById(@PathVariable("id") Long id) {
+        Optional<RoleDto> foundRoleDTO = roleService.findRoleById(id);
         if (foundRoleDTO.isPresent()) {
-            RoleDTO presentedRole = foundRoleDTO.get();
+            RoleDto presentedRole = foundRoleDTO.get();
             log.info("Get role with id {} : [{}]", id, presentedRole);
             return ResponseEntity.ok(presentedRole);
         } else {
@@ -66,7 +72,7 @@ public class RoleController {
      * Метод контроллера, позволяющий получить роль по имени.
      *
      * @param name имя получаемой роли.
-     * @return ResponseEntity получаемой роли, параметризованная RoleDTO.
+     * @return ResponseEntity получаемой роли, параметризованная RoleDto.
      */
     @GetMapping("/roleByName/{name}")
     @Operation(summary = "Получение роли по имени")
@@ -74,10 +80,10 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роль успешно получена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
-    public ResponseEntity<RoleDTO> getRoleByName(@PathVariable("name") String name) {
-        Optional<RoleDTO> foundRoleDTO = roleService.findRoleByName(name);
+    public ResponseEntity<RoleDto> getRoleByName(@PathVariable("name") String name) {
+        Optional<RoleDto> foundRoleDTO = roleService.findRoleByName(name);
         if (foundRoleDTO.isPresent()) {
-            RoleDTO presentedRole = foundRoleDTO.get();
+            RoleDto presentedRole = foundRoleDTO.get();
             log.info("Get role with name {} : [{}]", name, presentedRole);
             return ResponseEntity.ok(presentedRole);
         } else {
@@ -96,8 +102,8 @@ public class RoleController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Роли успешно получены"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос")})
-    public ResponseEntity<List<RoleDTO>> getAllRoles() {
-        List<RoleDTO> roleDTOS = roleService.findAllRoles();
+    public ResponseEntity<List<RoleDto>> getAllRoles() {
+        List<RoleDto> roleDTOS = roleService.findAllRoles();
         log.info("Get all roles, size: {}", roleDTOS.size());
         return ResponseEntity.ok(roleDTOS);
     }
@@ -106,7 +112,7 @@ public class RoleController {
      * Метод контроллера, позволяющий обновить роль в БД.
      *
      * @param updatedRoleDTO DTO обновляемой роли.
-     * @return ResponseEntity обновляемой роли, параметризованная RoleDTO.
+     * @return ResponseEntity обновляемой роли, параметризованная RoleDto.
      */
     @PutMapping("/updateRole")
     @Operation(summary = "Обновление роли")
@@ -114,10 +120,10 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роль успешно обновлена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
-    public ResponseEntity<RoleDTO> updateRoleById(@RequestBody @NonNull RoleDTO updatedRoleDTO) {
-        Optional<RoleDTO> updatedRole = roleService.updateRole(updatedRoleDTO);
+    public ResponseEntity<RoleDto> updateRoleById(@RequestBody @NonNull RoleDto updatedRoleDTO) {
+        Optional<RoleDto> updatedRole = roleService.updateRole(updatedRoleDTO);
         if (updatedRole.isPresent()) {
-            RoleDTO presentedRole = updatedRole.get();
+            RoleDto presentedRole = updatedRole.get();
             log.info("Update role: [{}] - success", presentedRole);
             return ResponseEntity.ok(presentedRole);
         } else {
@@ -130,7 +136,7 @@ public class RoleController {
      * Метод контроллера, позволяющий удалить роль из БД по id.
      *
      * @param id идентификатор удаляемой роли.
-     * @return ResponseEntity удаляемой роли, параметризованная RoleDTO.
+     * @return ResponseEntity удаляемой роли, параметризованная RoleDto.
      */
     @DeleteMapping("/deleteById/{id}")
     @Operation(summary = "Удаление роли по id")
@@ -138,10 +144,10 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роль успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
-    public ResponseEntity<RoleDTO> deleteRoleById(@PathVariable("id") Long id) {
-        Optional<RoleDTO> deletedRole = roleService.deleteRoleById(id);
+    public ResponseEntity<RoleDto> deleteRoleById(@PathVariable("id") Long id) {
+        Optional<RoleDto> deletedRole = roleService.deleteRoleById(id);
         if (deletedRole.isPresent()) {
-            RoleDTO presentedRole = deletedRole.get();
+            RoleDto presentedRole = deletedRole.get();
             log.info("Delete role with id {} : [{}]", id, presentedRole);
             return ResponseEntity.ok(presentedRole);
         } else {
@@ -154,7 +160,7 @@ public class RoleController {
      * Метод контроллера, позволяющий удалить роль из БД по имени.
      *
      * @param name имя удаляемой роли.
-     * @return ResponseEntity удаляемой роли, параметризованная RoleDTO.
+     * @return ResponseEntity удаляемой роли, параметризованная RoleDto.
      */
     @DeleteMapping("/deleteByName/{name}")
     @Operation(summary = "Удаление роли по имени")
@@ -162,10 +168,10 @@ public class RoleController {
             @ApiResponse(responseCode = "200", description = "Роль успешно удалена"),
             @ApiResponse(responseCode = "400", description = "Неверный запрос"),
             @ApiResponse(responseCode = "404", description = "Роль не найдена")})
-    public ResponseEntity<RoleDTO> deleteRoleByName(@PathVariable("name") String name) {
-        Optional<RoleDTO> deletedRole = roleService.deleteRoleByName(name);
+    public ResponseEntity<RoleDto> deleteRoleByName(@PathVariable("name") String name) {
+        Optional<RoleDto> deletedRole = roleService.deleteRoleByName(name);
         if (deletedRole.isPresent()) {
-            RoleDTO presentedRole = deletedRole.get();
+            RoleDto presentedRole = deletedRole.get();
             log.info("Delete role with name {} : [{}]", name, presentedRole);
             return ResponseEntity.ok(presentedRole);
         } else {

@@ -36,8 +36,8 @@ databaseChangeLog:
                   name: username
                   type: varchar(255)
                   constraints:
-                    unique: true
-                    nullable: false
+                    unique: false
+                    nullable: true
 
   - changeSet:
       id: FIT-26-3
@@ -72,13 +72,13 @@ databaseChangeLog:
                   name: username
                   type: varchar(255)
                   constraints:
-                    unique: true
-                    nullable: false
+                    unique: false
+                    nullable: true
               - column:
                   name: password
                   type: varchar(255)
                   constraints:
-                    nullable: false
+                    nullable: true
               - column:
                   name: first_name
                   type: varchar(255)
@@ -148,19 +148,21 @@ databaseChangeLog:
                   name: user_id
                   type: BIGINT
                   constraints:
+                    primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_user
-                    references: fit_user(id)
+#                    foreignKeyName: fk_user
+#                    references: fit_user(id)
               - column:
                   name: role_id
                   type: BIGINT
                   constraints:
+                    primaryKey: true
                     nullable: false
-                    foreignKeyName: fk_role
-                    references: fit_role(id)
+#                    foreignKeyName: fk_role
+#                    references: fit_role(id)
               - column:
                   name: revtype
                   type: smallint
                   constraints:
-                    nullable: false
+                    nullable: true
 
