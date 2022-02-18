@@ -3,6 +3,8 @@ package ws.eliseev.fitness.service.userexport;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.IOException;
+
 @Configuration
 //@RequiredArgsConstructor
 public class UserExportFactory {
@@ -23,13 +25,13 @@ public class UserExportFactory {
         this.docx = docx;
     }
 
-    public IUserExporter getExportFactory(String type) {
+    public IUserExporter getExportFactory(String type) throws IOException {
         switch (type) {
             case "pdf": return pdf;
             case "csv": return csv;
             case "xlsx": return xlsx;
             case "docx": return docx;
-            default:    return null;
+            default:    throw new IOException("Format not supported");
         }
     }
 }

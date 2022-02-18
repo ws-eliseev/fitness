@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.model.User;
+import ws.eliseev.fitness.dto.UserDto;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -42,8 +42,8 @@ public class UserPdfExporter implements IUserExporter {
         table.addCell(cell);
     }
 
-    private void writeTableData(PdfPTable table, List<User> listUsers) {
-        for (User user : listUsers) {
+    private void writeTableData(PdfPTable table, List<UserDto> listUsers) {
+        for (UserDto user : listUsers) {
             table.addCell(String.valueOf(user.getId()));
             table.addCell(user.getUsername());
             table.addCell(user.getFirstName());
@@ -56,7 +56,7 @@ public class UserPdfExporter implements IUserExporter {
     }
 
     @Override
-    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
+    public void exportAllUsers(HttpServletResponse response, List<UserDto> listUsers) {
         try (Document document = new Document(PageSize.A4)) {
             PdfWriter.getInstance(document, response.getOutputStream());
             document.open();

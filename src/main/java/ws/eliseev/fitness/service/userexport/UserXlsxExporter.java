@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.model.User;
+import ws.eliseev.fitness.dto.UserDto;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -22,11 +22,9 @@ import java.util.List;
 @Service("UserXLSXExport")
 public class UserXlsxExporter implements IUserExporter {
     private final Logger logger = LoggerFactory.getLogger("Export logger");
-    private final XSSFWorkbook workbook = new XSSFWorkbook();
     private XSSFSheet sheet;
 
-
-    private void writeHeaderLine() {
+    private void writeHeaderLine(XSSFWorkbook workbook) {
         sheet = workbook.createSheet("Users");
 
         Row row = sheet.createRow(0);
@@ -61,7 +59,7 @@ public class UserXlsxExporter implements IUserExporter {
         cell.setCellStyle(style);
     }
 
-    private void writeDataLines(List<User> listUsers) {
+    private void writeDataLines(List<UserDto> listUsers, XSSFWorkbook workbook) {
         int rowCount = 1;
 
         CellStyle style = workbook.createCellStyle();
@@ -69,7 +67,7 @@ public class UserXlsxExporter implements IUserExporter {
         font.setFontHeight(14);
         style.setFont(font);
 
-        for (User user : listUsers) {
+        for (UserDto user : listUsers) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, String.valueOf(user.getId()), style);
@@ -80,15 +78,15 @@ public class UserXlsxExporter implements IUserExporter {
             createCell(row, columnCount++, user.getPhone(), style);
             createCell(row, columnCount++, user.getAge(), style);
             createCell(row, columnCount++, String.valueOf(user.getSex()), style);
-            createCell(row, columnCount, user.getRoles().toString(), style);
+            //createCell(row, columnCount, user.getRoles().toString(), style);
         }
     }
 
     @Override
-    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
-        try (ServletOutputStream outputStream = response.getOutputStream()) {
-            writeHeaderLine();
-            writeDataLines(listUsers);
+    public void exportAllUsers(HttpServletResponse response, List<UserDto> listUsers) {
+        try (ServletOutputStream outputStream = response.getOutputStream(); XSSFWorkbook workbook = new XSSFWorkbook()) {
+            writeHeaderLine(workbook);
+            writeDataLines(listUsers, workbook);
             workbook.write(outputStream);
             logger.info("Saved to xlsx...");
         } catch (IOException | DocumentException documentException) {
