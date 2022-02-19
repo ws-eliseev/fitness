@@ -14,7 +14,6 @@
     <name>fitness</name>
     <description>fitness</description>
     <properties>
-        <java.version>11</java.version>
         <org.projectlombok.version>1.18.22</org.projectlombok.version>
         <io.swagger.core.v3.version>2.1.12</io.swagger.core.v3.version>
         <org.springdoc.version>1.6.5</org.springdoc.version>
