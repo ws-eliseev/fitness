@@ -1,16 +1,16 @@
 # Файл содержит свойства, используемые для всех профилей
-server:
-  port: 8080
+#server:
+#  port: 8080
 
 spring:
   profiles:
     active: dev
   jpa:
-    hibernate.ddl-auto: create
-    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    hibernate.ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://qziezrifcdynnh:a19389eba8ccc53b33d6f3ce04e1666fc6a09039cfa3256ace9da81d0717890c@ec2-54-220-223-3.eu-west-1.compute.amazonaws.com:5432/d8tlk73ggjsq13
+    url: jdbc:postgresql://ec2-54-220-223-3.eu-west-1.compute.amazonaws.com:5432/d8tlk73ggjsq13
     username: qziezrifcdynnh
     password: a19389eba8ccc53b33d6f3ce04e1666fc6a09039cfa3256ace9da81d0717890c
   liquibase:
