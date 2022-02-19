@@ -1,13 +1,11 @@
 package ws.eliseev.fitness.dto;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-@RequiredArgsConstructor
-public class RoleDTO {
+public class RoleDto {
     Long id;
     String name;
 }
