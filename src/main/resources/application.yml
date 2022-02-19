@@ -1,10 +1,10 @@
 # Файл содержит свойства, используемые для всех профилей
-#server:
-#  port: 8080
+server:
+  port: 8080
 
 spring:
-#  profiles:
-#    active: dev
+  profiles:
+    active: dev
   jpa:
     hibernate.ddl-auto: create
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
