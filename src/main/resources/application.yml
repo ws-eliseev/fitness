@@ -4,7 +4,7 @@ server:
 
 spring:
   profiles:
-    active: dev
+    active: ldap
   jpa:
     hibernate.ddl-auto: validate
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
@@ -18,3 +18,13 @@ spring:
     drop-first: false
     change-log: db/db.changelog-master.yaml
     default-schema: public
+  ldap:
+    embedded:
+      base-dn: dc=springframework,dc=org
+      credential:
+        username: uid=admin
+        password: secret
+      ldif: classpath:ldap-test-server.ldif
+      port: 8389
+      validation:
+        enabled: false

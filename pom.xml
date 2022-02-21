@@ -69,6 +69,18 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.ldap</groupId>
+            <artifactId>spring-ldap-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-ldap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.unboundid</groupId>
+            <artifactId>unboundid-ldapsdk</artifactId>
+        </dependency>
 
         <!-- SWAGGER OPENAPI V3 DEPENDENCIES-->
         <dependency>
@@ -111,6 +123,8 @@
             <scope>test</scope>
         </dependency>
 
+
+
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -118,6 +132,8 @@
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
+
+
 
     </dependencies>
 
