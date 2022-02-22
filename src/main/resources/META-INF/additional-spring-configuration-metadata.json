@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.liquibase.ldap.embedded.base-dn",
+      "type": "java.lang.String",
+      "description": "Description for spring.liquibase.ldap.embedded.base-dn."
+  }
+] }
