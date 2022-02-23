@@ -1,1 +1,1 @@
-web:     java
+web: sh target/bin/webapp
