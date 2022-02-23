@@ -1,1 +1,1 @@
-web: java -jar target/target\fitness-0.0.1-SNAPSHOT.jar
+web: java -jar target/fitness-0.0.1-SNAPSHOT.jar
