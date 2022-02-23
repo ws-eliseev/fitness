@@ -1,1 +1,1 @@
-web: java -cp target/*.jar
+web: java target/*.jar
