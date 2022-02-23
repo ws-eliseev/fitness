@@ -1,1 +1,1 @@
-web: java -jar target/fitness-0.0.1-SNAPSHOT.jar
+web: java -cp target/classes/:target/dependency/* ws.eliseev
