@@ -1,1 +1,1 @@
-web: main/java/ws.eliseev.fitness/FitnessApplication
+web: main/java/ws.eliseev.fitness/FitnessApplication.java
