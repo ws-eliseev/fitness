@@ -1,1 +1,1 @@
-FitnessApplication.java
+web: FitnessApplication.java
