@@ -1,1 +1,1 @@
-web: sh target/bin/webapp
+web: main/java/ws.eliseev.fitness/FitnessApplication
