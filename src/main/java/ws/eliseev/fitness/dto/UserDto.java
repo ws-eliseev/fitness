@@ -30,6 +30,10 @@ public class UserDto {
 
     private int age;
 
+    private String userRole;
+
+    private String adminRole;
+
     private Sex sex;
 
     @RequiredArgsConstructor
