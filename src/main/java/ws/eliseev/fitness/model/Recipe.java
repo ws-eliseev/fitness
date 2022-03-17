@@ -11,41 +11,62 @@ import java.util.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Recipe {
 
+    /**
+     * Поле id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
+    /**
+     * Поле названия рецепта
+     */
     @Column(name = "NAME", nullable = false)
     private String name;
 
+    /**
+     * Поле описания рецепта
+     */
     @Column(name = "UNIQUE_RECIPE_FIELD")
     private String uniqueRecipeField;
 
+    /**
+     * Поле количества калорий в блюде
+     */
     @Column(name = "CALORIES")
     private int calories;
 
+    /**
+     * Поле количества белков в блюде
+     */
     @Column(name = "PROTEINS")
     private int proteins;
 
+    /**
+     * Поле количества жиров в блюде
+     */
     @Column(name = "FAT")
     private int fat;
 
+    /**
+     * Поле количества углеводов в блюде
+     */
     @Column(name = "CARBOHYDRATES")
     private int carbohydrates;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Recipe recipe = (Recipe) o;
-        return calories == recipe.calories && proteins == recipe.proteins && fat == recipe.fat && carbohydrates == recipe.carbohydrates && Objects.equals(name, recipe.name) && Objects.equals(uniqueRecipeField, recipe.uniqueRecipeField);
-    }
+    /**
+     * Поле времени приема пищи (завтрак - обед - ужин)
+     */
+    @Column(name = "MEALS")
+    private String meals;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, uniqueRecipeField, calories, proteins, fat, carbohydrates);
-    }
+    /**
+     * Поле рейтинга рецепта
+     */
+    @Column(name = "RATING")
+    private int rating;
 }
