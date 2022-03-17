@@ -38,3 +38,9 @@ databaseChangeLog:
               - column:
                   name: carbohydrates
                   type: int
+              - column:
+                  name: meals
+                  type: varchar(255)
+              - column:
+                  name: rating
+                  type: int

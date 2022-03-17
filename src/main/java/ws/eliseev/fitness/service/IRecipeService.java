@@ -9,34 +9,47 @@ public interface IRecipeService {
     /**
      * Вывести список всех рецептов
      */
-    public List<Recipe> fetchRecipeList();
+    List<Recipe> fetchRecipeList();
 
     /**
      * Сохранить или обновить рецепт
      *
      * @param recipe - название рецепта
      */
-    public Recipe saveOrUpdateRecipe(Recipe recipe);
+    Recipe saveOrUpdateRecipe(Recipe recipe);
 
     /**
      * Найти рецепт по Id
      *
      * @param recipeId - идентификационный номер рецепта в бд
      */
-    public Optional<Recipe> fetchRecipeById(Long recipeId);
+    Optional<Recipe> fetchRecipeById(Long recipeId);
 
     /**
      * Найти все подходящие рецепты по имени
      *
      * @param name - название рецепта в БД
      */
-    public List<Recipe> fetchRecipeByName(String name);
+    List<Recipe> fetchRecipeByName(String name);
+
+    /**
+     * Найти все подходящие рецепты по времени приема пищи
+     *
+     * @param meals - время приема пищи
+     */
+    List<Recipe> fetchAllRecipesByMeals(String meals);
+
+    /**
+     * Найти все подходящие рецепты по рейтингу
+     * @param rating - рейтинг рецепта
+     */
+    List<Recipe> fetchAllRecipesByRating(int rating);
 
     /**
      * Удалить рецепт по Id
      *
      * @param recipeId - идентификационный номер рецепта в бд
      */
-    public void deleteRecipeById(Long recipeId);
+    void deleteRecipeById(Long recipeId);
 
 }

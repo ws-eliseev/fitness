@@ -37,6 +37,16 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
+    public List<Recipe> fetchAllRecipesByMeals(String meals) {
+        return recipeRepository.findAllByMeals(meals);
+    }
+
+    @Override
+    public List<Recipe> fetchAllRecipesByRating(int rating) {
+        return recipeRepository.findAllByRating(rating);
+    }
+
+    @Override
     public void deleteRecipeById(Long recipeId) {
         recipeRepository.deleteById(recipeId);
     }
