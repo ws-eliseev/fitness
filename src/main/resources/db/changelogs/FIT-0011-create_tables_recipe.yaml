@@ -1,18 +1,18 @@
 databaseChangeLog:
-  - logicalFilePath: db/changelogs/FIT-0011-create_tables_recipe.yaml
+  - logicalFilePath: db/changelogs/FIT-0011-create-tables_recipe.yaml
 
   - changeSet:
-      id: changelog-005
+      id: FIT-0011-1
       author: 1
       changes:
         - tagDatabase:
-            tag: create_recipe_table
+            tag: create_table_recipe
         - createTable:
             tableName: fit_recipe
             columns:
               - column:
                   name: id
-                  type: bigint
+                  type: BIGINT
                   autoIncrement: true
                   constraints:
                     primaryKey: true
@@ -22,6 +22,12 @@ databaseChangeLog:
                   type: varchar(255)
                   constraints:
                     nullable: false
+              - column:
+                  name: image
+                  type: varchar(255)
+              - column:
+                  name: ingredients
+                  type: varchar(255)
               - column:
                   name: unique_recipe_field
                   type: varchar(255)
@@ -38,3 +44,50 @@ databaseChangeLog:
               - column:
                   name: carbohydrates
                   type: int
+
+  - changeSet:
+      id: FIT-0011-2
+      author: 1
+      changes:
+              - tagDatabase:
+                  tag: create_table_fit_ingrediet
+              - createTable:
+                  tableName: fit_ingredient
+                  columns:
+                    - column:
+                        name: id
+                        type: BIGINT
+                        autoIncrement: true
+                        constraints:
+                          primaryKey: true
+                          nullable: false
+                    - column:
+                        name: name
+                        type: varchar(255)
+                        constraints:
+                          nullable: false
+
+
+  - changeSet:
+      id: FIT-0011-3
+      author: 1
+      changes:
+        - tagDatabase:
+            tag: create_table_fit_recipe_ingredient
+        - createTable:
+            tableName: fit_recipe_ingredient
+            columns:
+              - column:
+                  name: recipe_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_recipe
+                    references: fit_recipe(id)
+              - column:
+                  name: ingredient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_ingredient
+                    references: fit_ingredient(id)
