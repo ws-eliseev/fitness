@@ -2,8 +2,19 @@ databaseChangeLog:
   - logicalFilePath: db/changelogs/FIT-0039-create_tables_ingredient_ingredientrecipe.yaml
 
   - changeSet:
+      id: addColumn-image
+      author: mel
+      changes:
+        - addColumn:
+            tableName: fit_recipe
+            columns:
+              - column:
+                  name: image
+                  type: varchar(255)
+
+  - changeSet:
       id: FIT-0039-1
-      author: MEL
+      author: mel
       changes:
         - tagDatabase:
             tag: create_table_ingredient
@@ -25,7 +36,7 @@ databaseChangeLog:
                     nullable: false
   - changeSet:
       id: FIT-0039-2
-      author: 1
+      author: mel
       changes:
         - tagDatabase:
             tag: create_table_fit_recipe_ingredient
