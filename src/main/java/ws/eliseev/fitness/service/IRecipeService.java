@@ -2,6 +2,7 @@ package ws.eliseev.fitness.service;
 
 import ws.eliseev.fitness.model.Recipe;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +17,7 @@ public interface IRecipeService {
      *
      * @param recipe - название рецепта
      */
-    public Recipe saveOrUpdateRecipe(Recipe recipe);
+    public Recipe saveOrUpdateRecipe(@Valid Recipe recipe);
 
     /**
      * Найти рецепт по Id

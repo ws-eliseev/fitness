@@ -1,0 +1,48 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0039-create_tables_ingredient_ingredientrecipe.yaml
+
+  - changeSet:
+      id: FIT-0039-1
+      author: MEL
+      changes:
+        - tagDatabase:
+            tag: create_table_ingredient
+        - createTable:
+            tableName: fit_ingredient
+            columns:
+              - column:
+                  name: ID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: NAME
+                  type: varchar(255)
+                  constraints:
+                    unique: false
+                    nullable: false
+  - changeSet:
+      id: FIT-0039-2
+      author: 1
+      changes:
+        - tagDatabase:
+            tag: create_table_fit_recipe_ingredient
+        - createTable:
+            tableName: fit_recipe_ingredient
+            columns:
+              - column:
+                  name: recipe_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_recipe
+                    references: fit_recipe(id)
+              - column:
+                  name: ingredient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_ingredient
+                    references: fit_ingredient(id)

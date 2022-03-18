@@ -23,6 +23,9 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: image
+                  type: varchar(255)
+              - column:
                   name: unique_recipe_field
                   type: varchar(255)
                   constraints:
