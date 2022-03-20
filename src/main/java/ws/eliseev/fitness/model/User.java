@@ -2,9 +2,12 @@ package ws.eliseev.fitness.model;
 
 import lombok.*;
 import org.hibernate.envers.Audited;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.Set;
 
 /*
  * Класс для хранения информации о пользователе в программе и в БД
@@ -18,8 +21,7 @@ import java.util.*;
 @Audited
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
+public class User implements UserDetails {
     /* Первичный ключ с генерацией значения из последовательности, 8 байт */
     @Id
     @SequenceGenerator(name = "user_gen", sequenceName = "fit_user_seq", allocationSize = 1)
@@ -60,6 +62,31 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
     /* Класс соответствующий полю sex */
     @RequiredArgsConstructor
     @Getter
@@ -75,5 +102,5 @@ public class User {
     @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 }

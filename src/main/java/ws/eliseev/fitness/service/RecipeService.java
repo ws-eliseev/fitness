@@ -40,4 +40,14 @@ public class RecipeService implements IRecipeService {
     public void deleteRecipeById(Long recipeId) {
         recipeRepository.deleteById(recipeId);
     }
+
+    @Override
+    public List<Recipe> fetchRecipeByMeals(String meal) {
+        return recipeRepository.findAllByMeals(meal);
+    }
+
+    @Override
+    public List<Recipe> fetchRecipeByMealsAndRating(String meal, int rating) {
+        return recipeRepository.findAllByMealsAndRating(meal, rating);
+    }
 }
