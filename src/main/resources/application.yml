@@ -11,8 +11,8 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres_db
-    username: postgres_adm
-    password: postgres_pass
+    username: postgres
+    password: password
   liquibase:
     enabled: true
     drop-first: false
