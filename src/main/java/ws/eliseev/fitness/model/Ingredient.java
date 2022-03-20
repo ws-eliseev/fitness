@@ -19,7 +19,6 @@ import javax.persistence.Table;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 public class Ingredient {
 
     /** Поле id - Первичный ключ, генерация IDENTITY*/

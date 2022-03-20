@@ -11,3 +11,5 @@ databaseChangeLog:
       file: db/changelogs/FIT-0026-create_tables_userAud_userRolesAud_roleAud_reinfo.yaml
   - include:
       file: db/changelogs/FIT-0039-create_tables_ingredient_ingredientrecipe.yaml
+  - include:
+      file: db/changelogs/FIT-0042-create_tables_passport_address.yaml
