@@ -105,4 +105,40 @@ public class RecipeController {
     public ResponseEntity<List<Recipe>> fetchDepByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(recipeService.fetchRecipeByName(name));
     }
+
+    /**
+     * Получает все рецепты по совпадению времени приема пищи
+     *
+     * @param meal - время приема пищи
+     */
+    @Operation(summary = "Get all recipes by meal", tags = "recipe")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Got all recipes found by defined meal"
+            )
+    })
+    @GetMapping("/meals")
+    public ResponseEntity<List<Recipe>> fetchByMeals(@RequestParam("meal") String meal) {
+        return ResponseEntity.ok(recipeService.fetchRecipeByMeals(meal));
+    }
+
+    /**
+     * Получает все рецепты по времени приема пищи и райтингу
+     *
+     * @param meal - время приема пищи
+     * @param rating - рейтинг рецепта
+     */
+    @Operation(summary = "Get all recipes by meals and ratings", tags = "recipe")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Got all recipes found by defined meals and ratings"
+            )
+    })
+    @GetMapping("/rating")
+    public ResponseEntity<List<Recipe>> fetchRecipesByMealsAndRatings(@RequestParam("meal") String meal,
+                                                                      @RequestParam("rating") int rating){
+        return ResponseEntity.ok(recipeService.fetchRecipeByMealsAndRating(meal, rating));
+    }
 }
