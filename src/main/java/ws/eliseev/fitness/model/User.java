@@ -1,6 +1,8 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -98,9 +100,10 @@ public class User implements UserDetails {
     }
 
     /* Коллекция ролей пользователя для реализации связи "многие ко многим" */
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @Fetch(FetchMode.JOIN)
     private Set<Role> roles;
 }
