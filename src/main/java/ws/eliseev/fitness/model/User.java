@@ -103,4 +103,13 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles;
+
+    public String getCustomRoles() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Role role : getRoles()) {
+            stringBuilder.append(role.getName());
+            stringBuilder.append(" ");
+        }
+        return stringBuilder.toString();
+    }
 }
