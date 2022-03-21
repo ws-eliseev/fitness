@@ -19,6 +19,9 @@ import java.util.Map;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
+/**
+ * Класс проверки JWT-токена
+ */
 @Component
 public class JwtFilter extends OncePerRequestFilter {
 
@@ -33,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        final String authorizationHeader = request.getHeader(AUTHORIZATION);
+        final String authorizationHeader = request.getHeader(AUTHORIZATION); /* получаем header из запроса*/
 
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
