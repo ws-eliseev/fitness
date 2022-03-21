@@ -15,6 +15,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 
+/**
+ * класс создания JWT-токена
+ */
 @Service
 public class JwtUtil {
 
