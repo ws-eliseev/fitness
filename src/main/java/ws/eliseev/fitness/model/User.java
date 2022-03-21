@@ -104,6 +104,9 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles;
 
+    /**
+     * формирование строки с ролями
+     */
     public String getCustomRoles() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Role role : getRoles()) {
