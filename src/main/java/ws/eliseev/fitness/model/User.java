@@ -1,12 +1,15 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 /*
@@ -28,6 +31,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
     @Column(name = "ID")
     private Long id;
+
+    public User(String username, String password, Set<Role> roles) {
+    }
 
     /* Уникальное имя пользователя, не более 255 символов */
     @Column(name = "USERNAME", unique = true, nullable = false)
@@ -98,10 +104,11 @@ public class User implements UserDetails {
     }
 
     /* Коллекция ролей пользователя для реализации связи "многие ко многим" */
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @Fetch(FetchMode.JOIN)
     private Set<Role> roles;
 
     /**

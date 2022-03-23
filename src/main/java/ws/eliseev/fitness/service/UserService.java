@@ -1,13 +1,17 @@
 package ws.eliseev.fitness.service;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 import ws.eliseev.fitness.repository.IUserRepository;
 import ws.eliseev.fitness.util.mapper.IUserMapper;
 
 import java.util.List;
 import java.util.Optional;
+import static java.util.Collections.emptyList;
 import java.util.stream.Collectors;
 
 /**
@@ -16,11 +20,19 @@ import java.util.stream.Collectors;
  * @author Зыков Артем
  * @see IUserService
  */
-@RequiredArgsConstructor
+
 @Service
 public class UserService implements IUserService {
 
     private final IUserRepository repository;
+    private final IUserRepository userRepository;
+
+    @Autowired
+    public UserService(IUserRepository repository, IUserRepository userRepository, IUserMapper iUserMapper) {
+        this.repository = repository;
+        this.userRepository = userRepository;
+        this.iUserMapper = iUserMapper;
+    }
 
     private final IUserMapper iUserMapper;
 
@@ -59,5 +71,14 @@ public class UserService implements IUserService {
     @Override
     public void deleteUserById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new User(user.getUsername(), user.getPassword(), user.getRoles());
     }
 }

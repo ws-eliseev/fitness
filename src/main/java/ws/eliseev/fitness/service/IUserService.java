@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.service;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
 import ws.eliseev.fitness.dto.UserDto;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
  * @see ws.eliseev.fitness.repository.IUserRepository
  * @author Зыков Артем
  */
-public interface IUserService {
+public interface IUserService extends UserDetailsService {
 
     /**
      * @return Возвращаем список всех User-ов из базы данных
