@@ -1,6 +1,13 @@
 package ws.eliseev.fitness.dto;
 
 import lombok.*;
+import ws.eliseev.fitness.model.Role;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 
 /**
  * DTO объект от сущности User
@@ -31,6 +38,12 @@ public class UserDto {
     private int age;
 
     private Sex sex;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "FIT_USER_ROLES",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    private Set<Role> roles;
 
     @RequiredArgsConstructor
     @Getter
