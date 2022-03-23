@@ -12,8 +12,7 @@ import javax.persistence.Table;
 @Table(name = "FIT_REVINFO")
 @RevisionEntity(CustomRevisionEntityListener.class)
 @EqualsAndHashCode
-public class
-CustomRevisionEntity extends DefaultRevisionEntity {
+public class CustomRevisionEntity extends DefaultRevisionEntity {
 
     private static final long serialVersionUID = 1L;
 
