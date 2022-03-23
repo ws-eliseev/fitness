@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
+ * @author Costa Vashchuk
  * осуществляем авторизацию пользователей
  */
 @Slf4j

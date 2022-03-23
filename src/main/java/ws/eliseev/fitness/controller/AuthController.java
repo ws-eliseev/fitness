@@ -13,6 +13,10 @@ import ws.eliseev.fitness.service.jwt.AuthService;
 
 import javax.security.auth.message.AuthException;
 
+/**
+ * @author Costa Vashchuk
+ */
+
 @RestController
 @RequestMapping("api/auth")
 @RequiredArgsConstructor

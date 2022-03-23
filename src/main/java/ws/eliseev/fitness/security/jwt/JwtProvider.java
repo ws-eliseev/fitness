@@ -12,14 +12,15 @@ import java.time.ZoneId;
 import java.util.Date;
 
 /**
+ * @author Costa Vashchuk
  * Класс генерации и валидации access и refresh токенов
  */
 @Slf4j
 @Component
 public class JwtProvider {
 
-    private final String jwtAccessSecret = "superPuperSecret";
-    private final String jwtRefreshSecret = "superPuperRefresh";
+    private static final String JWT_ACCESS_SECRET = "superPuperSecret";
+    private static final String JWT_REFRESH_SECRET = "superPuperRefresh";
 
 
     /**
@@ -31,14 +32,13 @@ public class JwtProvider {
         final LocalDateTime now = LocalDateTime.now();
         final Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
         final Date accessExpiration = Date.from(accessExpirationInstant);
-        final String accessToken = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setExpiration(accessExpiration)
-                .signWith(SignatureAlgorithm.HS512, jwtAccessSecret)
+                .signWith(SignatureAlgorithm.HS512, JWT_ACCESS_SECRET)
                 .claim("roles", user.getRoles())
                 .claim("firstName", user.getFirstName())
                 .compact();
-        return accessToken;
     }
 
     /**
@@ -50,12 +50,11 @@ public class JwtProvider {
         final LocalDateTime now = LocalDateTime.now();
         final Instant refreshExpirationInstant = now.plusDays(30).atZone(ZoneId.systemDefault()).toInstant();
         final Date refreshExpiration = Date.from(refreshExpirationInstant);
-        final String refreshToken = Jwts.builder()
+        return Jwts.builder()
                 .setSubject(user.getUsername())
                 .setExpiration(refreshExpiration)
-                .signWith(SignatureAlgorithm.HS512, jwtRefreshSecret)
+                .signWith(SignatureAlgorithm.HS512, JWT_REFRESH_SECRET)
                 .compact();
-        return refreshToken;
     }
 
     /**
@@ -64,7 +63,7 @@ public class JwtProvider {
      * @return true or false
      */
     public boolean validateAccessToken(@NonNull String token) {
-        return validateToken(token, jwtAccessSecret);
+        return validateToken(token, JWT_ACCESS_SECRET);
     }
 
     /**
@@ -74,7 +73,7 @@ public class JwtProvider {
      */
 
     public boolean validateRefreshToken(@NonNull String token) {
-        return validateToken(token, jwtRefreshSecret);
+        return validateToken(token, JWT_REFRESH_SECRET);
     }
 
     private boolean validateToken(@NonNull String token, @NonNull String secret) {
@@ -96,11 +95,11 @@ public class JwtProvider {
     }
 
     public Claims getAccessClaims(@NonNull String token) {
-        return getClaims(token, jwtAccessSecret);
+        return getClaims(token, JWT_ACCESS_SECRET);
     }
 
     public Claims getRefreshClaims(@NonNull String token) {
-        return getClaims(token, jwtRefreshSecret);
+        return getClaims(token, JWT_REFRESH_SECRET);
     }
 
     private Claims getClaims(@NonNull String token, @NonNull String secret) {

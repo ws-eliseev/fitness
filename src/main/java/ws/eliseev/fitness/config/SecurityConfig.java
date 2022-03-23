@@ -12,6 +12,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ws.eliseev.fitness.security.jwt.JwtFilter;
 
+/**
+ * @author Costa Vashchuk
+ */
+
 @Configuration
 @EnableWebSecurity
 @Profile("dev")
