@@ -1,0 +1,80 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0044-create_table_mail_journal_bodyChar.yaml
+
+  - changeSet:
+      id: FIT-0044-1
+      author: Tsoy Roman
+      changes:
+        - createTable:
+            tableName: fit_mail
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: template
+                  type: text
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: FIT-0044-2
+      author: Tsoy Roman
+      changes:
+        - createTable:
+            tableName: fit_body_characteristics
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: height
+                  type: tinyint
+              - column:
+                  name: weight
+                  type: tinyint
+              - column:
+                  name: bmi
+                  type: tinyint
+
+  - changeSet:
+      id: FIT-0044-3
+      author: Tsoy Roman
+      changes:
+        - createTable:
+            tableName: fit_journal
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: creation_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modification_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: body_characteristics_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_fit_body_characteristics_id
+                    references: fit_body_characteristics(id)
+
+
+
