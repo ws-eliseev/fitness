@@ -9,16 +9,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.service.IMailService;
 import ws.eliseev.fitness.service.IUserService;
 import ws.eliseev.fitness.service.UserService;
 
+import javax.mail.MessagingException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
  * Контроллер реализует CRUD-операции над пользователем
- * @see UserService
+ *
  * @author Зыков Артем
+ * @see UserService
  */
 @Tag(name = "Users", description = "CRUD  операции над пользователями")
 @RequiredArgsConstructor
@@ -27,6 +31,7 @@ import java.util.Optional;
 public class UserController {
 
     private final IUserService service;
+    private final IMailService mailService;
 
     @GetMapping()
     @Operation(summary = "Get all Users", tags = "Получить списка всех пользователей")
@@ -56,7 +61,11 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные пользователя обновлены"),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден")})
-    public void updateUser(@RequestBody UserDto user) {
+    public void updateUser(@RequestBody UserDto user) throws MessagingException {
+        if (service.getUserById(user.getId()).isPresent() &&
+                !Objects.equals(service.getUserById(user.getId()).get().getPassword(), user.getPassword())) {
+            mailService.sendNewPassword(user);
+        }
         service.saveUserOrUpdate(user);
     }
 

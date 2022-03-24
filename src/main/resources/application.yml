@@ -11,10 +11,21 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres_db
-    username: postgres_adm
-    password: postgres_pass
+    username: tsoyroman
+    password:
   liquibase:
     enabled: true
-    drop-first: false
+    drop-first: true
     change-log: db/db.changelog-master.yaml
     default-schema: public
+#  mail:
+#    host: smtp.gmail.com
+#    port: 587
+#    username: ealfitness22@gmail.com
+#    password: Ceknij-nobraw-jexde9
+#    protocol: smtp
+#    tls: true
+#    properties.mail.smtp:
+#      auth: true
+#      starttls.enable: true
+#      ssl.trust: smtp.gmail.com
