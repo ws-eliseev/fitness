@@ -5,14 +5,20 @@ server:
 spring:
   profiles:
     active: dev
+
   jpa:
     hibernate.ddl-auto: validate
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
+    properties.hibernate.jdbc.use_streams_for_binary: true
+
+
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres_db
     username: postgres_adm
     password: postgres_pass
+    hikari:
+      auto-commit: false
   liquibase:
     enabled: true
     drop-first: false

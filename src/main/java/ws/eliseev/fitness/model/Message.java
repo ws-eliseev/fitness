@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.sql.Blob;
@@ -25,7 +26,7 @@ public class Message {
 
     /** Поле blob -  вложение, большой бинарный объект BLOB*/
     @Lob
-    private Blob blob;
+    private byte[] blob;
 
     /** Поле senderName - отправитель сообщения*/
     private String senderName;

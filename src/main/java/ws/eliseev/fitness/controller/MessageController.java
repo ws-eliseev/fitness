@@ -48,7 +48,6 @@ public class MessageController {
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @PostMapping
     public Message PostAddMsg(@RequestBody Message message) {
-        System.out.println();
         return messageService.addMessage(message);
     }
 
