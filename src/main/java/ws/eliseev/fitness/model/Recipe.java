@@ -25,45 +25,63 @@ import java.util.Set;
 @AllArgsConstructor
 public class Recipe {
 
-    /** Поле id - Первичный ключ, генерация IDENTITY*/
+    /**
+     * Поле id - Первичный ключ, генерация IDENTITY
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private Long id;
 
-    /** Поле наименования рецепта */
+    /**
+     * Поле наименования рецепта
+     */
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    /** Поле имени уникального  рецепта */
+    /**
+     * Поле имени уникального  рецепта
+     */
     @Column(name = "UNIQUE_RECIPE_FIELD")
     private String uniqueRecipeField;
 
-    /** Поле количества калорий */
+    /**
+     * Поле количества калорий
+     */
     @Column(name = "CALORIES")
     private int calories;
 
-    /** Поле количества белков */
+    /**
+     * Поле количества белков
+     */
     @Column(name = "PROTEINS")
     private int proteins;
 
-    /** Поле количества жиров */
+    /**
+     * Поле количества жиров
+     */
     @Column(name = "FAT")
     private int fat;
 
-    /** Поле количества углеводов */
+    /**
+     * Поле количества углеводов
+     */
     @Column(name = "CARBOHYDRATES")
     private int carbohydrates;
 
-    /** Поле для указания ингредиентов */
+    /**
+     * Поле для указания ингредиентов
+     */
     @ManyToMany
     @JoinTable(
             name = "FIT_RECIPE_INGREDIENT"
             , joinColumns = @JoinColumn(name = "RECIPE_ID")
             , inverseJoinColumns = @JoinColumn(name = "INGREDIENT_ID"))
-    private Set <Ingredient> ingredients = new HashSet<>() ;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
-    /** Поле изображения рецепта */
+    /**
+     * Поле изображения рецепта
+     */
     @Column(name = "IMAGE")
     private String image;
 
