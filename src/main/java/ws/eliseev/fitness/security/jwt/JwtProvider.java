@@ -26,11 +26,11 @@ public class JwtProvider {
     /**
      * Генерация access-токен. Принимает объект пользователя и генерирует access токен для него.
      *
-     * @return
+     * @return возвращает access-token
      */
     public String generateAccessToken(UserDto user) {
         final LocalDateTime now = LocalDateTime.now();
-        final Instant accessExpirationInstant = now.plusMinutes(5).atZone(ZoneId.systemDefault()).toInstant();
+        final Instant accessExpirationInstant = now.plusMinutes(30).atZone(ZoneId.systemDefault()).toInstant();
         final Date accessExpiration = Date.from(accessExpirationInstant);
         return Jwts.builder()
                 .setSubject(user.getUsername())

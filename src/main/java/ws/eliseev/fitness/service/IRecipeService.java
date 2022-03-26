@@ -40,17 +40,11 @@ public interface IRecipeService {
     void deleteRecipeById(Long recipeId);
 
     /**
-     * Найти подходящие рецепты по времени приема пищи
+     * Получить рецепты, удовлетворяющие заданным критериям
      *
-     * @param meal - время приема пищи
+     * @return лист рецептов по запросу
      */
-    List<Recipe> fetchRecipeByMeals(String meal);
+    List<Recipe> findAll();
 
-    /**
-     * Найти подходящие рецепты по времени приема пищи и рейтингу
-     *
-     * @param meal - время приема пищи
-     * @param rating - рейтинг рецепта
-     */
-    List<Recipe> fetchRecipeByMealsAndRating(String meal, int rating);
+    List<Recipe> search(String q);
 }

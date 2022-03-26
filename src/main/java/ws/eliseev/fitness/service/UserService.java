@@ -11,7 +11,6 @@ import ws.eliseev.fitness.util.mapper.IUserMapper;
 
 import java.util.List;
 import java.util.Optional;
-import static java.util.Collections.emptyList;
 import java.util.stream.Collectors;
 
 /**
@@ -79,6 +78,6 @@ public class UserService implements IUserService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(user.getUsername(), user.getPassword(), user.getRoles());
+        return userRepository.findByUsername(username);
     }
 }
