@@ -30,7 +30,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: TIMESTAMP
-                  type: time
+                  type: timestamp
               - column:
                   name: BLOB
                   type: blob

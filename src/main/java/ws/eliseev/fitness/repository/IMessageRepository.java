@@ -12,4 +12,5 @@ import ws.eliseev.fitness.model.Message;
 @Repository
 
 public interface IMessageRepository extends JpaRepository <Message, Long> {
+    Message findMessageById(Long messageId);
 }

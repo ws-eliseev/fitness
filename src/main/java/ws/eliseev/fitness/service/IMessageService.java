@@ -5,6 +5,7 @@ import ws.eliseev.fitness.model.Message;
 import ws.eliseev.fitness.model.Recipe;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Сервис для обращения к репозиторию
@@ -46,4 +47,10 @@ public interface IMessageService {
      */
     void editMessage(Message message);
 
+    /**
+     * Найти сообщение по id
+     *
+     * @param messageId - id искомого сообщения
+     */
+    Message findMessageById(Long messageId);
 }
