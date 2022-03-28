@@ -3,7 +3,6 @@ package ws.eliseev.fitness.service;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.Recipe;
 import ws.eliseev.fitness.repository.IRecipeRepository;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +21,7 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
-    public Recipe saveOrUpdateRecipe(Recipe recipe) {
+    public Recipe saveOrUpdateRecipe( Recipe recipe) {
         return recipeRepository.save(recipe);
     }
 

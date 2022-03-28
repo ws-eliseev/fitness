@@ -6,6 +6,8 @@ import org.hibernate.envers.Audited;
 import javax.persistence.*;
 import java.util.*;
 
+import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
+
 /*
  * Класс для хранения информации о пользователе в программе и в БД
  * @author Кончалов Роман
@@ -20,47 +22,47 @@ import java.util.*;
 @AllArgsConstructor
 public class User {
 
-    /* Первичный ключ с генерацией значения из последовательности, 8 байт */
+    /** Первичный ключ с генерацией значения из последовательности, 8 байт */
     @Id
     @SequenceGenerator(name = "user_gen", sequenceName = "fit_user_seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_gen")
     @Column(name = "ID")
     private Long id;
 
-    /* Уникальное имя пользователя, не более 255 символов */
+    /** Уникальное имя пользователя, не более 255 символов */
     @Column(name = "USERNAME", unique = true, nullable = false)
     private String username;
 
-    /* Пароль пользователя в незашифрованном виде, не более 255 символов */
+    /** Пароль пользователя в незашифрованном виде, не более 255 символов */
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    /* Имя пользователя, не более 255 символов */
+    /** Имя пользователя, не более 255 символов */
     @Column(name = "FIRST_NAME")
     private String firstName;
 
-    /* Фамилия пользователся, не более 255 символов */
+    /** Фамилия пользователся, не более 255 символов */
     @Column(name = "LAST_NAME")
     private String lastName;
 
-    /* Электронная почта пользователя, не более 255 символов */
+    /** Электронная почта пользователя, не более 255 символов */
     @Column(name = "EMAIL")
     private String email;
 
-    /* Номер телефон не более, 255 символов */
+    /** Номер телефон не более, 255 символов */
     @Column(name = "PHONE")
     private String phone;
 
-    /* Числовое значение возраста, 4 байта */
+    /** Числовое значение возраста, 4 байта */
     @Column(name = "AGE")
     private int age;
 
-    /* Значеие пола принимающее значение MALE или FEMALE */
+    /** Значеие пола принимающее значение MALE или FEMALE */
     @Column(name = "SEX")
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-    /* Класс соответствующий полю sex */
+    /** Класс соответствующий полю sex */
     @RequiredArgsConstructor
     @Getter
     public enum Sex {
@@ -70,10 +72,28 @@ public class User {
         private final String title;
     }
 
-    /* Коллекция ролей пользователя для реализации связи "многие ко многим" */
+    /** Коллекция ролей пользователя для реализации связи "многие ко многим" */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
+
+    /** Поле указания паспорта */
+    @Audited(targetAuditMode = NOT_AUDITED)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PASSPORT_ID")
+    private Passport passport ;
+
+    /** Поле указания адреса */
+    @Audited(targetAuditMode = NOT_AUDITED)
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ADDRESS_ID")
+    private Address address ;
+
+    /** Поле указания фото */
+    @Column(name = "PHOTO")
+    private String photo ;
+
 }
+
