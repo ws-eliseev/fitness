@@ -16,7 +16,7 @@ public interface IRecipeService {
      *
      * @param recipe - название рецепта
      */
-    public Recipe saveOrUpdateRecipe( Recipe recipe);
+    public Recipe saveOrUpdateRecipe(Recipe recipe);
 
     /**
      * Найти рецепт по Id
