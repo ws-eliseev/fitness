@@ -20,7 +20,7 @@ import java.util.List;
 //@Log4j
 @Tag(name = "Workout", description = "CRUD  операции с тренировкой")
 @RestController
-@RequestMapping("/workout")
+@RequestMapping("/api/workout")
 public class WorkoutController {
 
     private final WorkoutService workoutService;
@@ -33,7 +33,7 @@ public class WorkoutController {
      * Контроллер на запрос списка всех Тренировок
      * @return http ответ на исход запроса
      */
-    @GetMapping(value = "/")
+    @GetMapping()
     @Operation(summary = "Gets all Workouts", tags = "Получение списка всех тренировок")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка тренировок"),
@@ -54,7 +54,7 @@ public class WorkoutController {
      * Контроллер на создание или обновление Тренировки
      * @param workout - сущность БД
      */
-    @PostMapping(value = "/")
+    @PostMapping()
     @Operation(summary = "Create or update Workout", tags = "Создание или изменение тренировки")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Данные о тренировки обновлены"),

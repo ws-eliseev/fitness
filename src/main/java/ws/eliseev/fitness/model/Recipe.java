@@ -82,4 +82,11 @@ public class Recipe {
     @Field(store = Store.YES)
     @Column(name = "RATING")
     private int rating;
+
+    @NoArgsConstructor
+    public enum Meal{
+        BREAKFAST,
+        DINNER,
+        LUNCH
+    }
 }
