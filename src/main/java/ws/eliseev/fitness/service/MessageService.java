@@ -2,7 +2,6 @@ package ws.eliseev.fitness.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ws.eliseev.fitness.model.Message;
 import ws.eliseev.fitness.repository.IMessageRepository;
 

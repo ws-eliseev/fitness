@@ -1,11 +1,8 @@
 package ws.eliseev.fitness.service;
 
-import org.springframework.transaction.annotation.Transactional;
 import ws.eliseev.fitness.model.Message;
-import ws.eliseev.fitness.model.Recipe;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Сервис для обращения к репозиторию
