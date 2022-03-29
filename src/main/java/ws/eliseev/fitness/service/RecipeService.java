@@ -39,4 +39,9 @@ public class RecipeService implements IRecipeService {
     public void deleteRecipeById(Long recipeId) {
         recipeRepository.deleteById(recipeId);
     }
+
+    @Override
+    public List<Recipe> findAllByKeyWords(String query) {
+        return recipeRepository.findBy(query);
+    }
 }

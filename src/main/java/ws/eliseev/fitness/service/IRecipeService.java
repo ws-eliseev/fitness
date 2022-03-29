@@ -39,4 +39,9 @@ public interface IRecipeService {
      */
     public void deleteRecipeById(Long recipeId);
 
+    /**
+     * Найти все рецепты по ключевым словам
+     */
+    List<Recipe> findAllByKeyWords(String query);
+
 }

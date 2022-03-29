@@ -14,4 +14,11 @@ public interface IRecipeRepository extends JpaRepository<Recipe, Long> {
      * @param name - название рецепта
      */
     List<Recipe> findAllByName(String name);
+
+    /**
+     * Найти все рецепты по ключевым словам
+     *
+     * @param query - строка с ключевыми словами
+     */
+    List<Recipe> findBy(String query);
 }
