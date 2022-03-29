@@ -1,7 +1,7 @@
 package ws.eliseev.fitness.service;
 
-
 import org.springframework.stereotype.Service;
+
 import ws.eliseev.fitness.model.Document;
 import ws.eliseev.fitness.model.Recipe;
 import ws.eliseev.fitness.repository.IDocumentRepository;
