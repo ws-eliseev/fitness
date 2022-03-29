@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.service;
 
 
+import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.model.Document;
 import ws.eliseev.fitness.model.Recipe;
 import ws.eliseev.fitness.repository.IDocumentRepository;
@@ -8,7 +9,7 @@ import ws.eliseev.fitness.repository.IDocumentRepository;
 import java.util.List;
 import java.util.Optional;
 
-
+@Service
 public class DocumentService implements IDocumentService {
 
     private final IDocumentRepository iDocumentRepository;
