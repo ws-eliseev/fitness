@@ -70,6 +70,18 @@ public class Recipe {
     private int carbohydrates;
 
     /**
+     * Поле времени приема пищи (завтрак - обед - ужин)
+     */
+    @Column(name = "MEALS")
+    private String meals;
+
+    /**
+     * Поле рейтинга рецепта
+     */
+    @Column(name = "RATING")
+    private int rating;
+
+    /**
      * Поле для указания ингредиентов
      */
     @ManyToMany
