@@ -105,4 +105,21 @@ public class RecipeController {
     public ResponseEntity<List<Recipe>> fetchDepByName(@PathVariable("name") String name) {
         return ResponseEntity.ok(recipeService.fetchRecipeByName(name));
     }
+
+    /**
+     * Получает все рецепты по совпадению ключевых слов
+     *
+     * @param query - ключевые слова
+     */
+    @Operation(summary = "Gets all recipes by keywords", tags = "recipe")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Got all recipes found by keywords"
+            )
+    })
+    @GetMapping()
+    public ResponseEntity<List<Recipe>> searchByKeywords(@RequestParam("query") String query) {
+        return ResponseEntity.ok(recipeService.search(query));
+    }
 }
