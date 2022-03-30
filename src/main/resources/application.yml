@@ -6,7 +6,7 @@ spring:
   profiles:
     active: dev
   jpa:
-    hibernate.ddl-auto: update
+    hibernate.ddl-auto: validate
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -14,7 +14,7 @@ spring:
     username: postgres
     password: password
   liquibase:
-    enabled: false
+    enabled: true
     drop-first: true
     change-log: db/db.changelog-master.yaml
     default-schema: public

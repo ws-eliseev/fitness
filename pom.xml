@@ -19,6 +19,7 @@
         <io.swagger.core.v3.version>2.1.12</io.swagger.core.v3.version>
         <org.springdoc.version>1.6.5</org.springdoc.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+        <hibernate-search-orm.version>5.11.10.Final</hibernate-search-orm.version>
     </properties>
     <dependencies>
         <dependency>
@@ -140,7 +141,19 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-search-orm</artifactId>
+            <version>${hibernate-search-orm.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
