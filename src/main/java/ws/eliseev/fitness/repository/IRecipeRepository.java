@@ -15,7 +15,10 @@ public interface IRecipeRepository extends JpaRepository<Recipe, Long> {
      */
     List<Recipe> findAllByName(String name);
 
-    List<Recipe> findAllByMeals(String meals);
-
-    List<Recipe> findAllByMealsAndRating(String meals, Integer rating);
+    /**
+     * Найти все рецепты по ключевым словам
+     *
+     * @param query - строка с ключевыми словами
+     */
+    List<Recipe> findBy(String query);
 }

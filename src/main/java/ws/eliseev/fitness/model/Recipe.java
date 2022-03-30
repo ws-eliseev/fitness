@@ -5,7 +5,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "FIT_RECIPE")
@@ -16,7 +26,7 @@ import javax.persistence.*;
 public class Recipe {
 
     /**
-     * Поле id
+     * Поле id - Первичный ключ, генерация IDENTITY
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,37 +34,37 @@ public class Recipe {
     private Long id;
 
     /**
-     * Поле названия рецепта
+     * Поле наименования рецепта
      */
     @Column(name = "NAME", nullable = false)
     private String name;
 
     /**
-     * Поле описания рецепта
+     * Поле имени уникального  рецепта
      */
     @Column(name = "UNIQUE_RECIPE_FIELD")
     private String uniqueRecipeField;
 
     /**
-     * Поле количества калорий в блюде
+     * Поле количества калорий
      */
     @Column(name = "CALORIES")
     private int calories;
 
     /**
-     * Поле количества белков в блюде
+     * Поле количества белков
      */
     @Column(name = "PROTEINS")
     private int proteins;
 
     /**
-     * Поле количества жиров в блюде
+     * Поле количества жиров
      */
     @Column(name = "FAT")
     private int fat;
 
     /**
-     * Поле количества углеводов в блюде
+     * Поле количества углеводов
      */
     @Column(name = "CARBOHYDRATES")
     private int carbohydrates;
@@ -70,4 +80,21 @@ public class Recipe {
      */
     @Column(name = "RATING")
     private int rating;
+
+    /**
+     * Поле для указания ингредиентов
+     */
+    @ManyToMany
+    @JoinTable(
+            name = "FIT_RECIPE_INGREDIENT"
+            , joinColumns = @JoinColumn(name = "RECIPE_ID")
+            , inverseJoinColumns = @JoinColumn(name = "INGREDIENT_ID"))
+    private Set<Ingredient> ingredients = new HashSet<>();
+
+    /**
+     * Поле изображения рецепта
+     */
+    @Column(name = "IMAGE")
+    private String image;
+
 }
