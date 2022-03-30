@@ -15,7 +15,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
+
 
 @Audited
 @Entity
@@ -52,9 +56,5 @@ public class Document {
     /** Поле автора документа  */
     @Column(name="AUTHOR")
     private String author;
-
-
-
-
 
 }
