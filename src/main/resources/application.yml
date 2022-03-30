@@ -5,6 +5,7 @@ server:
 spring:
   profiles:
     active: dev
+
   jpa:
     hibernate.ddl-auto: validate
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQL95Dialect
@@ -14,6 +15,8 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres_db
     username: postgres_adm
     password: postgres_pass
+    hikari:
+      auto-commit: false
   liquibase:
     enabled: true
     drop-first: false
