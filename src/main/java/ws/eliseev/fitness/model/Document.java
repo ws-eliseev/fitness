@@ -57,7 +57,6 @@ public class Document {
     @Column(name="AUTHOR")
     private String author;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,4 +71,5 @@ public class Document {
         result = 31 * result + Arrays.hashCode(content);
         return result;
     }
+
 }
