@@ -9,7 +9,7 @@ databaseChangeLog:
       file: db/changelogs/FIT-0012-create_table_workout.yaml
   - include:
       file: db/changelogs/FIT-0026-create_tables_userAud_userRolesAud_roleAud_reinfo.yaml
-  -include:
-    file: db/changelogs/FITFIT-0040-update_tables_recipe.yaml
+  - include:
+      file: db/changelogs/FIT-0040-update_tables_recipe.yaml
   - include:
       file: db/changelogs/FIT-0040-update_tables_recipe.yaml
