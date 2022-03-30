@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0040-update_tables_recipe.yaml
+
+  - changeSet:
+      id: FIT-40
+      author: Costa Vashchuk
+      changes:
+        - insert:
+            tableName: fit_recipe
+            columns:
+              - column:
+                  name: meals
+                  type: varchar(255)
+              - column:
+                  name: rating
+                  type: int
