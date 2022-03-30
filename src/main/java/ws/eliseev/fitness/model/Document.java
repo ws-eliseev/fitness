@@ -57,4 +57,19 @@ public class Document {
     @Column(name="AUTHOR")
     private String author;
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Document document = (Document) o;
+        return Objects.equals(id, document.id) && Objects.equals(dateOfCreation, document.dateOfCreation) && Objects.equals(lastModified, document.lastModified) && Objects.equals(documentType, document.documentType) && Arrays.equals(content, document.content) && Objects.equals(author, document.author);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, dateOfCreation, lastModified, documentType, author);
+        result = 31 * result + Arrays.hashCode(content);
+        return result;
+    }
 }
