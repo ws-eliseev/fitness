@@ -39,4 +39,17 @@ public interface IRecipeService {
      */
     public void deleteRecipeById(Long recipeId);
 
+    /**
+     * Получить рецепты, удовлетворяющие заданным критериям
+     *
+     * @return лист рецептов по запросу
+     */
+    List<Recipe> findAll();
+
+    /**
+     * Получить рецепты по ключевым словам q
+     * @param q - ключевые слова
+     */
+    List<Recipe> search(String q);
+
 }

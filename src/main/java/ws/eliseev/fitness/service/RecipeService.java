@@ -39,4 +39,14 @@ public class RecipeService implements IRecipeService {
     public void deleteRecipeById(Long recipeId) {
         recipeRepository.deleteById(recipeId);
     }
+
+    @Override
+    public List<Recipe> findAll() {
+        return recipeRepository.findAll();
+    }
+
+    @Override
+    public List<Recipe> search(String q) {
+        return search(q);
+    }
 }
