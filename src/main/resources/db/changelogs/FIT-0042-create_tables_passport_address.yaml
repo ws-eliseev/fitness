@@ -118,7 +118,7 @@ databaseChangeLog:
                   type: BIGINT
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_fit_passport
+                    foreignKeyName: fk_fit_passport_aud
                     references: fit_passport(id)
               - column:
                   name: address_id
