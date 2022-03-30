@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelogs/FIT-0018-create_table_message.yaml
+
+  - changeSet:
+      id: FIT-0018-create_table_message
+      author: Razumova Irina
+      changes:
+        - tagDatabase:
+            tag: create_table_message
+        - createTable:
+            tableName: fit_message
+            columns:
+              - column:
+                  name: ID
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: SENDER_NAME
+                  type: varchar(255)
+                  constraints:
+                    unique: false
+                    nullable: false
+              - column:
+                  name: CONTENT
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: TIMESTAMP
+                  type: timestamp
+              - column:
+                  name: BLOB
+                  type: blob
