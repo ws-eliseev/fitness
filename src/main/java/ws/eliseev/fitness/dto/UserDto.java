@@ -1,6 +1,15 @@
 package ws.eliseev.fitness.dto;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import ws.eliseev.fitness.model.Role;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import java.util.Set;
 
 /**
  * DTO объект от сущности User
@@ -31,6 +40,13 @@ public class UserDto {
     private int age;
 
     private Sex sex;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "FIT_USER_ROLES",
+            joinColumns = @JoinColumn(name = "USER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @Fetch(FetchMode.JOIN)
+    private Set<Role> roles;
 
     @RequiredArgsConstructor
     @Getter
