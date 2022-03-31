@@ -2,6 +2,7 @@ package ws.eliseev.fitness.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,6 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Address {
 
     /** Поле id - Первичный ключ, генерация IDENTITY*/
@@ -45,5 +45,13 @@ public class Address {
     @Column(name="APARTMENT_NUMBER")
     private int apartmentNumber;
 
-
+    @Builder
+    public Address(Long id, String region, String city, String street, int houseNumber, int apartmentNumber) {
+        this.id = id;
+        this.region = region;
+        this.city = city;
+        this.street = street;
+        this.houseNumber = houseNumber;
+        this.apartmentNumber = apartmentNumber;
+    }
 }

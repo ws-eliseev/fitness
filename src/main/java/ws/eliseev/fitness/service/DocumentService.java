@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import ws.eliseev.fitness.model.Document;
@@ -8,6 +9,7 @@ import ws.eliseev.fitness.repository.IDocumentRepository;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class DocumentService implements IDocumentService {
