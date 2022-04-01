@@ -31,7 +31,7 @@ public class InitRoleUser {
         Role test = checker("ROLE_TEST", iRoleRepository);
 
         List<User> userList = List.of();
-//                new User(0L, "new_username", "password", "firstname", "lastname", "email", "phone", -10, User.Sex.MALE, Set.of(admin),null,null),
+//                new User(0L, "new_username", "password", "firstname", "lastname", "email", "phone", -10, User.Sex.MALE, Set.of(admin),null,null, null));
 //                new User(0L, "dxhoan420", "roma", "Roman", "Konchalov", "roma@ya.ru", "8(800)555-35-35", 28, User.Sex.MALE, Set.of(user),null,null),
 //                new User(0L, "ValentPr", "password", "Валентин", "lastname", "email", "+79273777777", 18, User.Sex.MALE, Set.of(admin, test, user),null,null),
 //                new User(0L, "dmitryprikhunov", "passWord", "Дмитрий", "lastname", "email", "8(495)123-312-312", 18, User.Sex.MALE, Set.of(test),null,null),

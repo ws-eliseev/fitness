@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,7 @@ import ws.eliseev.fitness.service.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 @Profile("dev")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -30,14 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private  final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationEntryPoint unAuthorizeHandler;
 
-    @Autowired
-    public SecurityConfig(JwtFilter jwtFilter,
-                          UserDetailsServiceImpl userDetailsService,
-                          JwtAuthenticationEntryPoint unAuthorizeHandler) {
-        this.jwtFilter = jwtFilter;
-        this.userDetailsService = userDetailsService;
-        this.unAuthorizeHandler = unAuthorizeHandler;
-    }
+
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -70,9 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers("/api/auth/**")
-                .permitAll()
-                .antMatchers(HttpMethod.GET, "/api/polls/**", "/api/users/**")
+                .antMatchers("/api/auth/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
