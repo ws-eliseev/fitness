@@ -8,7 +8,7 @@ import org.apache.poi.xwpf.usermodel.XWPFTableRow;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import java.util.List;
 public class UserDocxExporter implements IUserExporter {
     private final Logger logger = LoggerFactory.getLogger("Export logger");
 
-    private void writeDataLines(List<UserDto> listUsers, XWPFDocument document) {
+    private void writeDataLines(List<User> listUsers, XWPFDocument document) {
         XWPFTable table = document.createTable();
         XWPFTableRow tableRowOne = table.getRow(0);
 
@@ -32,9 +32,11 @@ public class UserDocxExporter implements IUserExporter {
         tableRowOne.addNewTableCell().setText("Phone");
         tableRowOne.addNewTableCell().setText("Age");
         tableRowOne.addNewTableCell().setText("Sex");
-        //tableRowOne.addNewTableCell().setText("Roles");
+        tableRowOne.addNewTableCell().setText("Passport");
+        tableRowOne.addNewTableCell().setText("Address");
+        tableRowOne.addNewTableCell().setText("Photo");
 
-        for (UserDto user : listUsers) {
+        for (User user : listUsers) {
             XWPFTableRow row = table.createRow();
             int columnCount = 0;
             row.getCell(columnCount++).setText(String.valueOf(user.getId()));
@@ -45,12 +47,14 @@ public class UserDocxExporter implements IUserExporter {
             row.getCell(columnCount++).setText(String.valueOf(user.getPhone()));
             row.getCell(columnCount++).setText(String.valueOf(user.getAge()));
             row.getCell(columnCount++).setText(String.valueOf(user.getSex()));
-                //row.getCell(columnCount).setText(user.getRoles().toString());
+            row.getCell(columnCount++).setText(String.valueOf(user.getPassport()));
+            row.getCell(columnCount++).setText(String.valueOf(user.getAddress()));
+            row.getCell(columnCount++).setText(String.valueOf(user.getPhoto()));
         }
     }
 
     @Override
-    public void exportAllUsers(HttpServletResponse response, List<UserDto> listUsers) {
+    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
         try (ServletOutputStream outputStream = response.getOutputStream(); XWPFDocument document = new XWPFDocument()) {
             writeDataLines(listUsers, document);
             document.write(outputStream);

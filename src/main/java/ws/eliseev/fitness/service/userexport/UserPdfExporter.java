@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -40,10 +40,16 @@ public class UserPdfExporter implements IUserExporter {
         table.addCell(cell);
         cell.setPhrase(new Phrase("Sex"));
         table.addCell(cell);
+        cell.setPhrase(new Phrase("Passport"));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Address"));
+        table.addCell(cell);
+        cell.setPhrase(new Phrase("Photo"));
+        table.addCell(cell);
     }
 
-    private void writeTableData(PdfPTable table, List<UserDto> listUsers) {
-        for (UserDto user : listUsers) {
+    private void writeTableData(PdfPTable table, List<User> listUsers) {
+        for (User user : listUsers) {
             table.addCell(String.valueOf(user.getId()));
             table.addCell(user.getUsername());
             table.addCell(user.getFirstName());
@@ -52,17 +58,20 @@ public class UserPdfExporter implements IUserExporter {
             table.addCell(user.getPhone());
             table.addCell(String.valueOf(user.getAge()));
             table.addCell(String.valueOf(user.getSex()));
+            table.addCell(String.valueOf(user.getPassport()));
+            table.addCell(String.valueOf(user.getAddress()));
+            table.addCell(String.valueOf(user.getPhoto()));
         }
     }
 
     @Override
-    public void exportAllUsers(HttpServletResponse response, List<UserDto> listUsers) {
+    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
         try (Document document = new Document(PageSize.A4)) {
             PdfWriter.getInstance(document, response.getOutputStream());
             document.open();
-            PdfPTable table = new PdfPTable(8);
+            PdfPTable table = new PdfPTable(11);
             table.setWidthPercentage(100f);
-            table.setWidths(new float[]{1.1f, 2.5f, 3.0f, 3.0f, 5f, 3.5f, 1.3f, 2.2f});
+            table.setWidths(new float[]{1.1f, 2.5f, 3.0f, 3.0f, 3.0f, 3.5f, 1.3f, 2.2f, 4.0f, 3.0f, 3.0f});
             writeTableHeader(table);
             writeTableData(table, listUsers);
             document.add(table);

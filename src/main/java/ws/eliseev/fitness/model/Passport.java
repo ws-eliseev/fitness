@@ -1,5 +1,6 @@
 package ws.eliseev.fitness.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Passport {
 
     /** Поле id - Первичный ключ, генерация IDENTITY*/
@@ -51,17 +53,18 @@ public class Passport {
     private int subdivision_code;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "ADDRESS_ID")
     private Address address ;
 
-    @Builder
-    private Passport(Long id, int passport_number, int passport_series, int date_of_issue, String authority, int subdivision_code, Address address) {
-        this.id = id;
-        this.passport_number = passport_number;
-        this.passport_series = passport_series;
-        this.date_of_issue = date_of_issue;
-        this.authority = authority;
-        this.subdivision_code = subdivision_code;
-        this.address = address;
+    @Override
+    public String toString() {
+        return  "Паспорт:"+
+                "Номер=" + passport_number+";" + " "+
+                "Серия=" + passport_series+";" +" "+
+                "Дата выдачи=" + date_of_issue+";" +" "+
+                "Кем выдан:" + authority + '\'' +" "+
+                "Код подразделения=" + subdivision_code+";" +" "+
+                "Адрес регистрации=" + address ;
     }
 }

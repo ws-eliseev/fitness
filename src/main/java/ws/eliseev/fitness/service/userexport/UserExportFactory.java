@@ -9,7 +9,6 @@ import java.io.IOException;
 //@RequiredArgsConstructor
 public class UserExportFactory {
 
-//    @Qualifier("UserPDFExport")
     private final IUserExporter pdf;
     private final IUserExporter csv;
     private final IUserExporter xlsx;

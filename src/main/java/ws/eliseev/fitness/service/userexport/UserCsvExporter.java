@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -19,10 +20,10 @@ public class UserCsvExporter implements IUserExporter {
     private final Logger logger = LoggerFactory.getLogger("Export logger");
 
     @Override
-    public void exportAllUsers(HttpServletResponse response, List<UserDto> listUsers) {
+    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
         try (CSVPrinter csvPrinter = new CSVPrinter(response.getWriter(), CSVFormat.DEFAULT)) {
             csvPrinter.printRecord("ID","Username","First Name","Last Name","E-mail","Phone","Age","Sex","Roles");
-            for (UserDto user : listUsers) {
+            for (User user : listUsers) {
                 csvPrinter.printRecord(
                         String.valueOf(user.getId()),
                         user.getUsername(),
