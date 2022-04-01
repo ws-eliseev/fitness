@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.service;
 
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ public interface IUserService {
     /**
      * @return Возвращаем список всех User-ов из базы данных
      */
-    List<UserDto> getAllUser();
+    List<User> getAllUser();
 
     /**
      * @param user Добавляем/изменяем в базе данных нового User-а

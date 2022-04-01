@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 import ws.eliseev.fitness.service.IUserService;
 import ws.eliseev.fitness.service.userexport.IUserExporter;
 import ws.eliseev.fitness.service.userexport.UserExportFactory;
@@ -38,7 +39,7 @@ public class UserExportController {
             @ApiResponse(responseCode = "400", description = "Данный формат не поддерживается")})
 
     public void exportAllUsers(HttpServletResponse response, @PathVariable String filetype) {
-        List<UserDto> listUsers = service.getAllUser();
+        List<User> listUsers = service.getAllUser();
         try {
             IUserExporter exporter = factory.getExportFactory(filetype);
             response.setContentType("application/" + filetype + ";charset=UTF-8");

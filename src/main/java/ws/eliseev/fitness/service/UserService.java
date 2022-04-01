@@ -3,6 +3,7 @@ package ws.eliseev.fitness.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 import ws.eliseev.fitness.repository.IUserRepository;
 import ws.eliseev.fitness.util.mapper.IUserMapper;
 
@@ -25,10 +26,11 @@ public class UserService implements IUserService {
     private final IUserMapper iUserMapper;
 
     @Override
-    public List<UserDto> getAllUser() {
-        return repository.findAll().stream()
-                .map(iUserMapper::maoToDto)
-                .collect(Collectors.toList());
+    public List<User> getAllUser() {
+        return repository.findAll();
+//                .stream()
+//                .map(iUserMapper::maoToDto)
+//                .collect(Collectors.toList());
     }
 
     @Override

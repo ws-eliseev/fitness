@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 import ws.eliseev.fitness.service.IUserService;
 import ws.eliseev.fitness.service.UserService;
 
@@ -33,8 +34,8 @@ public class UserController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Успешное получение списка"),
             @ApiResponse(responseCode = "404", description = "Список пользователей не найден")})
-    public ResponseEntity<List<UserDto>> showAllUsers() {
-        List<UserDto> userList = service.getAllUser();
+    public ResponseEntity<List<User>> showAllUsers() {
+        List<User> userList = service.getAllUser();
         if (userList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

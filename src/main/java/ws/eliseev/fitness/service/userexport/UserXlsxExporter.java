@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
@@ -43,7 +44,9 @@ public class UserXlsxExporter implements IUserExporter {
         createCell(row, 5, "Phone", style);
         createCell(row, 6, "Age", style);
         createCell(row, 7, "Sex", style);
-        createCell(row, 8, "Roles", style);
+        createCell(row, 8, "Passport", style);
+        createCell(row, 9, "Address", style);
+        createCell(row, 10, "Photo", style);
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -59,7 +62,7 @@ public class UserXlsxExporter implements IUserExporter {
         cell.setCellStyle(style);
     }
 
-    private void writeDataLines(List<UserDto> listUsers, XSSFWorkbook workbook) {
+    private void writeDataLines(List<User> listUsers, XSSFWorkbook workbook) {
         int rowCount = 1;
 
         CellStyle style = workbook.createCellStyle();
@@ -67,7 +70,7 @@ public class UserXlsxExporter implements IUserExporter {
         font.setFontHeight(14);
         style.setFont(font);
 
-        for (UserDto user : listUsers) {
+        for (User user : listUsers) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
             createCell(row, columnCount++, String.valueOf(user.getId()), style);
@@ -78,12 +81,15 @@ public class UserXlsxExporter implements IUserExporter {
             createCell(row, columnCount++, user.getPhone(), style);
             createCell(row, columnCount++, user.getAge(), style);
             createCell(row, columnCount++, String.valueOf(user.getSex()), style);
+            createCell(row, columnCount++, String.valueOf(user.getPassport()), style);
+            createCell(row, columnCount++, String.valueOf(user.getAddress()), style);
+            createCell(row, columnCount++, String.valueOf(user.getPhoto()), style);
             //createCell(row, columnCount, user.getRoles().toString(), style);
         }
     }
 
     @Override
-    public void exportAllUsers(HttpServletResponse response, List<UserDto> listUsers) {
+    public void exportAllUsers(HttpServletResponse response, List<User> listUsers) {
         try (ServletOutputStream outputStream = response.getOutputStream(); XSSFWorkbook workbook = new XSSFWorkbook()) {
             writeHeaderLine(workbook);
             writeDataLines(listUsers, workbook);

@@ -1,6 +1,8 @@
 package ws.eliseev.fitness.dto;
 
 import lombok.*;
+import ws.eliseev.fitness.model.Address;
+import ws.eliseev.fitness.model.Passport;
 
 /**
  * DTO объект от сущности User
@@ -31,6 +33,12 @@ public class UserDto {
     private int age;
 
     private Sex sex;
+
+    private String  passport;
+
+    private Address address;
+
+    private  String photo;
 
     @RequiredArgsConstructor
     @Getter
