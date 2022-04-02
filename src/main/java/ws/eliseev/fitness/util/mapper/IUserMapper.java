@@ -14,8 +14,6 @@ import ws.eliseev.fitness.model.User;
 @Mapper(componentModel = "spring")
 public interface IUserMapper {
 
-    IUserMapper INSTANCE = Mappers.getMapper(IUserMapper.class);
-
     /**
      * метод преобразования объекта в DTO
      * @param entity сущность User
