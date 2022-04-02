@@ -6,10 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-
-
 /**
  * DTO объект от сущности Address
  * @see ws.eliseev.fitness.model.Address

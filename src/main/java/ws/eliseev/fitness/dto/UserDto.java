@@ -1,8 +1,6 @@
 package ws.eliseev.fitness.dto;
 
 import lombok.*;
-import ws.eliseev.fitness.model.Address;
-import ws.eliseev.fitness.model.Passport;
 
 /**
  * DTO объект от сущности User
