@@ -2,23 +2,22 @@ package ws.eliseev.fitness.util.mapper;
 
 
 import org.mapstruct.Mapper;
-import ws.eliseev.fitness.dto.AddressDto;
 import ws.eliseev.fitness.dto.PassportDto;
-import ws.eliseev.fitness.model.Address;
 import ws.eliseev.fitness.model.Passport;
 
-
 /**
- * Преобразование сущности Address в DTO
+ * Преобразование сущности Passport в DTO
+ *
+ * @author Мельник Андрей
  * @see Passport
  * @see PassportDto
- * @author Мельник Андрей
  */
 @Mapper(componentModel = "spring")
 public interface IPassportMapper {
 
     /**
      * метод преобразования объекта в DTO
+     *
      * @param entity сущность Passport
      * @return объект типа DTO
      */
@@ -26,6 +25,7 @@ public interface IPassportMapper {
 
     /**
      * метод преобразования объекта в entity
+     *
      * @param dto объект PassportDto
      * @return сущность Passport
      */
