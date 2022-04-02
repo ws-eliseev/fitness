@@ -59,7 +59,7 @@ public class AddressController {
             )
     })
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Address>> getAddresstById(@PathVariable("id") Long id) {
+    public ResponseEntity<Optional<Address>> getAddressById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(addressService.getAddressById(id));
     }
 

@@ -45,13 +45,15 @@ public class Address {
     @Column(name="APARTMENT_NUMBER")
     private int apartmentNumber;
 
-    @Builder
-    public Address(Long id, String region, String city, String street, int houseNumber, int apartmentNumber) {
-        this.id = id;
-        this.region = region;
-        this.city = city;
-        this.street = street;
-        this.houseNumber = houseNumber;
-        this.apartmentNumber = apartmentNumber;
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", region='" + region + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", apartmentNumber=" + apartmentNumber +
+                '}';
     }
 }

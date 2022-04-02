@@ -54,14 +54,16 @@ public class Passport {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address ;
 
-    @Builder
-    private Passport(Long id, int passport_number, int passport_series, int date_of_issue, String authority, int subdivision_code, Address address) {
-        this.id = id;
-        this.passport_number = passport_number;
-        this.passport_series = passport_series;
-        this.date_of_issue = date_of_issue;
-        this.authority = authority;
-        this.subdivision_code = subdivision_code;
-        this.address = address;
+    @Override
+    public String toString() {
+        return "Passport{" +
+                "id=" + id +
+                ", passport_number=" + passport_number +
+                ", passport_series=" + passport_series +
+                ", date_of_issue=" + date_of_issue +
+                ", authority='" + authority + '\'' +
+                ", subdivision_code=" + subdivision_code +
+                ", address=" + address +
+                '}';
     }
 }

@@ -43,7 +43,9 @@ public class UserXlsxExporter implements IUserExporter {
         createCell(row, 5, "Phone", style);
         createCell(row, 6, "Age", style);
         createCell(row, 7, "Sex", style);
-        createCell(row, 8, "Roles", style);
+        createCell(row, 8, "Passport", style);
+        createCell(row, 9, "Address", style);
+        createCell(row, 10, "Photo", style);
     }
 
     private void createCell(Row row, int columnCount, Object value, CellStyle style) {
@@ -78,7 +80,9 @@ public class UserXlsxExporter implements IUserExporter {
             createCell(row, columnCount++, user.getPhone(), style);
             createCell(row, columnCount++, user.getAge(), style);
             createCell(row, columnCount++, String.valueOf(user.getSex()), style);
-            //createCell(row, columnCount, user.getRoles().toString(), style);
+            createCell(row, columnCount++, String.valueOf(user.getPassport()), style);
+            createCell(row, columnCount++, String.valueOf(user.getAddress()), style);
+            createCell(row, columnCount++, String.valueOf(user.getPhoto()), style);
         }
     }
 
