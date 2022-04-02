@@ -26,6 +26,7 @@ import java.util.List;
 @RequestMapping("/api/users/export")
 
 public class UserExportController {
+
     private final UserExportFactory factory;
     private final IUserService service;
     private final Logger logger = LoggerFactory.getLogger("Export logger");
