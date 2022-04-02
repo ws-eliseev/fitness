@@ -42,7 +42,7 @@ public class InitRoleUser {
         address.setCity("Москва");
         address.setApartmentNumber(3);
         address.setHouseNumber(2);
-        address.setRegion("Россия");
+        address.setRegion("Московская");
         address.setStreet("Лубянка");
         addressRepository.save(address);
 
