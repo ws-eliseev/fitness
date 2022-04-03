@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -19,6 +20,7 @@ import java.sql.Date;
 @NoArgsConstructor
 @Getter
 @Setter
+@Audited
 public class Journal {
 
     /** Поле id - Первичный ключ, генерация IDENTITY */

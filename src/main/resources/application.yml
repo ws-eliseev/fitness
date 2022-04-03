@@ -18,14 +18,14 @@ spring:
     drop-first: true
     change-log: db/db.changelog-master.yaml
     default-schema: public
-#  mail:
-#    host: smtp.gmail.com
-#    port: 587
-#    username: ealfitness22@gmail.com
-#    password: Ceknij-nobraw-jexde9
-#    protocol: smtp
-#    tls: true
-#    properties.mail.smtp:
-#      auth: true
-#      starttls.enable: true
-#      ssl.trust: smtp.gmail.com
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ealfitness22@gmail.com
+    password: Ceknij-nobraw-jexde9
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: smtp.gmail.com

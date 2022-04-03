@@ -3,6 +3,7 @@ package ws.eliseev.fitness.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,6 +19,7 @@ import java.util.Properties;
 @EnableWebSecurity
 @Profile("dev")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -46,12 +48,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    protected JavaMailSender getJavaMailSender() {
+    protected JavaMailSender getJavaMailSender(Environment env) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
-        mailSender.setPort(587);
-        mailSender.setUsername("ealfitness22@gmail.com");
-        mailSender.setPassword("Ceknij-nobraw-jexde9");
+        mailSender.setHost(env.getProperty("spring.mail.host"));
+        mailSender.setPort(Integer.parseInt(env.getProperty("spring.mail.port")));
+        mailSender.setUsername(env.getProperty("spring.mail.username"));
+        mailSender.setPassword(env.getProperty("spring.mail.password"));
         Properties properties = mailSender.getJavaMailProperties();
         properties.put("mail.transport.protocol", "smtp");
         properties.put("mail.smtp.auth", "true");

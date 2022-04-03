@@ -18,6 +18,10 @@ public class MailService implements IMailService{
     private final IMailRepository mailRepository;
     private final JavaMailSender mailSender;
 
+    private static final String MAIL_SUBJECT = "Смена пароля";
+    private static final String MAIL_USERNAME = "username";
+    private static final String MAIL_PASSWORD = "password";
+
     @Autowired
     public MailService(IMailRepository mailRepository, JavaMailSender mailSender) {
         this.mailRepository = mailRepository;
@@ -30,10 +34,10 @@ public class MailService implements IMailService{
 
         MimeMessage message = mailSender.createMimeMessage();
         message.setRecipient(Message.RecipientType.TO, new InternetAddress(user.getEmail()));
-        message.setSubject("Смена пароля");
+        message.setSubject(MAIL_SUBJECT);
         message.setContent(mailRepository.getById(1L).getTemplate()
-                .replace("username", user.getUsername())
-                .replace("password", user.getPassword()), "text/html; charset=utf-8");
+                .replace(MAIL_USERNAME, user.getUsername())
+                .replace(MAIL_PASSWORD, user.getPassword()), "text/html; charset=utf-8");
 
         mailSender.send(message);
     }

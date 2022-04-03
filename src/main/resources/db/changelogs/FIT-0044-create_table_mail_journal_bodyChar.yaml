@@ -76,5 +76,109 @@ databaseChangeLog:
                     foreignKeyName: fk_fit_body_characteristics_id
                     references: fit_body_characteristics(id)
 
+  - changeSet:
+      id: FIT-0044-4
+      author: Tsoy Roman
+      changes:
+        - addColumn:
+            tableName: fit_user
+            columns:
+              - column:
+                  name: journal_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_fit_journal_id
+                    references: fit_journal(id)
+  - changeSet:
+      id: FIT-0044-5
+      author: Tsoy Roman
+      changes:
+        - addColumn:
+            tableName: fit_user_aud
+            columns:
+              - column:
+                  name: journal_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_fit_journal_id
+                    references: fit_journal(id)
+
+  - changeSet:
+      id: FIT-0044-6
+      author: Tsoy Roman
+      changes:
+        - createTable:
+            tableName: fit_journal_aud
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: body_characteristics_id
+                  type: bigint
+              - column:
+                  name: creation_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: modification_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rev
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_role_aud
+                    references: fit_revinfo(id)
+              - column:
+                  name: revtype
+                  type: smallint
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: FIT-0044-7
+      author: Tsoy Roman
+      changes:
+        - createTable:
+            tableName: fit_body_characteristics_aud
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: height
+                  type: tinyint
+              - column:
+                  name: weight
+                  type: tinyint
+              - column:
+                  name: bmi
+                  type: tinyint
+              - column:
+                  name: rev
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    foreignKeyName: fk_role_aud
+                    references: fit_revinfo(id)
+              - column:
+                  name: revtype
+                  type: smallint
+                  constraints:
+                    nullable: false
 
 

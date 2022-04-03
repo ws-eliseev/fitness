@@ -76,4 +76,9 @@ public class User {
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     private Set<Role> roles = new HashSet<>();
+
+    /** Поле для хранения журнала пользователя, связь OneToOne*/
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "JOURNAL_ID", referencedColumnName = "ID")
+    private Journal journal;
 }

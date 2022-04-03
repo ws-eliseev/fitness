@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
@@ -18,6 +19,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Audited
 public class BodyCharacteristics {
 
     /** Поле id - Первичный ключ, генерация IDENTITY */
