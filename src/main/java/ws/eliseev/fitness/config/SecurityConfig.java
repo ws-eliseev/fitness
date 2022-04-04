@@ -1,7 +1,6 @@
 package ws.eliseev.fitness.config;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -26,7 +25,7 @@ import ws.eliseev.fitness.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @Profile("dev")
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtFilter jwtFilter;
     private  final UserDetailsServiceImpl userDetailsService;
@@ -66,6 +65,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.js")
                 .permitAll()
                 .antMatchers("/api/auth/login")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/api/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
