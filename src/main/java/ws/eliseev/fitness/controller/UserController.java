@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +21,14 @@ import java.util.Optional;
  * @author Зыков Артем
  */
 @Tag(name = "Users", description = "CRUD  операции над пользователями")
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-
     private final IUserService service;
+
+    public UserController(@Qualifier(value = "Kafka") IUserService service) {
+        this.service = service;
+    }
 
     @GetMapping()
     @Operation(summary = "Get all Users", tags = "Получить списка всех пользователей")

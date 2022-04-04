@@ -3,6 +3,16 @@ server:
   port: 8082
 
 spring:
+  kafka:
+    consumer:
+      group-id: Kata.1
+      bootstrap-servers: localhost:9092
+    template:
+      default-topic: fit-user
+  #    producer:
+#      acks: 1
+#      retries: 3
+#      transaction-id-prefix: FIT
   profiles:
     active: dev
 
