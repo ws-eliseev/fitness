@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +22,6 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Passport {
 
     /** Поле id - Первичный ключ, генерация IDENTITY*/
@@ -54,4 +54,16 @@ public class Passport {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address ;
 
+    @Override
+    public String toString() {
+        return "Passport{" +
+                "id=" + id +
+                ", passport_number=" + passport_number +
+                ", passport_series=" + passport_series +
+                ", date_of_issue=" + date_of_issue +
+                ", authority='" + authority + '\'' +
+                ", subdivision_code=" + subdivision_code +
+                ", address=" + address +
+                '}';
+    }
 }

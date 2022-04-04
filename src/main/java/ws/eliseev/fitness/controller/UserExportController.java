@@ -26,10 +26,10 @@ import java.util.List;
 @RequestMapping("/api/users/export")
 
 public class UserExportController {
+
     private final UserExportFactory factory;
     private final IUserService service;
     private final Logger logger = LoggerFactory.getLogger("Export logger");
-
 
     @GetMapping("/{filetype}")
     @Operation(summary = "Save all users to file", tags = "Получение списка всех пользователей в файл")

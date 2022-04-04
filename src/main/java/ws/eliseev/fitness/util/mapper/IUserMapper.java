@@ -1,6 +1,7 @@
 package ws.eliseev.fitness.util.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import ws.eliseev.fitness.dto.UserDto;
 import ws.eliseev.fitness.model.User;
 
@@ -18,7 +19,7 @@ public interface IUserMapper {
      * @param entity сущность User
      * @return объект типа DTO
      */
-    UserDto maoToDto(User entity);
+    UserDto mapToDto(User entity);
 
     /**
      * метод преобразования объекта в entity
@@ -26,4 +27,6 @@ public interface IUserMapper {
      * @return сущность User
      */
     User mapToModel(UserDto dto);
+
+
 }

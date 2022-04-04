@@ -32,7 +32,9 @@ public class UserDocxExporter implements IUserExporter {
         tableRowOne.addNewTableCell().setText("Phone");
         tableRowOne.addNewTableCell().setText("Age");
         tableRowOne.addNewTableCell().setText("Sex");
-        //tableRowOne.addNewTableCell().setText("Roles");
+        tableRowOne.addNewTableCell().setText("Passport");
+        tableRowOne.addNewTableCell().setText("Address");
+        tableRowOne.addNewTableCell().setText("Photo");
 
         for (UserDto user : listUsers) {
             XWPFTableRow row = table.createRow();
@@ -45,7 +47,10 @@ public class UserDocxExporter implements IUserExporter {
             row.getCell(columnCount++).setText(String.valueOf(user.getPhone()));
             row.getCell(columnCount++).setText(String.valueOf(user.getAge()));
             row.getCell(columnCount++).setText(String.valueOf(user.getSex()));
-                //row.getCell(columnCount).setText(user.getRoles().toString());
+            row.getCell(columnCount++).setText(String.valueOf(user.getPassport()));
+            row.getCell(columnCount++).setText(String.valueOf(user.getAddress()));
+            row.getCell(columnCount++).setText(String.valueOf(user.getPhoto()));
+
         }
     }
 

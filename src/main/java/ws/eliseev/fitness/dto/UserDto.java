@@ -32,6 +32,12 @@ public class UserDto {
 
     private Sex sex;
 
+    private PassportDto   passport;
+
+    private AddressDto address;
+
+    private String   photo;
+
     @RequiredArgsConstructor
     @Getter
     public enum Sex {
