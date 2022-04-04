@@ -37,6 +37,7 @@ public class InitRoleUser {
         Role user = checker("ROLE_USER", iRoleRepository);
         Role test = checker("ROLE_TEST", iRoleRepository);
 
+
         Address address = new Address();
         address.setId(1L);
         address.setCity("Москва");

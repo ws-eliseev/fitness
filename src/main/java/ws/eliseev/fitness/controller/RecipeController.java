@@ -17,7 +17,7 @@ import java.util.Optional;
 @Tag(name = "Recipe", description = "Recipe API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/recipes")
+@RequestMapping("/api/recipes")
 public class RecipeController {
 
     private final IRecipeService recipeService;
