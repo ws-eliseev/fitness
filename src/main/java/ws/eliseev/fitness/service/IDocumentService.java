@@ -1,7 +1,5 @@
 package ws.eliseev.fitness.service;
 
-import ws.eliseev.fitness.dto.DocumentDto;
-import ws.eliseev.fitness.dto.UserDto;
 import ws.eliseev.fitness.model.Document;
 
 import java.util.List;

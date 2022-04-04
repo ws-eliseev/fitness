@@ -41,12 +41,19 @@ public class UserDto {
 
     private Sex sex;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
     @Fetch(FetchMode.JOIN)
     private Set<Role> roles;
+    private PassportDto   passport;
+
+    private AddressDto address;
+
+    private String   photo;
+
 
     @RequiredArgsConstructor
     @Getter

@@ -19,10 +19,10 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: date_of_creation
-                  type: timestamp
+                  type: smalldatetime
               - column:
                   name: last_modified
-                  type: timestamp
+                  type: smalldatetime
               - column:
                   name: document_type
                   type: varchar(255)

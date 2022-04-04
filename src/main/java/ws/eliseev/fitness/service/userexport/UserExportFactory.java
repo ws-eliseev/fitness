@@ -6,10 +6,8 @@ import org.springframework.context.annotation.Configuration;
 import java.io.IOException;
 
 @Configuration
-//@RequiredArgsConstructor
 public class UserExportFactory {
 
-//    @Qualifier("UserPDFExport")
     private final IUserExporter pdf;
     private final IUserExporter csv;
     private final IUserExporter xlsx;

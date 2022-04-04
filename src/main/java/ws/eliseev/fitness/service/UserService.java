@@ -27,7 +27,7 @@ public class UserService implements IUserService {
     @Override
     public List<UserDto> getAllUser() {
         return repository.findAll().stream()
-                .map(iUserMapper::maoToDto)
+                .map(iUserMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
@@ -38,22 +38,22 @@ public class UserService implements IUserService {
 
     @Override
     public Optional<UserDto> getUserById(Long id) {
-        return Optional.ofNullable(iUserMapper.maoToDto(repository.getById(id)));
+        return Optional.ofNullable(iUserMapper.mapToDto(repository.getById(id)));
     }
 
     @Override
     public Optional<UserDto> getByUserName(String username) {
-        return Optional.ofNullable(iUserMapper.maoToDto(repository.findByUsername(username)));
+        return Optional.ofNullable(iUserMapper.mapToDto(repository.findByUsername(username)));
     }
 
     @Override
     public Optional<UserDto> getUserByEmail(String email) {
-        return Optional.ofNullable(iUserMapper.maoToDto(repository.findUsersByEmail(email)));
+        return Optional.ofNullable(iUserMapper.mapToDto(repository.findUsersByEmail(email)));
     }
 
     @Override
     public Optional<UserDto> getUserByPhone(String phone) {
-        return Optional.ofNullable(iUserMapper.maoToDto(repository.findUsersByPhone(phone)));
+        return Optional.ofNullable(iUserMapper.mapToDto(repository.findUsersByPhone(phone)));
     }
 
     @Override

@@ -95,5 +95,7 @@ public class User {
     @Column(name = "PHOTO")
     private String photo ;
 
+
+
 }
 
