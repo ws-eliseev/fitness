@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ws.eliseev.fitness.dto.UserDto;
+import ws.eliseev.fitness.model.User;
 import ws.eliseev.fitness.service.IUserService;
 import ws.eliseev.fitness.service.UserService;
 

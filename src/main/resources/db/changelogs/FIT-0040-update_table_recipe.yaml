@@ -1,5 +1,5 @@
 databaseChangeLog:
-  - logicalFilePath: db/changelogs/FIT-0040-update_tables_recipe.yaml
+  - logicalFilePath: db/changelogs/FIT-0040-update_recipe_table.yaml
   - changeSet:
       id: FIT-40
       author: Costa Vashchuk

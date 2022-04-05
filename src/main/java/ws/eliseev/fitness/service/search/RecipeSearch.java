@@ -3,6 +3,7 @@ package ws.eliseev.fitness.service.search;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.springframework.stereotype.Repository;
+import ws.eliseev.fitness.dto.RecipeDto;
 import ws.eliseev.fitness.model.Recipe;
 
 import javax.persistence.EntityManager;

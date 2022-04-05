@@ -6,6 +6,8 @@ databaseChangeLog:
   - include:
       file: db/changelogs/FIT-0011-create_tables_recipe.yaml
   - include:
+      file: db/changelogs/FIT-0040-update_recipe_table.yaml
+  - include:
       file: db/changelogs/FIT-0040-update_table_recipe.yaml
   - include:
       file: db/changelogs/FIT-0012-create_table_workout.yaml

@@ -94,16 +94,6 @@ public class Recipe {
     private int rating;
 
     /**
-     * Поле для указания ингредиентов
-     */
-    @ManyToMany
-    @JoinTable(
-            name = "FIT_RECIPE_INGREDIENT"
-            , joinColumns = @JoinColumn(name = "RECIPE_ID")
-            , inverseJoinColumns = @JoinColumn(name = "INGREDIENT_ID"))
-    private Set<Ingredient> ingredients = new HashSet<>();
-
-    /**
      * Поле изображения рецепта
      */
     @Column(name = "IMAGE")

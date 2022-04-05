@@ -4,17 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.envers.Audited;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "FIT_PASSPORT")
@@ -54,4 +45,16 @@ public class Passport {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address ;
 
+    @Override
+    public String toString() {
+        return "Passport{" +
+                "id=" + id +
+                ", passport_number=" + passport_number +
+                ", passport_series=" + passport_series +
+                ", date_of_issue=" + date_of_issue +
+                ", authority='" + authority + '\'' +
+                ", subdivision_code=" + subdivision_code +
+                ", address=" + address +
+                '}';
+    }
 }

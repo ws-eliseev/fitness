@@ -1,11 +1,10 @@
 package ws.eliseev.fitness.model;
 
-
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,5 +44,15 @@ public class Address {
     @Column(name="APARTMENT_NUMBER")
     private int apartmentNumber;
 
-
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", region='" + region + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", houseNumber=" + houseNumber +
+                ", apartmentNumber=" + apartmentNumber +
+                '}';
+    }
 }

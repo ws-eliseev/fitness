@@ -14,7 +14,9 @@ spring:
     username: postgres
     password: password
   liquibase:
+#    clear-checksums: true
     enabled: true
-    drop-first: true
+    drop-first: false
     change-log: db/db.changelog-master.yaml
     default-schema: public
+

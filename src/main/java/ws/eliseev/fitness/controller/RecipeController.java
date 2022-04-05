@@ -17,7 +17,7 @@ import java.util.Optional;
 @Tag(name = "Recipe", description = "Recipe API")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/recipes")
+@RequestMapping("/api/recipes")
 public class RecipeController {
 
     private final IRecipeService recipeService;
@@ -51,8 +51,8 @@ public class RecipeController {
             )
     })
     @GetMapping()
-    public ResponseEntity<List<Recipe>> fetchRecipeList() {
-        return ResponseEntity.ok(recipeService.fetchRecipeList());
+    public ResponseEntity<List<Recipe>> getAllRecipes() {
+        return ResponseEntity.ok(recipeService.findAll());
     }
 
     /**
@@ -118,7 +118,7 @@ public class RecipeController {
                     description = "Got all recipes found by keywords"
             )
     })
-    @GetMapping()
+    @GetMapping("/search")
     public ResponseEntity<List<Recipe>> searchByKeywords(@RequestParam("query") String query) {
         return ResponseEntity.ok(recipeService.search(query));
     }

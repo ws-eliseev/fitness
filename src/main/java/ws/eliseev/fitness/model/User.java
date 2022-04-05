@@ -91,6 +91,7 @@ public class User {
     @JoinColumn(name = "ADDRESS_ID")
     private Address address ;
 
+
     /** Поле указания фото */
     @Column(name = "PHOTO")
     private String photo ;
