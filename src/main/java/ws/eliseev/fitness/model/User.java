@@ -1,7 +1,11 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -20,7 +24,7 @@ import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 @Audited
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     /** Первичный ключ с генерацией значения из последовательности, 8 байт */
     @Id
@@ -73,28 +77,56 @@ public class User {
     }
 
     /** Коллекция ролей пользователя для реализации связи "многие ко многим" */
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "FIT_USER_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID"),
             inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
+    @Fetch(FetchMode.JOIN)
     private Set<Role> roles = new HashSet<>();
 
     /** Поле указания паспорта */
     @Audited(targetAuditMode = NOT_AUDITED)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PASSPORT_ID")
+    @Fetch(FetchMode.JOIN)
     private Passport passport ;
 
     /** Поле указания адреса */
     @Audited(targetAuditMode = NOT_AUDITED)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ADDRESS_ID")
+    @Fetch(FetchMode.JOIN)
     private Address address ;
 
 
     /** Поле указания фото */
     @Column(name = "PHOTO")
     private String photo ;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }
 

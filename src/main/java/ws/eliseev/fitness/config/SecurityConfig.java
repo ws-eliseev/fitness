@@ -11,9 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import ws.eliseev.fitness.service.UserDetailsServiceImpl;
+import ws.eliseev.fitness.service.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -22,7 +21,7 @@ import ws.eliseev.fitness.service.UserDetailsServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 
-    private  final UserDetailsServiceImpl userDetailsService;
+    private  final UserService userService;
 
 
 
@@ -30,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
     }
 

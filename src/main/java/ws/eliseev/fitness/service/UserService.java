@@ -1,6 +1,9 @@
 package ws.eliseev.fitness.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ws.eliseev.fitness.dto.UserDto;
 import ws.eliseev.fitness.repository.IUserRepository;
@@ -18,7 +21,7 @@ import java.util.stream.Collectors;
  */
 @RequiredArgsConstructor
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, UserDetailsService {
 
     private final IUserRepository repository;
 
@@ -59,5 +62,10 @@ public class UserService implements IUserService {
     @Override
     public void deleteUserById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return repository.findByUsername(username);
     }
 }
