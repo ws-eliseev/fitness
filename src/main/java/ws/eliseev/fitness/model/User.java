@@ -1,6 +1,8 @@
 package ws.eliseev.fitness.model;
 
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
@@ -62,6 +64,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
+
     /** Класс соответствующий полю sex */
     @RequiredArgsConstructor
     @Getter
@@ -81,14 +84,16 @@ public class User {
 
     /** Поле указания паспорта */
     @Audited(targetAuditMode = NOT_AUDITED)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PASSPORT_ID")
+    @Fetch(FetchMode.JOIN)
     private Passport passport ;
 
     /** Поле указания адреса */
     @Audited(targetAuditMode = NOT_AUDITED)
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ADDRESS_ID")
+    @Fetch(FetchMode.JOIN)
     private Address address ;
 
     /** Поле указания фото */

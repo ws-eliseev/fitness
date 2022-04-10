@@ -22,6 +22,7 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Passport {
 
     /** Поле id - Первичный ключ, генерация IDENTITY*/

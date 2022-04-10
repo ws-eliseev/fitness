@@ -23,7 +23,7 @@ import java.util.Optional;
 @Tag(name = "Users", description = "CRUD  операции над пользователями")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/user")
 public class UserController {
 
     private final IUserService service;

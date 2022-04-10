@@ -14,8 +14,8 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres_db
 
-    username: postgres_adm
-    password: postgres_pass
+    username: postgres
+    password: password
     hikari:
       auto-commit: false
 
@@ -24,3 +24,4 @@ spring:
     drop-first: false
     change-log: db/db.changelog-master.yaml
     default-schema: public
+    clear-checksums: true

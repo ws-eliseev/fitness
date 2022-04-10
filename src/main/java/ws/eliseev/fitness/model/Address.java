@@ -18,6 +18,7 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     /** Поле id - Первичный ключ, генерация IDENTITY*/

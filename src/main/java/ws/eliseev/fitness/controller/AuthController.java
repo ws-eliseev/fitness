@@ -15,7 +15,7 @@ import javax.security.auth.message.AuthException;
  */
 
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("api/user")
 @RequiredArgsConstructor
 @CrossOrigin
 public class AuthController {
