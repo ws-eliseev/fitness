@@ -1,28 +1,35 @@
 package ws.eliseev.fitness.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import ws.eliseev.fitness.dto.RecipeDto;
 import ws.eliseev.fitness.model.Recipe;
 import ws.eliseev.fitness.repository.IRecipeRepository;
+import ws.eliseev.fitness.util.mapper.IRecipeMapper;
+
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class RecipeService implements IRecipeService {
 
     private final IRecipeRepository recipeRepository;
 
-    public RecipeService(IRecipeRepository recipeRepository) {
-        this.recipeRepository = recipeRepository;
+    private final IRecipeMapper recipeMapper;
+
+
+    @Override
+    public List<RecipeDto> fetchRecipeList() {
+        return recipeRepository.findAll()
+                .stream()
+                .map(recipeMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public List<Recipe> fetchRecipeList() {
-        return recipeRepository.findAll();
-    }
-
-    @Override
-    public Recipe saveOrUpdateRecipe( Recipe recipe) {
-        return recipeRepository.save(recipe);
+    public void saveOrUpdateRecipe(RecipeDto recipeDto) {recipeRepository.save(recipeMapper.mapToModel(recipeDto));
     }
 
     @Override
