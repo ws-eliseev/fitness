@@ -49,25 +49,25 @@ public class Recipe {
      * Поле количества калорий
      */
     @Column(name = "CALORIES")
-    private int calories;
+    private double calories;
 
     /**
      * Поле количества белков
      */
     @Column(name = "PROTEINS")
-    private int proteins;
+    private double proteins;
 
     /**
      * Поле количества жиров
      */
     @Column(name = "FAT")
-    private int fat;
+    private double fat;
 
     /**
      * Поле количества углеводов
      */
     @Column(name = "CARBOHYDRATES")
-    private int carbohydrates;
+    private double carbohydrates;
 
     /**
      * Поле для указания ингредиентов

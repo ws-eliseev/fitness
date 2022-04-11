@@ -15,26 +15,26 @@ import javax.security.auth.message.AuthException;
  */
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/auth")
 @RequiredArgsConstructor
 @CrossOrigin
 public class AuthController {
 
     private final AuthService authService;
 
-    @PostMapping("login")
+    @PostMapping("/login")
     public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest authRequest) throws AuthException {
         final JwtResponse token = authService.login(authRequest);
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("token")
+    @PostMapping("/token")
     public ResponseEntity<JwtResponse> getNewAccessToken(@RequestBody RefreshJwtRequest request) throws AuthException {
         final JwtResponse token = authService.getAccessToken(request.getRefreshToken());
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("refresh")
+    @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> getNewRefreshToken(@RequestBody RefreshJwtRequest request) throws AuthException {
         final JwtResponse token = authService.refresh(request.getRefreshToken());
         return ResponseEntity.ok(token);
