@@ -1,17 +1,13 @@
 package ws.eliseev.fitness.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "FIT_INGREDIENT")
@@ -30,5 +26,9 @@ public class Ingredient {
     /** Поле наименования ингредиента */
     @Column(name="NAME")
     private String name;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "ingredients", fetch = FetchType.LAZY)
+    private Set<Recipe> recipes;
 
 }

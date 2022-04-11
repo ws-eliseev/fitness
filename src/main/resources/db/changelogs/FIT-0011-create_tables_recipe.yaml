@@ -28,13 +28,13 @@ databaseChangeLog:
                   constraints:
               - column:
                   name: calories
-                  type: int
+                  type: float8
               - column:
                   name: proteins
-                  type: int
+                  type: float8
               - column:
                   name: fat
-                  type: int
+                  type: float8
               - column:
                   name: carbohydrates
-                  type: int
+                  type: float8
