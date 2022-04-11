@@ -4,6 +4,8 @@ import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.envers.Audited;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.*;
@@ -22,7 +24,7 @@ import static org.hibernate.envers.RelationTargetAuditMode.NOT_AUDITED;
 @Audited
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     /** Первичный ключ с генерацией значения из последовательности, 8 байт */
     @Id
@@ -64,7 +66,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Sex sex;
 
-
     /** Класс соответствующий полю sex */
     @RequiredArgsConstructor
     @Getter
@@ -100,7 +101,30 @@ public class User {
     @Column(name = "PHOTO")
     private String photo ;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 
 }
 

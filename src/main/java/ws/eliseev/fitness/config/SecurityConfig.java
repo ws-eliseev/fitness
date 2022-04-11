@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import ws.eliseev.fitness.security.jwt.JwtAuthenticationEntryPoint;
 import ws.eliseev.fitness.security.jwt.JwtFilter;
-import ws.eliseev.fitness.service.UserDetailsServiceImpl;
+import ws.eliseev.fitness.service.IUserService;
 
 /**
  * @author Costa Vashchuk
@@ -28,7 +28,7 @@ import ws.eliseev.fitness.service.UserDetailsServiceImpl;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     private final JwtFilter jwtFilter;
-    private  final UserDetailsServiceImpl userDetailsService;
+    private  final IUserService userService;
     private final JwtAuthenticationEntryPoint unAuthorizeHandler;
 
 
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(userDetailsService)
+                .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder());
     }
 
